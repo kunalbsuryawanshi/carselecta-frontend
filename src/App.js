@@ -7,6 +7,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <Routes>
+       
+      </Routes>
         <Navigationbar />
         <HomePage/>
         <Routes></Routes>
