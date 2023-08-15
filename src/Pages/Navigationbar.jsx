@@ -95,7 +95,7 @@ function Navigationbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">New Launches</Nav.Link>
+            <Nav.Link href="/aboutus">New Launches</Nav.Link>
             <Nav.Link href="#home">Electric cars</Nav.Link>
             {/* <Nav.Link href="#link">Popular Brands</Nav.Link> */}
             <NavDropdown title="Popular Brands" id="basic-nav-dropdown">
