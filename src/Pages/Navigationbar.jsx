@@ -20,7 +20,7 @@ function Navigationbar() {
       <div className="row w-100 bg-light justify-content-center border-bottom">
         <Navbar className="shadow-sm w-100" bg="light" expand="lg">
           <div className="col-sm-4 col-md-3">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
               <img
                 style={{
                   width: "50%",
@@ -99,13 +99,13 @@ function Navigationbar() {
             <Nav.Link href="#home">Electric cars</Nav.Link>
             {/* <Nav.Link href="#link">Popular Brands</Nav.Link> */}
             <NavDropdown title="Popular Brands" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Maruti Suzuki Cars</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.1">
+                Maruti Suzuki Cars
+              </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Hundai Cars
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Kia Cars
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Kia Cars</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Mahindra Cars
               </NavDropdown.Item>
@@ -115,6 +115,7 @@ function Navigationbar() {
                 Separated link
               </NavDropdown.Item> */}
             </NavDropdown>
+            <Nav.Link href="/admin">Admin</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

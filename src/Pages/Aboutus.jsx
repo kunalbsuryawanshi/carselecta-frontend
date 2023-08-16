@@ -1,7 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./aboutus.css";
-import "../Images/about.png";
 import aboutus from "../Images/aboutus.jpg";
 import Navigationbar from "./Navigationbar";
 

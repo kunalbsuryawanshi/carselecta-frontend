@@ -1,0 +1,26 @@
+/* styles.css */
+
+.hover-element {
+  cursor: pointer;
+  transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+}
+
+.hover-element:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow increase on hover */
+}
+
+.textContent{
+    position: absolute;
+    z-index: 10;
+    bottom: -100%;
+    background-color: rgba(255,255,255,0.75);
+    transition: 0.3s;
+}
+.card:hover .textContent{
+    bottom: 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  margin: 0 -60px; /* Adjust the margin value to control the distance between arrows */
+}
