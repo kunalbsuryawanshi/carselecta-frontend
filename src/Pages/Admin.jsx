@@ -5,13 +5,15 @@ import React, { useRef, useState } from "react";
 import { FaAddressBook, FaCheck, FaExclamationCircle } from "react-icons/fa";
 import axios from "axios";
 import adminImage from "../Images/admin.jpg";
+import AlertPopup from "./AlertPopup";
 function Admin() {
   let formRef = useRef();
   const navigate = useNavigate();
   let [buttonValidation, setButtonValidation] = useState("outline-success");
   let [isSuccess, setIsSuccess] = useState(false);
   let [isError, setIsError] = useState(false);
-
+  
+  const [showAlert, setShowAlert] = useState(false);
   let [admin, setAdmin] = useState({
     username: "",
     password: "",
@@ -37,7 +39,7 @@ function Admin() {
     }
 
     // BACKEND :: ...
-    let url = "http://localhost:8181/admin-login";
+    let url = "http://localhost:8181/carselecta/admin-login";
     axios.post(url, admin).then((response) => {
       if (response.data == 500) {
         console.log(response.data);
@@ -50,8 +52,10 @@ function Admin() {
         localStorage.setItem("adminLogin", "true");
         setButtonValidation("outline-success");
         setIsSuccess(true);
+        setShowAlert(true);
         setTimeout(() => {
           setIsSuccess(false);
+          setShowAlert(false);
           navigate("/admindashboard", { replace: true });
         }, 2000);
       }
@@ -116,6 +120,7 @@ function Admin() {
               >
                 forgot password?
               </Link>
+              {showAlert && <AlertPopup message="Login Successful!" />}
             </div>
           </div>
         </div>

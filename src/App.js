@@ -6,7 +6,12 @@ import HomePage from "./Pages/HomePage";
 import AboutUs from "./Pages/Aboutus";
 import Admin from "./Pages/Admin";
 import AdminDashboard from "./Pages/AdminDashboard";
+import AdminUpdateCar from "./Pages/AdminUpdateCar";
 import UserLoginAndRegistrationForm from "./Pages/UserLogin&RegistrationForm";
+import UpdateCarByAdmin from "./Pages/UpdateCarByAdmin";
+import AddCarByAdmin from "./Pages/AddCarByAdmin";
+import RemoveCarByAdmin from "./Pages/RemoveCarByAdmin";
+import RemoveCar from "./Pages/RemoveCar";
 function App() {
   return (
     <>
@@ -16,7 +21,12 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/addcarbyadmin" element={<AddCarByAdmin />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/adminupdatecar" element={<AdminUpdateCar />} />
+          <Route path="/updatecarbyadmin" element={<UpdateCarByAdmin />} />
+          <Route path="/removecarbyadmin" element={<RemoveCarByAdmin />} />
+          <Route path="/removecar" element={<RemoveCar />} />
         </Routes>
       </BrowserRouter>
     </>
