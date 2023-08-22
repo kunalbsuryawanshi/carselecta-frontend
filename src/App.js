@@ -7,17 +7,20 @@ import AboutUs from "./Pages/Aboutus";
 import Admin from "./Pages/Admin";
 import AdminDashboard from "./Pages/AdminDashboard";
 import AdminUpdateCar from "./Pages/AdminUpdateCar";
-import UserLoginAndRegistrationForm from "./Pages/UserLogin&RegistrationForm";
 import UpdateCarByAdmin from "./Pages/UpdateCarByAdmin";
 import AddCarByAdmin from "./Pages/AddCarByAdmin";
 import RemoveCarByAdmin from "./Pages/RemoveCarByAdmin";
 import RemoveCar from "./Pages/RemoveCar";
+import UserLogin from "./Pages/UserLogin";
+import UserSignup from "./Pages/UserSignup";
+import WishList from "./Pages/WishList";
+import UserProfile from "./Pages/UserProfile";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<UserLogin />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/admin" element={<Admin />} />
@@ -27,6 +30,10 @@ function App() {
           <Route path="/updatecarbyadmin" element={<UpdateCarByAdmin />} />
           <Route path="/removecarbyadmin" element={<RemoveCarByAdmin />} />
           <Route path="/removecar" element={<RemoveCar />} />
+          <Route path="/usersignup" element={<UserSignup />} />
+          <Route path="/userlogin" element={<UserLogin />} />
+          <Route path="/wishlist" element={<WishList />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </>

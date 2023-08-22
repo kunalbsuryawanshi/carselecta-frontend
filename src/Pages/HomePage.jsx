@@ -61,15 +61,112 @@ import {
   FaTwitter,
   FaYoutube,
   FaArrowAltCircleLeft,
+  FaHeart,
+  FaRegHeart,
 } from "react-icons/fa";
 import Navigationbar from "./Navigationbar";
 import "./Cards.css";
 import Footer from "./Footer";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import WishList from "./WishList";
+import Cookies from "js-cookie";
+import AlertPopup from "./AlertPopup";
+
 function HomePage() {
+  const [budget, setBudget] = useState("");
+  const [modelType, setModelType] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [searchButton, setSearchButton] = useState("Search");
+  const [cars, setCars] = useState([]);
+  const [buttonValidation, setButtonValidation] = useState("outline-success");
+  const [showAlert, setShowAlert] = useState(false);
+  const [favoriteCars, setFavoriteCars] = useState([]);
+
+  const addToFavorites = async (carId) => {
+    if (!favoriteCars.includes(carId)) {
+      const updatedFavoriteCars = [...favoriteCars, carId];
+
+      try {
+        const requestBody = {
+          favoriteCarIds: updatedFavoriteCars,
+          email: Cookies.get("email"),
+        };
+
+        setFavoriteCars(updatedFavoriteCars);
+        console.log(requestBody);
+        await axios.post(
+          "http://localhost:8181/add-to-favorite",
+          requestBody
+        );
+
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  // console.log(modelType);
+  let formRef = useRef();
+
+  let searchCarByBudgetAndType = async () => {
+    formRef.current.classList.add("was-validated");
+    let formStatus = formRef.current.checkValidity();
+    if (!formStatus) {
+      setButtonValidation("outline-danger");
+      setSearchButton("Invalid Search !");
+      return;
+    }
+    setButtonValidation("outline-success");
+    setSearchButton("Search");
+
+    if (budget == "1 - 5 Lakh") {
+      setMinPrice("100000");
+      setMaxPrice("500000");
+    } else if (budget == "5 - 10 Lakh") {
+      setMinPrice("500000");
+      setMaxPrice("1000000");
+    } else if (budget == "10 - 15 Lakh") {
+      setMinPrice("1000000");
+      setMaxPrice("1500000");
+    } else if (budget == "15 - 20 Lakh") {
+      setMinPrice("1500000");
+      setMaxPrice("2000000");
+    } else if (budget == "20 - 35 Lakh") {
+      setMinPrice("2000000");
+      setMaxPrice("3500000");
+    }
+
+    const formData = new FormData();
+    formData.append("minPrice", minPrice);
+    formData.append("maxPrice", maxPrice);
+    formData.append("modelType", modelType);
+    try {
+      const response = await axios.post(
+        `http://localhost:8181/${modelType}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setCars(response.data);
+      console.log(response.data);
+    } catch {}
+  };
+
   return (
     <>
       <Navigationbar />
-      <div className="card mb-3" style={{ maxWidth: "1500px" }}>
+
+      <div className="card mb-3" style={{ width: "block" }}>
         <div className="row ">
           <div className="col-sm-12 col-md-12">
             <img
@@ -85,33 +182,54 @@ function HomePage() {
           >
             <div className="card-body">
               <div className="row justify-content-center align-items-center mt-4">
-                <div className="col-sm-12 col-md-7 bg-light shadow mt-5">
-                  <h4 className="mt-5 mb-5 text-center">Find your right car</h4>
-                  <select className="form-control mb-2" name="budget" id="">
-                    <option value="b0">Select Budget</option>
-                    <option value="b1">1 - 5 Lakh</option>
-                    <option value="b1">10 - 15 Lakh</option>
-                    <option value="b1">15 - 20 Lakh</option>
-                    <option value="b1">20 - 35 Lakh</option>
-                  </select>
-                  <select className="form-control" name="budget" id="">
-                    <option value="b0">Select Type</option>
-                    <option value="b1">Hatchback</option>
-                    <option value="b1">Sedan</option>
-                    <option value="b1">SUV</option>
-                    <option value="b1">MUV</option>
-                    <option value="b1">Luxury</option>
-                    <option value="b1">Super Luxury</option>
-                    <option value="b1">Convertible</option>
-                    <option value="b1">Hybrid</option>
-                    <option value="b1">Coupe</option>
-                    <option value="b1">Pickup Truck</option>
-                    <option value="b1">Minivan</option>
-                    <option value="b1">Wagon</option>
-                  </select>
-                  <button className="form-control mt-4 mb-5 bg-danger text-light shadow">
-                    Search
-                  </button>
+                <div className="col-sm-6 col-md-7 bg-light shadow mt-5">
+                  <h4 className="mt-5 mb-5 text-center">
+                    Find your right newCarId
+                  </h4>
+                  <form ref={formRef} className="needs-validation">
+                    <select
+                      className="form-control mb-2"
+                      name="budget"
+                      newCarId="budget"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      required
+                    >
+                      <option value="">Select Budget</option>
+                      <option value="1 - 5 Lakh">1 - 5 Lakh</option>
+                      <option value="5 - 10 Lakh">5 - 10 Lakh</option>
+                      <option value="10 - 15 Lakh">10 - 15 Lakh</option>
+                      <option value="15 - 20 Lakh">15 - 20 Lakh</option>
+                      <option value="20 - 35 Lakh">20 - 35 Lakh</option>
+                    </select>
+                    <select
+                      className="form-control"
+                      name="modeType"
+                      newCarId="modeType"
+                      value={modelType}
+                      onChange={(e) => setModelType(e.target.value)}
+                      required
+                    >
+                      <option value="">Select Model Type...</option>
+                      <option value="Hatchback">Hatchback</option>
+                      <option value="Sedan">Sedan</option>
+                      <option value="SUV">SUV</option>
+                      <option value="MUV">MUV</option>
+                      <option value="Luxury">Luxury</option>
+                      <option value="Hybrid">Hybrid</option>
+                      <option value="Electric">Electric</option>
+                      <option value="Minivan">Minivan</option>
+                      <option value="Wagon">Wagon</option>
+                    </select>
+                  </form>
+                  <Button
+                    type="submit"
+                    className="btn btn-block shadow-sm mt-3 mb-4"
+                    variant={buttonValidation}
+                    onClick={searchCarByBudgetAndType}
+                  >
+                    {searchButton}
+                  </Button>
                 </div>
               </div>
             </div>
@@ -119,12 +237,58 @@ function HomePage() {
         </div>
       </div>
 
+      <div
+        style={{ marginTop: "350px" }}
+        className={"row m-5 p-5 justify-content-center "}
+      >
+        {cars.map((car) => (
+          <div className="col-sm-12 col-md-3 mt-5">
+            <Link
+              className="text-secondary"
+              // onClick={() =>
+              //   handleShowPopup(
+              //     newCarId.carBrand + " " + newCarId.carName,
+              //     newCarId.newCarId
+              //   )
+              // }
+            >
+              <Card
+                className="hover-element overflow-hidden"
+                style={{ width: "18rem" }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={`data:image/jpeg;base64,${car.carImage}`}
+                />
+                <Card.Body style={{ width: "18rem" }} className="textContent">
+                  <Card.Title className="mb-0">
+                    {car.carBrand + " " + car.carName}
+                  </Card.Title>
+                  <Card.Text className="mb-0">
+                    <small>{"Price: " + car.CarPrice + "*"}</small>
+                  </Card.Text>
+                  <Card.Text className="mb-0 mt-0">
+                    <small>{"Mileage: " + car.araimileage}</small>{" "}
+                  </Card.Text>
+                  <Card.Text className="mb-0 mt-0">
+                    <small>{"Fuel: " + car.fuelType}</small>{" "}
+                  </Card.Text>
+                  <Link onClick={() => addToFavorites(car.newCarId)}>
+                    <FaRegHeart className="text-danger" />
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Link>
+          </div>
+        ))}
+      </div>
+      {showAlert && <AlertPopup message="Car Added to your collection!" />}
       {/* SUV Carousal */}
       <div style={{ marginTop: "350px" }} className="row ">
-        <div className="col-sm-12 col-md-12">
+        <div className="col-sm-12 col-md-12 ">
           <Carousel
             prevIcon={
-              <span style={{ fontSize: "30px" }} className="text-info">
+              <span style={{ fontSize: "30px" }} className="text-info ">
                 <FaArrowAltCircleLeft />
               </span>
             }
@@ -135,7 +299,7 @@ function HomePage() {
               </span>
             }
             nextLabel={<span></span>}
-            className="mt-5 mb-5 bg-light m-5 "
+            className="bg-light m-5 "
             wrap={true}
             slide={false}
             interval={3000}
@@ -272,7 +436,7 @@ function HomePage() {
       </div>
 
       {/* Hatchback Carousal */}
-      <div style={{ marginTop: "50px" }} className="row ">
+      <div className="row ">
         <div className="col-sm-12 col-md-12">
           <Carousel
             prevIcon={
@@ -425,7 +589,7 @@ function HomePage() {
       </div>
 
       {/* Sedan Carousal */}
-      <div style={{ marginTop: "50px" }} className="row ">
+      <div className="row ">
         <div className="col-sm-12 col-md-12">
           <Carousel
             prevIcon={
@@ -578,7 +742,7 @@ function HomePage() {
       </div>
 
       {/* MUV Carousal */}
-      <div style={{ marginTop: "50px" }} className="row ">
+      <div className="row ">
         <div className="col-sm-12 col-md-12">
           <Carousel
             prevIcon={
@@ -731,7 +895,7 @@ function HomePage() {
       </div>
 
       {/* Luxury Carousal */}
-      <div style={{ marginTop: "50px" }} className="row ">
+      <div className="row ">
         <div className="col-sm-12 col-md-12">
           <Carousel
             prevIcon={
@@ -813,7 +977,7 @@ function HomePage() {
                 </div>
               </div>
               <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched Luxury car's
+                The most searched Luxury newCarId's
               </h4>
             </Carousel.Item>
             <Carousel.Item>
@@ -874,7 +1038,7 @@ function HomePage() {
                 </div>
               </div>
               <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched Luxury car's
+                The most searched Luxury newCarId's
               </h4>
             </Carousel.Item>
           </Carousel>
@@ -882,7 +1046,7 @@ function HomePage() {
       </div>
 
       {/* Popular Brands */}
-      <div style={{ marginTop: "50px" }} className="row ">
+      <div style={{ marginTop: "10px" }} className="row ">
         <div className="col-sm-12 col-md-12">
           <Carousel
             prevIcon={
@@ -906,18 +1070,17 @@ function HomePage() {
           >
             <Carousel.Item>
               <div className="row bg-light m-5  mt-5 justify-content-center ">
-
                 {/* card => 1 */}
                 <div className="col-sm-12 col-md-2 mt-5 d-flex justify-content-center">
                   <Card
                     className="hover-element overflow-hidden"
                     style={{ width: "18rem", height: "8rem" }}
-                    >
+                  >
                     <Card.Img className="mt-3" variant="top" src={Suzuki} />
                     <Card.Body
                       style={{ width: "11rem" }}
                       className="textContent"
-                      >
+                    >
                       <Card.Title className="text-center">Suzuki</Card.Title>
                     </Card.Body>
                   </Card>
@@ -939,7 +1102,7 @@ function HomePage() {
                   </Card>
                 </div>
 
-                  {/* card => 3 */}
+                {/* card => 3 */}
                 <div className="col-sm-12 col-md-2 mt-5 d-flex justify-content-center">
                   <Card
                     className="hover-element overflow-hidden"
@@ -1010,7 +1173,6 @@ function HomePage() {
 
             <Carousel.Item>
               <div className="row bg-light m-5  mt-5 justify-content-center">
-
                 {/* card => 7 */}
                 <div className="col-sm-12 col-md-2 mt-5 d-flex justify-content-center">
                   <Card
@@ -1114,8 +1276,6 @@ function HomePage() {
           </Carousel>
         </div>
       </div>
-
-      {/* <Footer /> */}
     </>
   );
 }

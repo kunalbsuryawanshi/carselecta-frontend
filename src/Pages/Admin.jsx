@@ -6,13 +6,13 @@ import { FaAddressBook, FaCheck, FaExclamationCircle } from "react-icons/fa";
 import axios from "axios";
 import adminImage from "../Images/admin.jpg";
 import AlertPopup from "./AlertPopup";
+import Cookies from "js-cookie";
 function Admin() {
   let formRef = useRef();
   const navigate = useNavigate();
   let [buttonValidation, setButtonValidation] = useState("outline-success");
-  let [isSuccess, setIsSuccess] = useState(false);
   let [isError, setIsError] = useState(false);
-  
+
   const [showAlert, setShowAlert] = useState(false);
   let [admin, setAdmin] = useState({
     username: "",
@@ -39,7 +39,7 @@ function Admin() {
     }
 
     // BACKEND :: ...
-    let url = "http://localhost:8181/carselecta/admin-login";
+    let url = "http://localhost:8181/admin-login";
     axios.post(url, admin).then((response) => {
       if (response.data == 500) {
         console.log(response.data);
@@ -49,12 +49,10 @@ function Admin() {
           setIsError(false);
         }, 2000);
       } else {
-        localStorage.setItem("adminLogin", "true");
+        Cookies.set("admin",admin.username);
         setButtonValidation("outline-success");
-        setIsSuccess(true);
         setShowAlert(true);
         setTimeout(() => {
-          setIsSuccess(false);
           setShowAlert(false);
           navigate("/admindashboard", { replace: true });
         }, 2000);
@@ -100,12 +98,6 @@ function Admin() {
               >
                 Login
               </Button>
-              {isSuccess && (
-                <div className="text-success text-center mt-2">
-                  Login successful
-                  <FaCheck className="ms-1 mb-1" />
-                </div>
-              )}
               {isError && (
                 <div className="text-danger text-center mt-2">
                   Invalid username or password
@@ -120,7 +112,9 @@ function Admin() {
               >
                 forgot password?
               </Link>
-              {showAlert && <AlertPopup message="Login Successful!" />}
+              {showAlert && (
+                <AlertPopup message="Login Successful! Welcome Admin" />
+              )}
             </div>
           </div>
         </div>

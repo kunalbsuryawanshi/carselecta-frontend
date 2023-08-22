@@ -17,26 +17,36 @@ import {
   NotificationManager,
 } from "react-notifications";
 import AlertPopup from "./AlertPopup";
+import Cookies from "js-cookie";
 function AddCarByAdmin() {
   let formRef = useRef();
   const navigate = useNavigate();
 
   let [buttonValidation, setButtonValidation] = useState("outline-success");
-  let [isSuccess, setIsSuccess] = useState(false);
-  let [isError, setIsError] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [priceDropdown, setPriceDropdown] = useState("");
 
-  const [modelName, setModelName] = useState("");
-  const [modelBrand, setModelBrand] = useState("");
-  const [modelType, setModelType] = useState("");
-  const [price, setPrice] = useState("");
-  const [mileage, setMileage] = useState("");
+  const [carImage, setCarImage] = useState(null);
+  const [carName, setModelName] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [carBrand, setModelBrand] = useState("");
+  const [carType, setModelType] = useState("");
+  const [carPrice, setPrice] = useState("");
+  const [ARAIMileage, setARAIMileage] = useState("");
+  const [cityMileage, setCityMileage] = useState("");
+  const [highwayMileage, setHighwayMileage] = useState("");
   const [fuelType, setFuelType] = useState("");
   const [transmission, setTransmission] = useState("");
   const [modelYear, setModelyear] = useState("");
   const [description, setDescription] = useState("");
-  const [carImage, setCarImage] = useState(null);
+
+  // ARAI Mileage	* City Mileage	* Highway Mileage
+  const [exShowroomPrice, setExShowroomPrice] = useState("");
+  const [roadTax, setRoadTax] = useState("");
+  const [insurance, setInsurance] = useState("");
+  const [otherCharges, setOtherCharges] = useState("");
+  const [optionalCharges, setOptionalCharges] = useState("");
+  const [EMI, setEMI] = useState("");
 
   const handleCarImage = (e) => {
     setCarImage(e.target.files[0]);
@@ -49,22 +59,51 @@ function AddCarByAdmin() {
       setButtonValidation("outline-danger");
       return;
     }
-
+    const username = Cookies.get("admin");
     const formData = new FormData();
-    formData.append("modelName", modelName);
-    formData.append("modelBrand", modelBrand);
-    formData.append("modelType", modelType);
-    formData.append("price", price + " " + priceDropdown);
-    formData.append("mileage", mileage + " kmpl");
+    formData.append("carImage", carImage);
+    formData.append("carName", carName);
+    formData.append("carModel", carModel);
+    formData.append("carBrand", carBrand);
+    formData.append("carType", carType);
+    formData.append("carPrice", carPrice);
+    formData.append("ARAIMileage", ARAIMileage + " kmpl");
+    formData.append("cityMileage", cityMileage + " kmpl");
+    formData.append("highwayMileage", highwayMileage + " kmpl");
     formData.append("fuelType", fuelType);
     formData.append("transmission", transmission);
     formData.append("modelYear", modelYear);
     formData.append("description", description);
-    formData.append("carImage", carImage);
+    formData.append("exShowroomPrice", exShowroomPrice);
+    formData.append("roadTax", roadTax);
+    formData.append("insurance", insurance);
+    formData.append("otherCharges", otherCharges);
+    formData.append("optionalCharges", optionalCharges);
+    formData.append("EMI", EMI);
+    formData.append("username", username);
 
+    // console.log(carImage);
+
+    // console.log(carName);
+    // console.log(carModel);
+    // console.log(carBrand);
+    // console.log(carType);
+    // console.log(carPrice);
+    // console.log(ARAIMileage);
+    // console.log(cityMileage);
+    // console.log(highwayMileage);
+    // console.log(transmission);
+    // console.log(modelYear);
+    // console.log(description);
+    // console.log(exShowroomPrice);
+    // console.log(roadTax);
+    // console.log(insurance);
+    // console.log(otherCharges);
+    // console.log(optionalCharges);
+    // console.log(EMI);
     try {
       const response = await axios.post(
-        "http://localhost:8181/carselecta/add-new-car",
+        "http://localhost:8181/add-new-car",
         formData,
         {
           headers: {
@@ -78,64 +117,26 @@ function AddCarByAdmin() {
         setTimeout(() => {
           setShowAlert(false);
         }, 3000);
-        // NotificationManager.success(
-        //   "Car Details inserted successfully!",
-        //   "Success",
-        //   2000
-        // );
         setButtonValidation("outline-success");
         console.log("Data uploaded successfully");
       }
     } catch (error) {
       console.error("Error uploading data", error);
     }
-
-    setModelName("");
-    setModelBrand("");
-    setModelType("");
-    setPrice("");
-    setMileage("");
-    setFuelType("");
-    setTransmission("");
-    setModelyear("");
-    setDescription("");
-    setCarImage(null);
+    
+    // setModelName("");
+    // setModelBrand("");
+    // setModelType("");
+    // setPrice("");
+    // setMileage("");
+    // setFuelType("");
+    // setTransmission("");
+    // setModelyear("");
+    // setDescription("");
+    // setCarImage(null);
     formRef.current.classList.remove("was-validated");
 
     //Testing ::...
-
-    // console.log(modelName);
-    // console.log(modelBrand);
-    // console.log(modelType);
-    // console.log(price);
-    // console.log(mileage);
-    // console.log(fuelType);
-    // console.log(transmission);
-    // console.log(modelYear);
-    // console.log(description);
-    // console.log(carImage);
-
-    // BACKEND :: ...
-
-    // let url = "http://localhost:8181/admin-login";
-    // axios.post(url).then((response) => {
-    //   if (response.data == 500) {
-    //     console.log(response.data);
-    //     setButtonValidation("outline-danger");
-    //     setIsError(true);
-    //     setTimeout(() => {
-    //       setIsError(false);
-    //     }, 2000);
-    //   } else {
-    //     localStorage.setItem("adminLogin", "true");
-    //     setButtonValidation("outline-success");
-    //     setIsSuccess(true);
-    //     setTimeout(() => {
-    //       setIsSuccess(false);
-    //       navigate("/admindashboard", { replace: true });
-    //     }, 2000);
-    //   }
-    // });
   };
 
   return (
@@ -146,33 +147,49 @@ function AddCarByAdmin() {
       </h2>
       <div className="bg-light p-5 m-5 shadow">
         <form ref={formRef} className="needs-validation">
+          {/* ----------------------------------------------------ROW::1--------------------------------- */}
           <div className="row m-5 ">
             <div className="col-sm-12 col-md-4 mt-1">
               <input
                 className="form-control shadow-sm"
                 type="text"
-                name="modelName"
-                id="modelName"
-                placeholder="Enter model name..."
-                pattern="^[A-Za-z0-9\s-]+$"
-                value={modelName}
+                name="carName"
+                id="carName"
+                placeholder="Enter car name..."
+                pattern="^[a-zA-Z0-9]*$"
+                value={carName}
                 onChange={(e) => setModelName(e.target.value)}
                 required
               />
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please enter a model name*
+                Please enter a car name*
+              </Form.Control.Feedback>
+            </div>
+            <div className="col-sm-12 col-md-4 mt-1">
+              <input
+                className="form-control shadow-sm"
+                type="text"
+                name="carModel"
+                id="carModel"
+                placeholder="Enter car model..."
+                value={carModel}
+                onChange={(e) => setCarModel(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback className="m-1" type="invalid">
+                Please enter a car model name*
               </Form.Control.Feedback>
             </div>
             <div className="col-sm-12 col-md-4 mt-1">
               <select
                 className="form-control shadow-sm"
                 aria-label="Default select example"
-                value={modelType}
+                value={carType}
                 onChange={(e) => setModelType(e.target.value)}
                 required
               >
                 <option value="" selected>
-                  Select model type...
+                  Select car type...
                 </option>
                 <option value="SUV">SUV</option>
                 <option value="Sedan">Sedan</option>
@@ -188,19 +205,22 @@ function AddCarByAdmin() {
                 <option value="Sports Car">Sports Car</option>
               </select>
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please choose a model type*
+                Please select a car type*
               </Form.Control.Feedback>
             </div>
+          </div>
+          {/* ----------------------------------------------------ROW::2--------------------------------- */}
+          <div className="row m-5">
             <div className="col-sm-12 col-md-4 mt-1">
               <select
                 className="form-control shadow-sm"
                 aria-label="Default select example"
-                value={modelBrand}
+                value={carBrand}
                 onChange={(e) => setModelBrand(e.target.value)}
                 required
               >
                 <option value="" selected>
-                  Select model brand...
+                  Select car brand...
                 </option>
                 <option value="Mercedes-Benz">Mercedes-Benz</option>
                 <option value="BMW">BMW</option>
@@ -229,7 +249,7 @@ function AddCarByAdmin() {
                 <option value="Rolls Royse">Rolls Royse</option>
                 <option value="Kia">Kia</option>
                 <option value="Volvo">Volvo</option>
-                <option value="Suzuki">Suzuki</option>
+                <option value="Maruti Suzuki">Maruti Suzuki</option>
                 <option value="Fiat">Fiat</option>
                 <option value="Land Rover">Land Rover</option>
                 <option value="Skoda">Skoda</option>
@@ -239,58 +259,42 @@ function AddCarByAdmin() {
                 <option value="Mahindra">Mahindra</option>
               </select>
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please choose a model brand*
+                Please select a car brand*
               </Form.Control.Feedback>
             </div>
-          </div>
 
-          <div className="row m-5">
             <div className="col-sm-12 col-md-4 mt-1">
               <InputGroup className="mb-3">
                 <Form.Control
                   aria-label="Text input with dropdown button"
-                  pattern="\d+(\.\d{2})?"
-                  placeholder="Enter price e.g.(0.00)..."
-                  value={price}
+                  pattern="^[1-9][0-9]*$"
+                  placeholder="Enter car price..."
+                  value={carPrice}
                   onChange={(e) => setPrice(e.target.value)}
                   required
                 />
-                <select
-                  className="form-control shadow-sm"
-                  aria-label="Default select example"
-                  value={priceDropdown}
-                  onChange={(e) => setPriceDropdown(e.target.value)}
-                  required
-                >
-                  <option value="" selected>
-                    Select...
-                  </option>
-                  <option value="Thousand">Thousand</option>
-                  <option value="Lakh">Lakh</option>
-                  <option value="Crore">Crore</option>
-                </select>
                 <Form.Control.Feedback className="m-1" type="invalid">
-                  Please enter price*
+                  Please enter car price*
                 </Form.Control.Feedback>
               </InputGroup>
             </div>
-
             <div className="col-sm-12 col-md-4 mt-1">
-              <InputGroup className="mb-3">
-                <Form.Control
-                  placeholder="Enter model mileage e.g.(0.00)..."
-                  pattern="\d+(\.\d{2})?"
-                  title="Mileage must be a number with up to 2 decimal places"
-                  value={mileage}
-                  onChange={(e) => setMileage(e.target.value)}
-                  required
-                />
-                <InputGroup.Text>kmpl</InputGroup.Text>
-                <Form.Control.Feedback className="m-1" type="invalid">
-                  Please enter model mileage*
-                </Form.Control.Feedback>
-              </InputGroup>
+              <input
+                className="form-control shadow-sm "
+                type="file"
+                name="carImage"
+                id="formFile"
+                placeholder="Choose car image"
+                onChange={handleCarImage}
+                required
+              />
+              <Form.Control.Feedback className="m-1" type="invalid">
+                Please upload car image*
+              </Form.Control.Feedback>
             </div>
+          </div>
+          {/* ----------------------------------------------------ROW::3--------------------------------- */}
+          <div className="row m-5">
             <div className="col-sm-12 col-md-4 mt-1">
               <select
                 className="form-control shadow-sm"
@@ -304,17 +308,16 @@ function AddCarByAdmin() {
                 </option>
                 <option value="Diesel">Diesel</option>
                 <option value="Petrol">Petrol</option>
+                <option value="Electric">Electric</option>
                 <option value="CNG">CNG</option>
                 <option value="Bio Diesel">Bio Diesel</option>
                 <option value="LPG">LPG</option>
                 <option value="Ethanol or Methanol">Ethanol or Methanol</option>
               </select>
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please chhose model fuel type*
+                Please select car fuel type*
               </Form.Control.Feedback>
             </div>
-          </div>
-          <div className="row m-5">
             <div className="col-sm-12 col-md-4 mt-1">
               <select
                 className="form-control shadow-sm"
@@ -330,7 +333,7 @@ function AddCarByAdmin() {
                 <option value="Manual">Manual</option>
               </select>
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please choose transmission*
+                Please select transmission*
               </Form.Control.Feedback>
             </div>
             <div className="col-sm-12 col-md-4 mt-1">
@@ -342,7 +345,7 @@ function AddCarByAdmin() {
                 required
               >
                 <option value="" selected>
-                  Select model year...
+                  Select car year...
                 </option>
                 <option value="2000">2000</option>
                 <option value="2001">2001</option>
@@ -372,22 +375,161 @@ function AddCarByAdmin() {
                 <option value="2025">2025</option>
               </select>
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please choose model year*
+                Please select car year*
+              </Form.Control.Feedback>
+            </div>
+          </div>
+          {/* ----------------------------------------------------ROW::4--------------------------------- */}
+          <div className="row m-5">
+            <div className="col-sm-12 col-md-4 mt-1">
+              <input
+                className="form-control shadow-sm"
+                type="text"
+                name="exShowroomPrice"
+                id="exShowroomPrice"
+                placeholder="Enter ex-showroom price..."
+                pattern="^[1-9][0-9]*$"
+                value={exShowroomPrice}
+                onChange={(e) => setExShowroomPrice(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback className="m-1" type="invalid">
+                Please enter ex-showroom price*
               </Form.Control.Feedback>
             </div>
             <div className="col-sm-12 col-md-4 mt-1">
               <input
-                className="form-control shadow-sm "
-                type="file"
-                name="carImage"
-                id="formFile"
-                placeholder="Choose car image"
-                onChange={handleCarImage}
+                className="form-control shadow-sm"
+                type="text"
+                name="roadTax"
+                id="roadTax"
+                placeholder="Enter road tax..."
+                pattern="^[1-9][0-9]*$"
+                value={roadTax}
+                onChange={(e) => setRoadTax(e.target.value)}
                 required
               />
               <Form.Control.Feedback className="m-1" type="invalid">
-                Please upload model image*
+                Please enter road-tax*
               </Form.Control.Feedback>
+            </div>
+            <div className="col-sm-12 col-md-4 mt-1">
+            <input
+                className="form-control shadow-sm "
+                type="text"
+                name="insurance"
+                id="insurance"
+                placeholder="Enter insurance price..."
+                pattern="^[1-9][0-9]*$"
+                value={insurance}
+                onChange={(e) => setInsurance(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback className="m-1" type="invalid">
+                Please enter car insurance price*
+              </Form.Control.Feedback>
+            </div>
+          </div>
+          {/* ----------------------------------------------------ROW::5--------------------------------- */}
+          <div className="row m-5">
+            <div className="col-sm-12 col-md-4 mt-1">
+            <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="Enter EMI..."
+                  title="Mileage must be a number with up to 2 decimal places"
+                  value={EMI}
+                  pattern="^[1-9][0-9]*$"
+                  onChange={(e) => setEMI(e.target.value)}
+                  required
+                />
+                <InputGroup.Text>month</InputGroup.Text>
+                <Form.Control.Feedback className="m-1" type="invalid">
+                  Please enter EMI/month*
+                </Form.Control.Feedback>
+              </InputGroup>
+            </div>
+            <div className="col-sm-12 col-md-4 mt-1">
+              <input
+                className="form-control shadow-sm"
+                type="text"
+                name="otherCharges"
+                id="otherCharges"
+                placeholder="Enter other charges..."
+                pattern="^[1-9][0-9]*$"
+                value={otherCharges}
+                onChange={(e) => setOtherCharges(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback className="m-1" type="invalid">
+                Please enter other charges*
+              </Form.Control.Feedback>
+            </div>
+            <div className="col-sm-12 col-md-4 mt-1">
+              <input
+                className="form-control shadow-sm"
+                type="text"
+                name="optionalCharges"
+                id="optionalCharges"
+                placeholder="Enter optional charges..."
+                pattern="^[1-9][0-9]*$"
+                value={optionalCharges}
+                onChange={(e) => setOptionalCharges(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback className="m-1" type="invalid">
+                Please enter optional charges*
+              </Form.Control.Feedback>
+            </div>
+          </div>
+          {/* ----------------------------------------------------ROW::6--------------------------------- */}
+          <div className="row m-5">
+            <div className="col-sm-12 col-md-4 mt-1">
+            <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="Enter ARAI mileage"
+                  pattern="\d+(\.\d{2})?"
+                  title="Mileage must be a number with up to 2 decimal places"
+                  value={ARAIMileage}
+                  onChange={(e) => setARAIMileage(e.target.value)}
+                  required
+                />
+                <InputGroup.Text>kmpl</InputGroup.Text>
+                <Form.Control.Feedback className="m-1" type="invalid">
+                  Please enter ARAI mileage*
+                </Form.Control.Feedback>
+              </InputGroup>
+            </div>
+            <div className="col-sm-12 col-md-4 mt-1">
+              <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="Enter city mileage"
+                  pattern="\d+(\.\d{2})?"
+                  title="Mileage must be a number with up to 2 decimal places"
+                  value={cityMileage}
+                  onChange={(e) => setCityMileage(e.target.value)}
+                  required
+                />
+                <InputGroup.Text>kmpl</InputGroup.Text>
+                <Form.Control.Feedback className="m-1" type="invalid">
+                  Please enter city mileage*
+                </Form.Control.Feedback>
+              </InputGroup>
+            </div>
+            <div className="col-sm-12 col-md-4 mt-1">
+              <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="Enter highway mileage"
+                  pattern="\d+(\.\d{2})?"
+                  title="Mileage must be a number with up to 2 decimal places"
+                  value={highwayMileage}
+                  onChange={(e) => setHighwayMileage(e.target.value)}
+                  required
+                />
+                <InputGroup.Text>kmpl</InputGroup.Text>
+                <Form.Control.Feedback className="m-1" type="invalid">
+                  Please enter highway mileage*
+                </Form.Control.Feedback>
+              </InputGroup>
             </div>
           </div>
 
@@ -429,3 +571,13 @@ function AddCarByAdmin() {
   );
 }
 export default AddCarByAdmin;
+/**
+ * 
+ * 
+ * private double exShowroomPrice;
+	private double roadTax;
+	private double insurance;
+	private double otherCharges;
+	private double optionalCharges;
+	private double onRoadPrice;
+ */

@@ -55,6 +55,7 @@ function RemoveCarByAdmin() {
     setShowPopup(true);
     setBackground(".4");
     setCarId(newCarId);
+    console.log(newCarId);
   };
 
   const handleCancel = () => {
@@ -71,12 +72,10 @@ function RemoveCarByAdmin() {
       .get(`http://localhost:8181/delete-car-by-id?newCarId=${carId}`)
       .then((response) => {
         setShowAlert(true);
-
         setTimeout(() => {
           setShowAlert(false);
           window.location.reload();
         }, 3000);
-
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
