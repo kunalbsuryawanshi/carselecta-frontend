@@ -53,26 +53,17 @@ import Nissan from "../Images/nissan.webp";
 
 import {
   FaArrowAltCircleRight,
-  FaArrowRight,
-  FaFacebook,
-  FaInstagram,
-  FaPhoneAlt,
-  FaPhoneSquare,
-  FaTwitter,
-  FaYoutube,
   FaArrowAltCircleLeft,
-  FaHeart,
   FaRegHeart,
 } from "react-icons/fa";
 import Navigationbar from "./Navigationbar";
 import "./Cards.css";
-import Footer from "./Footer";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import WishList from "./WishList";
 import Cookies from "js-cookie";
 import AlertPopup from "./AlertPopup";
+import CardSlider from "./CardSlider";
 
 function HomePage() {
   const [budget, setBudget] = useState("");
@@ -83,35 +74,8 @@ function HomePage() {
   const [cars, setCars] = useState([]);
   const [buttonValidation, setButtonValidation] = useState("outline-success");
   const [showAlert, setShowAlert] = useState(false);
-  const [favoriteCars, setFavoriteCars] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const addToFavorites = async (carId) => {
-    if (!favoriteCars.includes(carId)) {
-      const updatedFavoriteCars = [...favoriteCars, carId];
-
-      try {
-        const requestBody = {
-          favoriteCarIds: updatedFavoriteCars,
-          email: Cookies.get("email"),
-        };
-
-        setFavoriteCars(updatedFavoriteCars);
-        console.log(requestBody);
-        await axios.post(
-          "http://localhost:8181/add-to-favorite",
-          requestBody
-        );
-
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 2000);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-  // console.log(modelType);
   let formRef = useRef();
 
   let searchCarByBudgetAndType = async () => {
@@ -122,30 +86,30 @@ function HomePage() {
       setSearchButton("Invalid Search !");
       return;
     }
+    setIsFetching(true);
     setButtonValidation("outline-success");
     setSearchButton("Search");
 
-    if (budget == "1 - 5 Lakh") {
-      setMinPrice("100000");
-      setMaxPrice("500000");
-    } else if (budget == "5 - 10 Lakh") {
-      setMinPrice("500000");
-      setMaxPrice("1000000");
-    } else if (budget == "10 - 15 Lakh") {
-      setMinPrice("1000000");
-      setMaxPrice("1500000");
-    } else if (budget == "15 - 20 Lakh") {
-      setMinPrice("1500000");
-      setMaxPrice("2000000");
-    } else if (budget == "20 - 35 Lakh") {
-      setMinPrice("2000000");
-      setMaxPrice("3500000");
+    const budgetRanges = {
+      "1 - 5 Lakh": { minPrice: "100000", maxPrice: "500000" },
+      "5 - 10 Lakh": { minPrice: "500000", maxPrice: "1000000" },
+      "10 - 15 Lakh": { minPrice: "1000000", maxPrice: "1500000" },
+      "15 - 20 Lakh": { minPrice: "1500000", maxPrice: "2000000" },
+      "20 - 35 Lakh": { minPrice: "2000000", maxPrice: "3500000" },
+    };
+
+    let selectedRange = {};
+    if (budgetRanges.hasOwnProperty(budget)) {
+      selectedRange = budgetRanges[budget];
     }
+    // await new Promise((resolve) => setTimeout(resolve, 0));
 
     const formData = new FormData();
-    formData.append("minPrice", minPrice);
-    formData.append("maxPrice", maxPrice);
+    formData.append("minPrice", selectedRange.minPrice);
+    formData.append("maxPrice", selectedRange.maxPrice);
     formData.append("modelType", modelType);
+    // console.log(formData);
+
     try {
       const response = await axios.post(
         `http://localhost:8181/${modelType}`,
@@ -159,7 +123,9 @@ function HomePage() {
 
       setCars(response.data);
       console.log(response.data);
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -237,7 +203,17 @@ function HomePage() {
         </div>
       </div>
 
-      <div
+      {isFetching ? (
+        cars.length !== 0 ? (
+          <CardSlider cars={cars} />
+        ) : (
+          <p className="m-5">No {modelType}'s available in that range...</p>
+        )
+      ) : (
+        <></>
+      )}
+
+      {/* <div
         style={{ marginTop: "350px" }}
         className={"row m-5 p-5 justify-content-center "}
       >
@@ -281,7 +257,7 @@ function HomePage() {
             </Link>
           </div>
         ))}
-      </div>
+      </div> */}
       {showAlert && <AlertPopup message="Car Added to your collection!" />}
       {/* SUV Carousal */}
       <div style={{ marginTop: "350px" }} className="row ">

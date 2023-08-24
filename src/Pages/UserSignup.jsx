@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import { FaUserLock } from "react-icons/fa";
+import { FaCircle, FaUserLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import AlertPopup from "./AlertPopup";
 import { useRef, useState } from "react";
@@ -74,27 +74,29 @@ function UserSignup() {
           </h2>
           <form ref={formRef} className="needs-validation">
             <input
-              className="form-control mt-2"
+              className="form-control input mt-2"
               type="text"
               name="name"
               id="name"
               placeholder="Enter your first name..."
+              pattern="[A-Za-z]+"
               value={user.firstName}
               onChange={(e) => setUser({ ...user, firstName: e.target.value })}
               required
             />
             <input
-              className="form-control mt-2"
+              className="form-control input mt-2"
               type="text"
               name="name"
               id="name"
+              pattern="[A-Za-z]+"
               placeholder="Enter your last name..."
               value={user.lastName}
               onChange={(e) => setUser({ ...user, lastName: e.target.value })}
               required
             />
             <input
-              className="form-control mt-2"
+              className="form-control input mt-2"
               type="email"
               name="email"
               id="email"
@@ -110,7 +112,7 @@ function UserSignup() {
               </span>
               <input
                 type="text"
-                class="form-control mt-2"
+                class="form-control input mt-2"
                 placeholder="Enter phone number..."
                 pattern="^(?:(?:(?:0{0,2})?|[0]?)?[6789]\d{9})$"
                 value={user.phoneNumber}
@@ -124,7 +126,7 @@ function UserSignup() {
               />
             </div>
             <select
-              className="form-control shadow-sm"
+              className="form-control input shadow-sm"
               aria-label="Default select example"
               value={user.state}
               onChange={(e) => setUser({ ...user, state: e.target.value })}
@@ -163,7 +165,7 @@ function UserSignup() {
               <option value="West Bengal">West Bengal</option>
             </select>
             <input
-              className="form-control mt-2"
+              className="form-control input mt-2"
               type="text"
               name="city"
               id="city"
@@ -174,7 +176,7 @@ function UserSignup() {
               required
             />
             <input
-              className="form-control mt-2"
+              className="form-control input mt-2"
               type="password"
               name="password"
               id="password"
@@ -190,15 +192,18 @@ function UserSignup() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              <li className="text-danger list-unstyled">
-                Password should contain atleast
-              </li>
-              <li className="text-danger list-unstyled">
-                Atleast 1 Uppercase, 1 Lowercase and 1 Special character
-              </li>
-              <li className="text-danger list-unstyled">
-                Minimum length should be 8 charcater
-              </li>
+              <small>
+                <li className="text-danger list-unstyled">
+                  Password should contain atleast
+                </li>
+                <li className="text-danger list-unstyled">
+                  <FaCircle style={{ fontSize: "5px" }} /> Atleast 1 Uppercase,
+                  1 Lowercase and 1 Special character
+                </li>
+                <li className="text-danger list-unstyled">
+                  <FaCircle style={{ fontSize: "5px" }} /> Minimum 8 charcater
+                </li>
+              </small>
             </Form.Control.Feedback>
           </form>
           <Button

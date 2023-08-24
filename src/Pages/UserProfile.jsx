@@ -62,10 +62,9 @@ function UserProfile() {
       setFavoriteCars(response.data);
       setShow(true);
       setShowFav(true);
-      console.log(showFav);
       console.log(favoriteCars);
     } catch (error) {
-      
+
       console.log(error);
     }
   };

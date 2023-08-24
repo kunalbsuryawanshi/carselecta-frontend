@@ -15,18 +15,20 @@ import AlertPopup from "./AlertPopup";
 
 function WishList({ Cars }) {
   const [showAlert, setShowAlert] = useState(false);
-  const removeFromFavHandle = (newCarId) => {
+  const [carList, setCarList] = useState(Cars);
+
+  const removeFromFavHandle = async (newCarId) => {
     const email = Cookies.get("email");
     try {
-      axios.get(
+      await axios.get(
         `http://localhost:8181/delete-from-favorite?newCarId=${newCarId}&email=${email}`
       );
+      const updatedCarList = carList.filter((car) => car.newCarId !== newCarId);
+      setCarList(updatedCarList);
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-        // window.location.reload();
       }, 2000);
-      //   navigate("/userprofile", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -40,10 +42,17 @@ function WishList({ Cars }) {
       <Popover.Body>{description}</Popover.Body>
     </Popover>
   );
-
+  const formatPrice = (price) => {
+    return price.toLocaleString("en-IN", {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 0,
+      //   maximumFractionDigits: 2,
+    });
+  };
   return (
     <>
-      {Cars.map((car) => (
+      {carList.map((car) => (
         <div
           key={car.newCarId}
           style={{ borderRadius: "10px" }}
@@ -68,7 +77,7 @@ function WishList({ Cars }) {
                 )}
               >
                 <small className="card-title">
-                  {car.carBrand + " " + car.carName}
+                  <strong>{car.carBrand + " " + car.carName}</strong>
                 </small>
               </OverlayTrigger>
               <p className="card-text text-secondary">
@@ -80,7 +89,7 @@ function WishList({ Cars }) {
               </p>
               <p className="card-text">
                 <h5 className="text-body-secondary">
-                  &#x20B9; {car.carPrice + "*"}
+                  {formatPrice(car.carPrice) + " Lakh*"}
                 </h5>
               </p>
             </div>

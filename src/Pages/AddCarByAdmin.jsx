@@ -66,7 +66,7 @@ function AddCarByAdmin() {
     formData.append("carModel", carModel);
     formData.append("carBrand", carBrand);
     formData.append("carType", carType);
-    formData.append("carPrice", carPrice);
+    formData.append("carPrice", carPrice.replace(/,/g, ""));
     formData.append("ARAIMileage", ARAIMileage + " kmpl");
     formData.append("cityMileage", cityMileage + " kmpl");
     formData.append("highwayMileage", highwayMileage + " kmpl");
@@ -74,12 +74,12 @@ function AddCarByAdmin() {
     formData.append("transmission", transmission);
     formData.append("modelYear", modelYear);
     formData.append("description", description);
-    formData.append("exShowroomPrice", exShowroomPrice);
-    formData.append("roadTax", roadTax);
-    formData.append("insurance", insurance);
-    formData.append("otherCharges", otherCharges);
-    formData.append("optionalCharges", optionalCharges);
-    formData.append("EMI", EMI);
+    formData.append("exShowroomPrice", exShowroomPrice.replace(/,/g, ""));
+    formData.append("roadTax", roadTax.replace(/,/g, ""));
+    formData.append("insurance", insurance.replace(/,/g, ""));
+    formData.append("otherCharges", otherCharges.replace(/,/g, ""));
+    formData.append("optionalCharges", optionalCharges.replace(/,/g, ""));
+    formData.append("EMI", EMI.replace(/,/g, ""));
     formData.append("username", username);
 
     // console.log(carImage);
@@ -123,7 +123,7 @@ function AddCarByAdmin() {
     } catch (error) {
       console.error("Error uploading data", error);
     }
-    
+
     // setModelName("");
     // setModelBrand("");
     // setModelType("");
@@ -267,7 +267,7 @@ function AddCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   aria-label="Text input with dropdown button"
-                  pattern="^[1-9][0-9]*$"
+                  pattern="^[0-9,]*$"
                   placeholder="Enter car price..."
                   value={carPrice}
                   onChange={(e) => setPrice(e.target.value)}
@@ -388,7 +388,7 @@ function AddCarByAdmin() {
                 name="exShowroomPrice"
                 id="exShowroomPrice"
                 placeholder="Enter ex-showroom price..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={exShowroomPrice}
                 onChange={(e) => setExShowroomPrice(e.target.value)}
                 required
@@ -404,7 +404,7 @@ function AddCarByAdmin() {
                 name="roadTax"
                 id="roadTax"
                 placeholder="Enter road tax..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={roadTax}
                 onChange={(e) => setRoadTax(e.target.value)}
                 required
@@ -414,13 +414,13 @@ function AddCarByAdmin() {
               </Form.Control.Feedback>
             </div>
             <div className="col-sm-12 col-md-4 mt-1">
-            <input
+              <input
                 className="form-control shadow-sm "
                 type="text"
                 name="insurance"
                 id="insurance"
                 placeholder="Enter insurance price..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={insurance}
                 onChange={(e) => setInsurance(e.target.value)}
                 required
@@ -433,12 +433,12 @@ function AddCarByAdmin() {
           {/* ----------------------------------------------------ROW::5--------------------------------- */}
           <div className="row m-5">
             <div className="col-sm-12 col-md-4 mt-1">
-            <InputGroup className="mb-3">
+              <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter EMI..."
                   title="Mileage must be a number with up to 2 decimal places"
                   value={EMI}
-                  pattern="^[1-9][0-9]*$"
+                  pattern="^[0-9,]*$"
                   onChange={(e) => setEMI(e.target.value)}
                   required
                 />
@@ -455,7 +455,7 @@ function AddCarByAdmin() {
                 name="otherCharges"
                 id="otherCharges"
                 placeholder="Enter other charges..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={otherCharges}
                 onChange={(e) => setOtherCharges(e.target.value)}
                 required
@@ -471,7 +471,7 @@ function AddCarByAdmin() {
                 name="optionalCharges"
                 id="optionalCharges"
                 placeholder="Enter optional charges..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={optionalCharges}
                 onChange={(e) => setOptionalCharges(e.target.value)}
                 required
@@ -484,10 +484,10 @@ function AddCarByAdmin() {
           {/* ----------------------------------------------------ROW::6--------------------------------- */}
           <div className="row m-5">
             <div className="col-sm-12 col-md-4 mt-1">
-            <InputGroup className="mb-3">
+              <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter ARAI mileage"
-                  pattern="\d+(\.\d{2})?"
+                  pattern="^[0-9]*\.?[0-9]*$"
                   title="Mileage must be a number with up to 2 decimal places"
                   value={ARAIMileage}
                   onChange={(e) => setARAIMileage(e.target.value)}
@@ -503,7 +503,7 @@ function AddCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter city mileage"
-                  pattern="\d+(\.\d{2})?"
+                  pattern="^[0-9]*\.?[0-9]*$"
                   title="Mileage must be a number with up to 2 decimal places"
                   value={cityMileage}
                   onChange={(e) => setCityMileage(e.target.value)}
@@ -519,7 +519,7 @@ function AddCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter highway mileage"
-                  pattern="\d+(\.\d{2})?"
+                  pattern="^[0-9]*\.?[0-9]*$"
                   title="Mileage must be a number with up to 2 decimal places"
                   value={highwayMileage}
                   onChange={(e) => setHighwayMileage(e.target.value)}

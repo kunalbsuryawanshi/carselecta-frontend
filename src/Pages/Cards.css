@@ -49,7 +49,7 @@
 }
 
 .hover-pop:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow increase on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.432); /* Shadow increase on hover */
 }
 
 /* for login form baground video */
@@ -99,8 +99,6 @@
   transform: scale(1.1); /* Apply zoom effect on hover */
 }
 
-
-
 .circle-icon-container {
   position: relative;
   display: inline-block;
@@ -119,3 +117,34 @@
   color: white; /* Set the color to match the circle's color */
   font-weight: bold;
 }
+
+
+/*input form validations animation */
+.input {
+  color: dimgray;
+}
+
+.input:invalid {
+  animation: justshake 0.3s forwards;
+  color: red;
+}
+
+@keyframes justshake {
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
+
+
+
+
