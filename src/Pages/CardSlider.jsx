@@ -16,32 +16,9 @@ import axios from "axios";
 
 const CardSlider = ({ cars }) => {
   const [showAlert, setShowAlert] = useState(false);
-  const [favoriteCars, setFavoriteCars] = useState([]);
 
-  const addToFavorites = async (carId) => {
-    if (!favoriteCars.includes(carId)) {
-      const updatedFavoriteCars = [...favoriteCars, carId];
 
-      try {
-        const requestBody = {
-          favoriteCarIds: updatedFavoriteCars,
-          email: Cookies.get("email"),
-        };
-
-        setFavoriteCars(updatedFavoriteCars);
-        // console.log(requestBody);
-        await axios.post("http://localhost:8181/add-to-favorite", requestBody);
-
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 2000);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-  //   console.log(cars);
+  
   const formatPrice = (price) => {
     return price.toLocaleString("en-IN", {
       style: "currency",
@@ -71,36 +48,28 @@ const CardSlider = ({ cars }) => {
       >
         {cars.map((car) => (
           <SplideSlide key={car.newCarId}>
-            <Card
-              className="hover-element m-4 overflow-hidden"
-              style={{ width: "18rem" }}
+            <Link
+              as={Link}
+              state={{ value: car.newCarId }}
+              to={"/carpreview"}
+              className="text-decoration-none text-secondary"
             >
-              <Card.Img
-                variant="top"
-                src={`data:image/jpeg;base64,${car.carImage}`}
-              />
-              <Card.Body style={{ width: "18rem" }} className="textContent">
-                <Card.Title>{car.carBrand + " " + car.carName}</Card.Title>
-                <Card.Text className="fs-5 mb-0 mt-0">
-                  <strong>{formatPrice(car.carPrice)} Lakh</strong>
-                </Card.Text>
-                <Card.Text className="mb-0">{car.carModel}</Card.Text>
-                <Card.Text className="mb-0">
-                  {car.fuelType + " "}
-                  <FaCircle
-                    className="mb-1 text-secondary"
-                    style={{ fontSize: "7px" }}
-                  />
-                  {" " + car.transmission}
-                </Card.Text>
-                <Link
-                  className="mt-0 mb-0"
-                  onClick={() => addToFavorites(car.newCarId)}
-                >
-                  <FaRegHeart className="text-danger" />
-                </Link>
-              </Card.Body>
-            </Card>
+              <Card
+                className="hover-element m-4 overflow-hidden"
+                style={{ width: "18rem" }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={`data:image/jpeg;base64,${car.carImage}`}
+                />
+                <Card.Body style={{ width: "18rem" }} className="textContent">
+                  <Card.Title>{car.carBrand + " " + car.carName}</Card.Title>
+                  <Card.Text className="fs-5 mb-0 mt-0">
+                    <strong>{formatPrice(car.carPrice)} Lakh</strong>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
           </SplideSlide>
         ))}
       </Splide>

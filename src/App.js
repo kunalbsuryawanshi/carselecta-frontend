@@ -15,6 +15,9 @@ import UserLogin from "./Pages/UserLogin";
 import UserSignup from "./Pages/UserSignup";
 import WishList from "./Pages/WishList";
 import UserProfile from "./Pages/UserProfile";
+import FindCarUnderBudget from "./Pages/FindCarUnderBudget";
+import CarPreview from "./Pages/CarPreview";
+import CarPreviewPrice from "./Pages/CarPreviewPrice";
 function App() {
   return (
     <>
@@ -34,6 +37,9 @@ function App() {
           <Route path="/userlogin" element={<UserLogin />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/findcarunderbudget" element={<FindCarUnderBudget />} />
+          <Route path="/carpreview" element={<CarPreview />} />
+          <Route path="/carpreviewprice" element={<CarPreviewPrice />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -63,22 +63,17 @@ function AdminUpdateCar() {
         },
       });
 
-      if (response.status === 200) {
-        setItems(response.data);
-        console.log(response.data);
-        setButtonValidation("outline-success");
-        console.log("Data uploaded successfully");
-      }
+      setItems(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error uploading data", error);
       setButtonValidation("outline-danger");
-    } finally {
-      setInputValue("");
-      setSearchCarBy("");
-      setInputPlaceholder("");
-      setButtonValidation("outline-success");
-      formRef.current.classList.remove("was-validated");
     }
+    setInputValue("");
+    setSearchCarBy("");
+    setInputPlaceholder("");
+    setButtonValidation("outline-success");
+    formRef.current.classList.remove("was-validated");
   };
 
   return (

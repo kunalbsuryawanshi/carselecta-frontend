@@ -60,61 +60,40 @@ function UpdateCarByAdmin() {
 
 
       //here we are passing response data to populate all the input fields for update purpose
-      insertData(response.data);
+      insertDataIntoNewCar(response.data.newCar);
+      insertDateIntoCarPricing(response.data.carPricing);
       
-      console.log(response.data);
+      console.log(response.data.carPricing);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   //these will populate all the inputs with the data that is to be updated
-  const insertData = (responseData) => {
+  const insertDataIntoNewCar = (responseData) => {
     setNewCarId(receivedValue);
     setCarName(responseData.carName);
     setCarModel(responseData.carModel);
     setCarBrand(responseData.carBrand);
     setCarType(responseData.carType);
     setCarPrice(responseData.carPrice);
-    setARAIMileage(responseData.araimileage);
-    setCityMileage(responseData.cityMileage);
-    setHighwayMileage(responseData.highwayMileage);
+    setARAIMileage(responseData.araimileage.replace(' kmpl', ''));
+    setCityMileage(responseData.cityMileage.replace(' kmpl', ''));
+    setHighwayMileage(responseData.highwayMileage.replace(' kmpl', ''));
     setFuelType(responseData.fuelType);
     setTransmission(responseData.transmission);
     setModelyear(responseData.modelYear);
     setDescription(responseData.description);
+    
+  };
+  const insertDateIntoCarPricing=(responseData)=>{
     setExShowroomPrice(responseData.exShowroomPrice);
     setRoadTax(responseData.roadTax);
     setInsurance(responseData.insurance);
     setOtherCharges(responseData.otherCharges);
     setOptionalCharges(responseData.optionalCharges);
-    setEMI(responseData.EMI);
-    /**
-     * 
-     * 
-     *  const [newCarId, setNewCarId] = useState("");
-  const [carName, setCarName] = useState("");
-  const [carBrand, setCarBrand] = useState("");
-  const [carType, setCarType] = useState("");
-  const [carPrice, setCarPrice] = useState("");
-  const [ARAIMileage, setARAIMileage] = useState("");
-  const [cityMileage, setCityMileage] = useState("");
-  const [highwayMileage, setHighwayMileage] = useState("");
-  const [fuelType, setFuelType] = useState("");
-  const [transmission, setTransmission] = useState("");
-  const [modelYear, setModelyear] = useState("");
-  const [description, setDescription] = useState("");
-  const [carImage, setCarImage] = useState(null);
-
-  const [exShowroomPrice, setExShowroomPrice] = useState("");
-  const [roadTax, setRoadTax] = useState("");
-  const [insurance, setInsurance] = useState("");
-  const [otherCharges, setOtherCharges] = useState("");
-  const [optionalCharges, setOptionalCharges] = useState("");
-  const [EMI, setEMI] = useState("");
-
-     */
-  };
+    setEMI(responseData.emi);
+  }
 
   //The code below is for update purpose
 
@@ -157,7 +136,7 @@ function UpdateCarByAdmin() {
     //for storing the updated data
     try {
       const response = await axios.post(
-        "http://localhost:8181/update-car-details",
+        "http://localhost:8181//add-new-car",
         formData,
         {
           headers: {

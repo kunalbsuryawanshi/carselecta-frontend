@@ -118,7 +118,6 @@
   font-weight: bold;
 }
 
-
 /*input form validations animation */
 .input {
   color: dimgray;
@@ -144,7 +143,96 @@
   }
 }
 
+/* Style for the entire table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+/* Style for table header cells */
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Style for table data cells */
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Alternate row background color */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect for rows */
+tr:hover {
+  background-color: #ddd;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  padding-right: 20px; /* Add padding to make space for the arrow icon */
+}
+
+.lineDownArrow {
+  /* Add styles for the down arrow icon */
+}
+
+.varfueltype {
+  color: gray; /* Style for the (Diesel) and (Base Model) text */
+}
+
+.dropdown-menu {
+  min-width: 100%; /* Adjust the width of the dropdown menu as needed */
+}
 
 
 
+/* Remove default styles from Accordion Header */
+.accordion-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
 
+/* Customize Accordion Header Text */
+.accordion-header {
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Style Active Accordion Header */
+.accordion-button:not(.collapsed) {
+  color: #007bff; /* Active header text color */
+}
+
+/* Customize Accordion Body */
+.accordion-body {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+}

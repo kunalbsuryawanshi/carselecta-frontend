@@ -132,7 +132,7 @@ function HomePage() {
     <>
       <Navigationbar />
 
-      <div className="card mb-3" style={{ width: "block" }}>
+      <div className=" mb-3">
         <div className="row ">
           <div className="col-sm-12 col-md-12">
             <img
@@ -147,8 +147,11 @@ function HomePage() {
             className="col-sm-12 col-md-5 d-flex justify-content-center"
           >
             <div className="card-body">
-              <div className="row justify-content-center align-items-center mt-4">
-                <div className="col-sm-6 col-md-7 bg-light shadow mt-5">
+              <div className="row justify-content-center align-items-center mt-2">
+                <div
+                  className="col-sm-6 col-md-7 bg-light shadow mt-5 "
+                  style={{ borderRadius: "10px" }}
+                >
                   <h4 className="mt-5 mb-5 text-center">
                     Find your right newCarId
                   </h4>
