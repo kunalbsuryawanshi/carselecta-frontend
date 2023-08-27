@@ -343,9 +343,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched SUV's
-              </h4>
+              <h4 className="text-center">The most searched SUV's</h4>
             </Carousel.Item>
             <Carousel.Item>
               <div className="row bg-light m-5  mt-5 justify-content-center">
@@ -406,9 +404,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched SUV's
-              </h4>
+              <h4 className="text-center">The most searched SUV's</h4>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -496,9 +492,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched Hatchback's
-              </h4>
+              <h4 className="text-center">The most searched Hatchback's</h4>
             </Carousel.Item>
             <Carousel.Item>
               <div className="row bg-light m-5  mt-5 justify-content-center ">
@@ -559,9 +553,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched Hatchback's
-              </h4>
+              <h4 className="text-center">The most searched Hatchback's</h4>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -649,9 +641,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched Sedan's
-              </h4>
+              <h4 className="text-center">The most searched Sedan's</h4>
             </Carousel.Item>
             <Carousel.Item>
               <div className="row bg-light m-5  mt-5 justify-content-center">
@@ -712,9 +702,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched Sedan's
-              </h4>
+              <h4 className="text-center">The most searched Sedan's</h4>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -802,9 +790,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched MUV's
-              </h4>
+              <h4 className="text-center">The most searched MUV's</h4>
             </Carousel.Item>
             <Carousel.Item>
               <div className="row bg-light m-5  mt-5 justify-content-center">
@@ -865,9 +851,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                The most searched MUV's
-              </h4>
+              <h4 className="text-center">The most searched MUV's</h4>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -955,7 +939,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
+              <h4 className="text-center">
                 The most searched Luxury newCarId's
               </h4>
             </Carousel.Item>
@@ -1016,7 +1000,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
+              <h4 className="text-center">
                 The most searched Luxury newCarId's
               </h4>
             </Carousel.Item>
@@ -1145,9 +1129,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                Popular Brands
-              </h4>
+              <h4 className="text-center">Popular Brands</h4>
             </Carousel.Item>
 
             <Carousel.Item>
@@ -1248,9 +1230,7 @@ function HomePage() {
                   </Card>
                 </div>
               </div>
-              <h4 style={{ fontFamily: "sans-serif" }} className="text-center">
-                Popular Brands
-              </h4>
+              <h4 className="text-center">Popular Brands</h4>
             </Carousel.Item>
           </Carousel>
         </div>

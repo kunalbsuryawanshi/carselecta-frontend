@@ -25,6 +25,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import AlertPopup from "./AlertPopup";
+import RatingStars from "./RatingStars";
 
 const Star = ({ selected, onClick }) => {
   return (
@@ -46,6 +47,9 @@ function CarPreview() {
   const [carNameForImages, setCarNameForImages] = useState("");
   const [images, setImages] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [rating, setRating] = useState(null);
+
+  const [totalRatings, setTotalRatings] = useState(null);
   const [showAlertForAddToFavorite, setShowAlertForAddToFavorite] =
     useState(false);
   const [showAlertForRemoveFromFavorite, setShowAlertForRemoveFromFavorite] =
@@ -53,10 +57,10 @@ function CarPreview() {
   useEffect(() => {
     fetchCarData(receivedValue);
   }, [receivedValue]);
-  const email = Cookies.get("email");
 
   const fetchCarData = async (param) => {
     try {
+      const email = Cookies.get("email");
       const response = await axios.get(
         `http://localhost:8181/find-car-by-id?newCarId=${param}`
       );
@@ -73,6 +77,12 @@ function CarPreview() {
         `http://localhost:8181/get-user-details?email=${email}`
       );
       userDetails(user.data);
+
+      const ratingResponse = await axios.get(
+        `http://localhost:8181/get-car-rating?newCarId=${param}`
+      );
+      setRating(ratingResponse.data.rating);
+      setTotalRatings(ratingResponse.data.totalRatings);
     } catch (error) {
       console.log(error);
     }
@@ -85,19 +95,20 @@ function CarPreview() {
 
   const fetchCarImages = async (carName) => {
     const img = await axios.get(
-      `http://localhost:8181/get-car-images?carName=${carNameForImages}`
+      `http://localhost:8181/get-car-images?carName=${carName}`
     );
     setImages(img.data);
   };
 
   useEffect(() => {
-    checkIsFavorite();
-  }, []);
+    checkIsFavorite(receivedValue);
+  }, [receivedValue]);
 
-  const checkIsFavorite = async () => {
+  const checkIsFavorite = async (newCarId) => {
     try {
+      const email = Cookies.get("email");
       const response = await axios.get(
-        `http://localhost:8181/is-car-favorite?email=${email}&newCarId=${newCar.newCarId}`
+        `http://localhost:8181/is-car-favorite?email=${email}&newCarId=${newCarId}`
       );
       console.log(response.data);
       if (response.data === 200 && !isFavorite) {
@@ -127,6 +138,7 @@ function CarPreview() {
   const addToFavorite = async (newCarId) => {
     setIsFavorite(true);
     try {
+      const email = Cookies.get("email");
       await axios.get(
         `http://localhost:8181/add-to-favorite?email=${email}&newCarId=${newCarId}`
       );
@@ -141,7 +153,9 @@ function CarPreview() {
     }
   };
   const removeFromFavorite = async (newCarId) => {
+    console.log(newCarId);
     try {
+      const email = Cookies.get("email");
       await axios.get(
         `http://localhost:8181/delete-from-favorite?newCarId=${newCarId}&email=${email}`
       );
@@ -166,25 +180,6 @@ function CarPreview() {
     </Popover>
   );
 
-  //   Rating
-  const [rating, setRating] = useState(0);
-
-  const handleStarClick = (selectedRating) => {
-    setRating(selectedRating);
-  };
-  const renderStars = () => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <Star
-          key={i}
-          selected={i <= rating}
-          onClick={() => handleStarClick(i)}
-        />
-      );
-    }
-    return stars;
-  };
   return (
     <>
       <Navigationbar />
@@ -208,6 +203,13 @@ function CarPreview() {
                 to="/carpreviewprice"
               >
                 Price
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                state={{ value: newCar.newCarId }}
+                to="/userreviews"
+              >
+                User Reviews
               </Nav.Link>
               <Nav.Link href="#pricing">Images</Nav.Link>
             </Nav>
@@ -238,9 +240,7 @@ function CarPreview() {
                     newCar.carBrand + " " + newCar.carName
                   )}
                 >
-                  <h2 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
-                    {newCar.carBrand + " " + newCar.carName}
-                  </h2>
+                  <h2>{newCar.carBrand + " " + newCar.carName}</h2>
                 </OverlayTrigger>
                 {newCar.length !== 0 ? (
                   <div
@@ -266,7 +266,7 @@ function CarPreview() {
                             color: "red",
                             cursor: "pointer",
                           }}
-                          onClick={() => removeFromFavorite(newCar.newCarId)}
+                          onClick={() => removeFromFavorite(receivedValue)}
                         />
                       ) : (
                         <FaRegHeart
@@ -276,7 +276,7 @@ function CarPreview() {
                             color: "red",
                             cursor: "pointer",
                           }}
-                          onClick={() => addToFavorite(newCar.newCarId)}
+                          onClick={() => addToFavorite(receivedValue)}
                         />
                       )}
                     </div>
@@ -291,7 +291,13 @@ function CarPreview() {
               {showAlertForRemoveFromFavorite && (
                 <AlertPopup message="Car is removes from your collection!" />
               )}
-              <p>{renderStars()}</p>
+              <p className="d-flex">
+                <RatingStars rating={rating} />
+                &nbsp;
+                <p style={{ marginTop: "4px", fontSize: "13px" }}>
+                  {" " + totalRatings + " "}reviews
+                </p>
+              </p>
 
               <h4>{formatPrice(newCar.carPrice) + " Lakh*"}</h4>
               <> </>
@@ -327,9 +333,7 @@ function CarPreview() {
             <div className="col-sm-12 col-md-9">
               <div style={{ backgroundColor: "#FFFFFF" }} className="shadow-sm">
                 <div className="p-4">
-                  <h3 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
-                    {newCar.carBrand + " " + newCar.carName}
-                  </h3>
+                  <h3>{newCar.carBrand + " " + newCar.carName}</h3>
                   <p>{newCar.description}</p>
                   <table>
                     <thead>
@@ -361,9 +365,7 @@ function CarPreview() {
                 className="shadow-sm mt-3"
               >
                 <div className="p-4">
-                  <h3 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
-                    {newCar.carBrand + " " + newCar.carName} mileage
-                  </h3>
+                  <h3>{newCar.carBrand + " " + newCar.carName} mileage</h3>
                   <p>{mileageDescription}</p>
                   <table>
                     <thead>
@@ -392,9 +394,7 @@ function CarPreview() {
                 className="shadow-sm mt-3"
               >
                 <div className="p-4">
-                  <h3 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
-                    {newCar.carBrand + " " + newCar.carName} Images
-                  </h3>
+                  <h3>{newCar.carBrand + " " + newCar.carName} Images</h3>
                   {images.length !== 0 ? (
                     <Splide
                       className="p-5"

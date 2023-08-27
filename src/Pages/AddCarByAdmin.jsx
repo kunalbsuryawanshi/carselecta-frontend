@@ -156,7 +156,6 @@ function AddCarByAdmin() {
                 name="carName"
                 id="carName"
                 placeholder="Enter car name..."
-                pattern="^[a-zA-Z0-9]*$"
                 value={carName}
                 onChange={(e) => setModelName(e.target.value)}
                 required
@@ -202,6 +201,7 @@ function AddCarByAdmin() {
                 <option value="Van">Van</option>
                 <option value="Pickup Truck">Pickup Truck</option>
                 <option value="CUV">CUV</option>
+                <option value="Luxury">Luxury</option>
                 <option value="Sports Car">Sports Car</option>
               </select>
               <Form.Control.Feedback className="m-1" type="invalid">

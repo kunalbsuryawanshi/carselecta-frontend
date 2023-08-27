@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import RatingStars from "./RatingStars";
 function CarPreviewPrice() {
   const location = useLocation();
   const receivedValue = location.state?.value || "No value received";
@@ -42,6 +43,8 @@ function CarPreviewPrice() {
   ] = useState([]);
   const [firstModelPrice, setFirstModelPrice] = useState(null);
   const [lastModelPrice, setLastModelPrice] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [totalRatings, setTotalRatings] = useState(null);
   useEffect(() => {
     fetchData(receivedValue);
   }, [receivedValue]);
@@ -60,6 +63,11 @@ function CarPreviewPrice() {
       );
       setUser(user.data);
       console.log(user);
+      const ratingResponse = await axios.get(
+        `http://localhost:8181/get-car-rating?newCarId=${newCarId}`
+      );
+      setRating(ratingResponse.data.rating);
+      setTotalRatings(ratingResponse.data.totalRatings);
     } catch (error) {
       console.log(error);
     }
@@ -187,8 +195,21 @@ function CarPreviewPrice() {
                   variant="underline"
                   className="d-flex justify-content-center w-100 "
                 >
-                  <Nav.Link href="/carpreview">{car.carName}</Nav.Link>
-                  <Nav.Link href="/carpreviewprice">Price</Nav.Link>
+                  <Nav.Link
+                    state={{ value: car.newCarId }}
+                    as={Link}
+                    to={"/carpreview"}
+                  >
+                    {car.carName}
+                  </Nav.Link>
+                  <Nav.Link href="#">Price</Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    state={{ value: car.newCarId }}
+                    to="/userreviews"
+                  >
+                    User Reviews
+                  </Nav.Link>
                   <Nav.Link href="#pricing">Images</Nav.Link>
                 </Nav>
               </Navbar>
@@ -200,7 +221,7 @@ function CarPreviewPrice() {
           >
             <div className="row shadow-sm">
               <div className="col-md-12 p-4">
-                <h3 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
+                <h3>
                   On Road Price of {car.carBrand + " " + car.carName} In{" "}
                   {user.city}
                 </h3>
@@ -233,12 +254,15 @@ function CarPreviewPrice() {
                     src={`data:image/jpeg;base64,${car.carImage}`}
                   />
                   <Card.Body>
-                    <Card.Title
-                      style={{ fontFamily: "roboto,Sans-Serif,Arial" }}
-                    >
-                      {car.carBrand + " " + car.carName}
-                    </Card.Title>
-                    <p>reviews...</p>
+                    <Card.Title>{car.carBrand + " " + car.carName}</Card.Title>
+
+                    <p className="d-flex m-0 p-0">
+                      <RatingStars rating={rating} />
+                      &nbsp;
+                      <p style={{ marginTop: "4px", fontSize: "13px" }}>
+                        {" " + totalRatings + " "}reviews
+                      </p>
+                    </p>
                     <h5 className="mb-3">
                       {formatPrice(car.carPrice) + " Lakh*"}
                     </h5>
@@ -250,10 +274,7 @@ function CarPreviewPrice() {
               </div>
 
               <div className="col-sm-12 col-md-9 p-4">
-                <h5
-                  className=""
-                  style={{ fontFamily: "roboto,Sans-Serif,Arial" }}
-                >
+                <h5 className="">
                   {car.carBrand + " " + car.carName} On Road Price in{" "}
                   {user.city}
                 </h5>
@@ -343,7 +364,6 @@ function CarPreviewPrice() {
                           <Accordion.Header
                             className="d-flex"
                             style={{
-                              fontFamily: "roboto,Sans-Serif,Arial",
                               fontSize: "17px",
                             }}
                           >
@@ -436,7 +456,6 @@ function CarPreviewPrice() {
                           <Accordion.Header
                             className="d-flex"
                             style={{
-                              fontFamily: "roboto,Sans-Serif,Arial",
                               fontSize: "17px",
                             }}
                           >
@@ -529,7 +548,6 @@ function CarPreviewPrice() {
                           <Accordion.Header
                             className="d-flex"
                             style={{
-                              fontFamily: "roboto,Sans-Serif,Arial",
                               fontSize: "17px",
                             }}
                           >
@@ -622,7 +640,6 @@ function CarPreviewPrice() {
                           <Accordion.Header
                             className="d-flex"
                             style={{
-                              fontFamily: "roboto,Sans-Serif,Arial",
                               fontSize: "17px",
                             }}
                           >
@@ -715,7 +732,6 @@ function CarPreviewPrice() {
                           <Accordion.Header
                             className="d-flex"
                             style={{
-                              fontFamily: "roboto,Sans-Serif,Arial",
                               fontSize: "17px",
                             }}
                           >

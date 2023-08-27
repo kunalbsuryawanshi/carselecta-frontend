@@ -18,6 +18,9 @@ import UserProfile from "./Pages/UserProfile";
 import FindCarUnderBudget from "./Pages/FindCarUnderBudget";
 import CarPreview from "./Pages/CarPreview";
 import CarPreviewPrice from "./Pages/CarPreviewPrice";
+import UserReviews from "./Pages/UserReviews";
+import WriteReview from "./Pages/WriteReview";
+import ThanksForReview from "./Pages/ThanksForReview";
 function App() {
   return (
     <>
@@ -40,6 +43,9 @@ function App() {
           <Route path="/findcarunderbudget" element={<FindCarUnderBudget />} />
           <Route path="/carpreview" element={<CarPreview />} />
           <Route path="/carpreviewprice" element={<CarPreviewPrice />} />
+          <Route path="/userreviews" element={<UserReviews />} />
+          <Route path="/writereview" element={<WriteReview />} />
+          <Route path="/thanksforreview" element={<ThanksForReview />} />
         </Routes>
       </BrowserRouter>
     </>

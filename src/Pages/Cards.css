@@ -210,8 +210,6 @@ tr:hover {
   min-width: 100%; /* Adjust the width of the dropdown menu as needed */
 }
 
-
-
 /* Remove default styles from Accordion Header */
 .accordion-button {
   background-color: transparent;
@@ -235,4 +233,33 @@ tr:hover {
 .accordion-body {
   padding: 1rem;
   border: 1px solid #dee2e6;
+  /* color: rgb(169, 168, 168); */
+}
+
+.star-rating {
+  display: inline-block;
+}
+
+.half-star {
+  color: orange;
+  position: relative;
+  /* width: 1em;  */
+  overflow: hidden;
+}
+
+.half-star:before {
+  content: "\f089"; /* Unicode character for half-star icon */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.empty-star {
+  color: orange; /* Change the color as desired */
+}
+
+* {
+  font-family: "Roboto", "Sans-Serif", "Arial", sans-serif;
 }
