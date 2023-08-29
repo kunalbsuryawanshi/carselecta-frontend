@@ -61,11 +61,10 @@ function Admin() {
   };
   return (
     <>
-      <Navigationbar />
       <div class="card text-bg-dark">
-        <img src={adminImage} class="card-img" alt="..." />
+        <img className="vh-100" src={adminImage} class="card-img" alt="..." />
         <div class="card-img-overlay">
-          <div className="row justify-content-center align-items-center vh-100">
+          <div className="row justify-content-center align-items-center vh-100 ">
             <div className="col-sm-12 col-md-3 bg-light p-4 shadow-lg">
               <form ref={formRef} className="needs-validation">
                 <h3 className="text-center mt-4 mb-4">Admin Login</h3>
@@ -106,7 +105,7 @@ function Admin() {
               )}
               <Link
                 className="d-flex justify-content-center mt-3"
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none", color:'#1b5a9d' }}
                 as={Link}
                 to={"#"}
               >

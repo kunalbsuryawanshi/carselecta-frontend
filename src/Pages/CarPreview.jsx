@@ -1,6 +1,7 @@
 import Navigationbar from "./Navigationbar";
 import card from "../Images/card2.webp";
 import {
+  FaCircle,
   FaHeart,
   FaPen,
   FaPenAlt,
@@ -18,6 +19,7 @@ import {
   Navbar,
   OverlayTrigger,
   Popover,
+  Table,
 } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -26,16 +28,6 @@ import Cookies from "js-cookie";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import AlertPopup from "./AlertPopup";
 import RatingStars from "./RatingStars";
-
-const Star = ({ selected, onClick }) => {
-  return (
-    <FaStar
-      color={selected ? "#ffa236" : "#e9e9e9"}
-      onClick={onClick}
-      style={{ cursor: "pointer", marginRight: "5px" }}
-    />
-  );
-};
 
 function CarPreview() {
   const location = useLocation();
@@ -48,12 +40,20 @@ function CarPreview() {
   const [images, setImages] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [rating, setRating] = useState(null);
+  const [similarCarTypes, setSimilarCarTypes] = useState([]);
+  const [user, setUser] = useState([]);
 
   const [totalRatings, setTotalRatings] = useState(null);
   const [showAlertForAddToFavorite, setShowAlertForAddToFavorite] =
     useState(false);
   const [showAlertForRemoveFromFavorite, setShowAlertForRemoveFromFavorite] =
     useState(false);
+
+  const [newCarForAllVarient, setNewCarForAllVarient] = useState([]);
+  const [carPricingForAllVarient, setCarPricingForAllVarient] = useState([]);
+  const [firstModelPrice, setFirstModelPrice] = useState(null);
+  const [lastModelPrice, setLastModelPrice] = useState(null);
+
   useEffect(() => {
     fetchCarData(receivedValue);
   }, [receivedValue]);
@@ -68,7 +68,7 @@ function CarPreview() {
       setCarPricing(response.data.carPricing);
       setCarNameForImages(response.data.newCar.carName);
 
-      console.log(response.data);
+      console.log(response.data.newCar);
       setMileageDescription(
         `This ${response.data.newCar.carBrand} ${response.data.newCar.carName} offers impressive mileage figures. With an ARAI-certified mileage of ${response.data.newCar.araimileage}, it provides a balance between city and highway driving. In city conditions, you can expect to achieve around ${response.data.newCar.cityMileage}, while on the highway, the mileage goes up to ${response.data.newCar.highwayMileage}`
       );
@@ -77,12 +77,31 @@ function CarPreview() {
         `http://localhost:8181/get-user-details?email=${email}`
       );
       userDetails(user.data);
+      setUser(user.data);
 
       const ratingResponse = await axios.get(
         `http://localhost:8181/get-car-rating?newCarId=${param}`
       );
       setRating(ratingResponse.data.rating);
       setTotalRatings(ratingResponse.data.totalRatings);
+
+      const similarBrands = await axios.get(
+        `http://localhost:8181/get-same-type-cars?carType=${response.data.newCar.carType}`
+      );
+
+      setSimilarCarTypes(similarBrands.data);
+
+      const allVarientresponse = await axios.get(
+        `http://localhost:8181/get-car-by-car-name?carName=${response.data.newCar.carName}`
+      );
+      setNewCarForAllVarient(allVarientresponse.data.newCar);
+      setCarPricingForAllVarient(allVarientresponse.data.carPricing);
+      setFirstModelPrice(allVarientresponse.data.newCar[0].carPrice);
+      setLastModelPrice(
+        allVarientresponse.data.newCar[
+          allVarientresponse.data.newCar.length - 1
+        ].carPrice
+      );
     } catch (error) {
       console.log(error);
     }
@@ -124,7 +143,7 @@ function CarPreview() {
 
   //   to formatte price and put (,) in between
   const formatPrice = (price) => {
-    if (newCar && newCar.carPrice) {
+    if (newCar && newCar.carPrice && firstModelPrice) {
       return price.toLocaleString("en-IN", {
         style: "currency",
         currency: "INR",
@@ -173,7 +192,7 @@ function CarPreview() {
   //   for showing description for car on hovering on carName
   const renderTooltip = (description, name) => (
     <Popover id="popover-basic" className="w-100">
-      <Popover.Header as="h3" className="text-center text-info">
+      <Popover.Header as="h5" className="text-center text-info">
         {name}
       </Popover.Header>
       <Popover.Body>{description}</Popover.Body>
@@ -194,7 +213,7 @@ function CarPreview() {
           style={{ backgroundColor: "#FFFFFF" }}
           className="container-fluid mb-1"
         >
-          <Navbar style={{ backgroundColor: "#FFFFFF" }}>
+          <Navbar className="shadow-sm" style={{ backgroundColor: "#FFFFFF" }}>
             <Nav className="d-flex justify-content-center w-100">
               <Nav.Link href="#">{newCar.carName}</Nav.Link>
               <Nav.Link
@@ -270,7 +289,7 @@ function CarPreview() {
                         />
                       ) : (
                         <FaRegHeart
-                          className="heart-icon"
+                          className="heart-icon text-secondary"
                           style={{
                             fontSize: "20px",
                             color: "red",
@@ -295,7 +314,7 @@ function CarPreview() {
                 <RatingStars rating={rating} />
                 &nbsp;
                 <p style={{ marginTop: "4px", fontSize: "13px" }}>
-                  {" " + totalRatings + " "}reviews
+                  {" " + totalRatings + " "}review
                 </p>
               </p>
 
@@ -310,12 +329,18 @@ function CarPreview() {
                   />
                 </small>
               </p>
-              <Button
-                style={{ width: "300px" }}
-                className="btn btn-warning text-light"
+              <Link
+                as={Link}
+                to={"/carpreviewprice"}
+                state={{ value: newCar.newCarId }}
               >
-                <strong>Offer Button</strong>
-              </Button>
+                <Button
+                  style={{ width: "300px" }}
+                  className="btn btn-warning text-light"
+                >
+                  <strong>Check On-Road Price</strong>
+                </Button>
+              </Link>
               <p className="mt-2">
                 <small className="text-secondary">
                   <FaTags
@@ -333,7 +358,9 @@ function CarPreview() {
             <div className="col-sm-12 col-md-9">
               <div style={{ backgroundColor: "#FFFFFF" }} className="shadow-sm">
                 <div className="p-4">
-                  <h3>{newCar.carBrand + " " + newCar.carName}</h3>
+                  <h5>
+                    <strong>{newCar.carBrand + " " + newCar.carName}</strong>
+                  </h5>
                   <p>{newCar.description}</p>
                   <table>
                     <thead>
@@ -365,7 +392,11 @@ function CarPreview() {
                 className="shadow-sm mt-3"
               >
                 <div className="p-4">
-                  <h3>{newCar.carBrand + " " + newCar.carName} mileage</h3>
+                  <h5>
+                    <strong>
+                      {newCar.carBrand + " " + newCar.carName} mileage
+                    </strong>
+                  </h5>
                   <p>{mileageDescription}</p>
                   <table>
                     <thead>
@@ -394,7 +425,11 @@ function CarPreview() {
                 className="shadow-sm mt-3"
               >
                 <div className="p-4">
-                  <h3>{newCar.carBrand + " " + newCar.carName} Images</h3>
+                  <h5>
+                    <strong>
+                      {newCar.carBrand + " " + newCar.carName} Images
+                    </strong>
+                  </h5>
                   {images.length !== 0 ? (
                     <Splide
                       className="p-5"
@@ -424,6 +459,178 @@ function CarPreview() {
                               src={`data:image/jpeg;base64,${image.carImage}`}
                             />
                           </Card>
+                        </SplideSlide>
+                      ))}
+                    </Splide>
+                  ) : (
+                    <>Fetching...</>
+                  )}
+                </div>
+              </div>
+
+              <div
+                style={{ backgroundColor: "#FFFFFF" }}
+                className="shadow-sm mt-3"
+              >
+                <div className="p-4">
+                  <h5>
+                    <strong>
+                      {newCar.carBrand + " " + newCar.carName} Price
+                    </strong>
+                  </h5>
+                  <p>
+                    Discover a range of options when it comes to{" "}
+                    {newCar.carBrand + " " + newCar.carName} in {user.city}.
+                    With prices starting at Rs. {formatPrice(firstModelPrice)}{" "}
+                    onwards, you have a variety of choices to explore. Whether
+                    you're interested in the {formatPrice(firstModelPrice)} or
+                    aiming for the top-tier {formatPrice(lastModelPrice)}, we've
+                    got you covered. Looking for a pre-owned option? Used{" "}
+                    {newCar.carBrand} {newCar.carName} are available for sale.
+                    Don't miss out on the opportunity to explore the diverse
+                    lineup of {newCar.carBrand} {newCar.carName} in {user.city}.
+                    Visit our showroom today to experience these incredible
+                    vehicles firsthand."
+                  </p>
+                  <div className="row bg-light p-3">
+                    <div
+                      style={{ fontSize: "14px" }}
+                      className="col-sm-6 col-md-6 text-secondary"
+                    >
+                      Varient
+                    </div>
+                    <div
+                      style={{ fontSize: "14px" }}
+                      className="col-sm-6 col-md-6 text-secondary"
+                    >
+                      Ex-ShowRoom Price
+                    </div>
+                  </div>
+                  {newCarForAllVarient.map((car, index) => (
+                    <div>
+                      <div className="row p-1 mt-2">
+                        <div className="col-sm-6 col-md-6">
+                          <Link
+                            className="text-decoration-none text-dark"
+                            as={Link}
+                            to={"/carpreview"}
+                            onClick={() =>
+                              (window.location.href = window.location.href)
+                            }
+                            state={{ value: car.newCarId }}
+                          >
+                            <p className="mb-0 pb-0">
+                              {car.carName + " " + car.carModel}
+                            </p>
+                          </Link>
+                          <p
+                            style={{
+                              color: "rgba(36,39,44,.5)",
+                              fontSize: "14px",
+                            }}
+                            className="m-0 p-0"
+                          >
+                            <small>
+                              {car.fuelType + " "}
+                              <FaCircle
+                                style={{ fontSize: "5px" }}
+                              />
+                              {" " + car.transmission+" "}
+                              <FaCircle
+                                style={{ fontSize: "5px" }}
+                              />
+                              {" "+car.araimileage}
+                            </small>
+                          </p>
+                        </div>
+                        <div className="col-sm-6 col-md-6">
+                          <p className="m-0 p-0">
+                            <strong>
+                              {formatPrice(
+                                carPricingForAllVarient[index].exShowroomPrice
+                              ) + " "}
+                              Lakh*
+                            </strong>
+                          </p>
+                          <Link
+                            style={{ fontSize: "11px", color: "#2176ae" }}
+                            className="m-0 p-0 text-decoration-none"
+                            as={Link}
+                            to={"/carpreviewprice"}
+                            state={{ value: newCar.newCarId }}
+                          >
+                            Get On Road Price
+                          </Link>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                style={{ backgroundColor: "#FFFFFF" }}
+                className="shadow-sm mt-3"
+              >
+                <div className="p-4">
+                  <h5>
+                    <strong>Get Similar {newCar.carType + "'s"}</strong>
+                  </h5>
+                  {similarCarTypes.length !== 0 ? (
+                    <Splide
+                      className="p-5"
+                      options={{
+                        type: "loop",
+                        perPage: 2,
+                        perMove: 1,
+                        autoplay: {
+                          delay: 100,
+                        },
+                        //   wheel: true,
+                        pauseOnHover: true,
+                        speed: 800,
+                        drag: "free",
+                        easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
+                        keyboard: true,
+                      }}
+                    >
+                      {similarCarTypes.map((similarCar) => (
+                        <SplideSlide>
+                          <Link
+                            className="text-decoration-none text-secondary"
+                            as={Link}
+                            to={"/carpreview"}
+                            onClick={() =>
+                              (window.location.href = window.location.href)
+                            }
+                            state={{ value: similarCar.newCarId }}
+                          >
+                            <Card
+                              className="hover-element m-4 overflow-hidden"
+                              style={{ width: "18rem" }}
+                            >
+                              <Card.Img
+                                variant="top"
+                                src={`data:image/jpeg;base64,${similarCar.carImage}`}
+                              />
+                              <Card.Body
+                                style={{ width: "18rem" }}
+                                className="textContent"
+                              >
+                                <Card.Title>
+                                  {similarCar.carBrand +
+                                    " " +
+                                    similarCar.carName}
+                                </Card.Title>
+                                <Card.Text className="fs-5 mb-0 mt-0">
+                                  <strong>
+                                    {formatPrice(similarCar.carPrice)} Lakh
+                                  </strong>
+                                </Card.Text>
+                              </Card.Body>
+                            </Card>
+                          </Link>
                         </SplideSlide>
                       ))}
                     </Splide>

@@ -142,10 +142,10 @@ function AddCarByAdmin() {
   return (
     <>
       <Navigationbar />
-      <h2 className="text-secondary text-center mt-5">
-        Add car into collection
-      </h2>
-      <div className="bg-light p-5 m-5 shadow">
+      <div className="bg-light m-5 shadow-sm">
+      <h3 style={{backgroundColor:'#104b8be3'}} className="text-light p-4 text-center">
+        Enter Car Details
+      </h3>
         <form ref={formRef} className="needs-validation">
           {/* ----------------------------------------------------ROW::1--------------------------------- */}
           <div className="row m-5 ">
@@ -550,12 +550,11 @@ function AddCarByAdmin() {
           </div>
         </form>
 
-        <div className="row m-5 justify-content-center">
-          <div className="col-sm-12 col-md-2">
+        <div className="row  justify-content-center p-5">
+          <div className="col-sm-6 col-md-2">
             <Button
-              style={{ width: "200px" }}
               type="submit"
-              className="btn shadow mt-3"
+              className="btn btn-block shadow "
               variant={buttonValidation}
               onClick={addCarAction}
             >

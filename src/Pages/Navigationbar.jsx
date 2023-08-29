@@ -27,12 +27,25 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import userlogin from "../Images/userlogin.jpg";
 import { useEffect, useState } from "react";
+import axios from "axios";
 function Navigationbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   useEffect(() => {
-    setUser(Cookies.get("email"));
-  });
+   const fetchUser = async () => {
+      try {
+        const email = Cookies.get("email");
+        const response = await axios.get(
+          `http://localhost:8181/get-user-details?email=${email}`
+        );
+        setUser(response.data.firstName);
+        console.log(response.data.firstName);
+      } catch (error) {
+        consol.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const logOutHandler = () => {
     Cookies.remove("email");
@@ -55,8 +68,7 @@ function Navigationbar() {
             alt=""
           />
         </Navbar.Brand>
-
-        <DropdownButton variant="light" id="dropdown-basic-button" title={user}>
+        <DropdownButton variant="light" className="m-4" id="dropdown-basic-button" title={"Hello "+user+"!"}>
           <Dropdown.Item href="/userprofile">
             <FaUserCircle style={{ fontSize: "35px" }} />
           </Dropdown.Item>
@@ -109,7 +121,6 @@ function Navigationbar() {
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Tata Cars</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/admin">Admin</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

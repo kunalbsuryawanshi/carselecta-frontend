@@ -134,7 +134,7 @@ function HomePage() {
 
       <div className=" mb-3">
         <div className="row ">
-          <div className="col-sm-12 col-md-12">
+          <div className="col-sm-12 col-md-12 img-container">
             <img
               style={{ position: "relative" }}
               src={Homeimage}
@@ -142,18 +142,18 @@ function HomePage() {
               alt="..."
             />
           </div>
+
           <div
-            style={{ position: "absolute", marginTop: "200px" }}
-            className="col-sm-12 col-md-5 d-flex justify-content-center"
+            className="col-sm-12 col-md-5 position-absolute "
           >
             <div className="card-body">
-              <div className="row justify-content-center align-items-center mt-2">
+              <div className="row justify-content-center align-items-center vh-100 ">
                 <div
-                  className="col-sm-6 col-md-7 bg-light shadow mt-5 "
+                  className="col-sm-6 col-md-7 bg-light shadow "
                   style={{ borderRadius: "10px" }}
                 >
                   <h4 className="mt-5 mb-5 text-center">
-                    Find your right newCarId
+                    Find your right car
                   </h4>
                   <form ref={formRef} className="needs-validation">
                     <select

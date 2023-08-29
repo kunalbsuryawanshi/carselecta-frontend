@@ -71,7 +71,7 @@ function UserReviews() {
   return (
     <>
       <Navigationbar />
-      <div className="vh-100" style={{ backgroundColor: "#fafafa" }}>
+      <div className="" style={{ backgroundColor: "#fafafa" }}>
         <div
           style={{ backgroundColor: "#fafafa" }}
           className="p-5 mb-0 p-0 d-flex justify-content-center "
@@ -206,15 +206,6 @@ function UserReviews() {
                           {individualReview[index].heading}
                         </strong>
                       </p>
-                      <Link
-                        className="text-decoration-none"
-                        onClick={() => handleCollapseToggle(index)}
-                        aria-controls={`example-collapse-text-${index}`}
-                        aria-expanded={openStates[index]}
-                      >
-                        Read more...
-                      </Link>
-                      <div>&nbsp;</div>
                       <Collapse in={openStates[index]}>
                         <div
                           style={{ fontFamily: "roboto,Sans-Serif,Arial" }}
@@ -224,6 +215,15 @@ function UserReviews() {
                           {individualReview[index].comment}
                         </div>
                       </Collapse>
+                      <Link
+                        className="text-decoration-none"
+                        onClick={() => handleCollapseToggle(index)}
+                        aria-controls={`example-collapse-text-${index}`}
+                        aria-expanded={openStates[index]}
+                      >
+                        Read more...
+                      </Link>
+                        <div>&nbsp;</div>
                       <p className="p-0 m-0">
                         <small
                           style={{

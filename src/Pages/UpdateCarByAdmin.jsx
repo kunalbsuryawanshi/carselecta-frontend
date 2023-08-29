@@ -136,7 +136,7 @@ function UpdateCarByAdmin() {
     //for storing the updated data
     try {
       const response = await axios.post(
-        "http://localhost:8181//add-new-car",
+        "http://localhost:8181/add-new-car",
         formData,
         {
           headers: {
@@ -222,7 +222,6 @@ function UpdateCarByAdmin() {
                 name="carName"
                 id="carName"
                 placeholder="Enter car name..."
-                pattern="^[a-zA-Z0-9]*$"
                 value={carName}
                 onChange={(e) => setCarName(e.target.value)}
                 required
@@ -333,7 +332,7 @@ function UpdateCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   aria-label="Text input with dropdown button"
-                  pattern="^[1-9][0-9]*$"
+                  pattern="^[0-9,]*$"
                   placeholder="Enter car price..."
                   value={carPrice}
                   onChange={(e) => setCarPrice(e.target.value)}
@@ -454,7 +453,7 @@ function UpdateCarByAdmin() {
                 name="exShowroomPrice"
                 id="exShowroomPrice"
                 placeholder="Enter ex-showroom price..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={exShowroomPrice}
                 onChange={(e) => setExShowroomPrice(e.target.value)}
                 required
@@ -470,7 +469,7 @@ function UpdateCarByAdmin() {
                 name="roadTax"
                 id="roadTax"
                 placeholder="Enter road tax..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={roadTax}
                 onChange={(e) => setRoadTax(e.target.value)}
                 required
@@ -486,7 +485,7 @@ function UpdateCarByAdmin() {
                 name="insurance"
                 id="insurance"
                 placeholder="Enter insurance price..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={insurance}
                 onChange={(e) => setInsurance(e.target.value)}
                 required
@@ -504,7 +503,7 @@ function UpdateCarByAdmin() {
                   placeholder="Enter EMI..."
                   title="Mileage must be a number with up to 2 decimal places"
                   value={EMI}
-                  pattern="^[1-9][0-9]*$"
+                  pattern="^[0-9,]*$"
                   onChange={(e) => setEMI(e.target.value)}
                   required
                 />
@@ -521,7 +520,7 @@ function UpdateCarByAdmin() {
                 name="otherCharges"
                 id="otherCharges"
                 placeholder="Enter other charges..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={otherCharges}
                 onChange={(e) => setOtherCharges(e.target.value)}
                 required
@@ -537,7 +536,7 @@ function UpdateCarByAdmin() {
                 name="optionalCharges"
                 id="optionalCharges"
                 placeholder="Enter optional charges..."
-                pattern="^[1-9][0-9]*$"
+                pattern="^[0-9,]*$"
                 value={optionalCharges}
                 onChange={(e) => setOptionalCharges(e.target.value)}
                 required
@@ -553,7 +552,7 @@ function UpdateCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter ARAI mileage"
-                  pattern="\d+(\.\d{2})?"
+                  pattern="^[0-9]*\.?[0-9]*$"
                   title="Mileage must be a number with up to 2 decimal places"
                   value={ARAIMileage}
                   onChange={(e) => setARAIMileage(e.target.value)}
@@ -569,7 +568,7 @@ function UpdateCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter city mileage"
-                  pattern="\d+(\.\d{2})?"
+                  pattern="^[0-9]*\.?[0-9]*$"
                   title="Mileage must be a number with up to 2 decimal places"
                   value={cityMileage}
                   onChange={(e) => setCityMileage(e.target.value)}
@@ -585,7 +584,7 @@ function UpdateCarByAdmin() {
               <InputGroup className="mb-3">
                 <Form.Control
                   placeholder="Enter highway mileage"
-                  pattern="\d+(\.\d{2})?"
+                  pattern="^[0-9]*\.?[0-9]*$"
                   title="Mileage must be a number with up to 2 decimal places"
                   value={highwayMileage}
                   onChange={(e) => setHighwayMileage(e.target.value)}

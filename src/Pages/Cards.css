@@ -71,6 +71,24 @@
   object-fit: cover;
 }
 
+.img-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.img-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .login-container {
   position: relative;
   z-index: 2; /* Higher z-index value places the form above the video */
@@ -263,3 +281,18 @@ tr:hover {
 * {
   font-family: "Roboto", "Sans-Serif", "Arial", sans-serif;
 }
+
+
+
+/* .splide__arrow {
+  font-size: 20px; 
+}
+
+.splide__arrow--prev {
+  left: 50px;
+}
+
+.splide__arrow--next {
+  right: 10px; 
+} */
+

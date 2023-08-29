@@ -282,6 +282,7 @@ function CarPreviewPrice() {
                 <Nav justify variant="tabs" defaultActiveKey="#" className="">
                   <Nav.Item>
                     <Nav.Link
+
                       onClick={() => handleAllVarient("#")}
                       href="#"
                       active={activeTab === "#"}
@@ -289,6 +290,8 @@ function CarPreviewPrice() {
                         color: activeTab === "#" ? "white" : "black",
                         backgroundColor:
                           activeTab === "#" ? "#555555" : "transparent",
+                          
+                          
                       }}
                     >
                       All
@@ -303,6 +306,8 @@ function CarPreviewPrice() {
                         color: activeTab === "link-1" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-1" ? "#555555" : "transparent",
+                          
+                          
                       }}
                     >
                       Diesel
@@ -317,6 +322,8 @@ function CarPreviewPrice() {
                         color: activeTab === "link-2" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-2" ? "#555555" : "transparent",
+                          
+                          
                       }}
                     >
                       Petrol
@@ -331,6 +338,8 @@ function CarPreviewPrice() {
                         color: activeTab === "link-3" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-3" ? "#555555" : "transparent",
+                          
+                          
                       }}
                     >
                       CNG
@@ -345,6 +354,8 @@ function CarPreviewPrice() {
                         color: activeTab === "link-4" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-4" ? "#555555" : "transparent",
+                          
+                          
                       }}
                     >
                       Automatic
@@ -425,7 +436,7 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                      style={{ backgroundColor: "#0bc40b9e" }}
+                                      style={{ backgroundColor: "#2176ae",color:'white' }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -517,7 +528,7 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                      style={{ backgroundColor: "#0bc40b9e" }}
+                                       style={{ backgroundColor: "#2176ae",color:'white' }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -609,7 +620,7 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                      style={{ backgroundColor: "#0bc40b9e" }}
+                                       style={{ backgroundColor: "#2176ae",color:'white' }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -701,7 +712,7 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                      style={{ backgroundColor: "#0bc40b9e" }}
+                                       style={{ backgroundColor: "#2176ae",color:'white' }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -793,7 +804,7 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                      style={{ backgroundColor: "#0bc40b9e" }}
+                                       style={{ backgroundColor: "#2176ae",color:'white' }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>

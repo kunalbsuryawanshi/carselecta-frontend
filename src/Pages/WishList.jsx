@@ -86,7 +86,7 @@ function WishList({ Cars }) {
                     <strong>{car.carBrand + " " + car.carName}</strong>
                   </small>
                 </OverlayTrigger>
-                <p className="card-text text-secondary">
+                <p style={{fontSize:'14px',marginLeft:'4px'}} className="card-text text-secondary">
                   <small className="card-title">
                     {car.fuelType}&nbsp;&nbsp;
                     <FaCircle className="mb-1" style={{ fontSize: "5px" }} />
@@ -94,9 +94,9 @@ function WishList({ Cars }) {
                   </small>
                 </p>
                 <p className="card-text">
-                  <h5 className="text-body-secondary">
+                  <p className="text-body-secondary">
                     {formatPrice(car.carPrice) + " Lakh*"}
-                  </h5>
+                  </p>
                 </p>
               </div>
             </div>

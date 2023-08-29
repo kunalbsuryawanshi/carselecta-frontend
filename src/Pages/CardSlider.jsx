@@ -17,8 +17,22 @@ import axios from "axios";
 const CardSlider = ({ cars }) => {
   const [showAlert, setShowAlert] = useState(false);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isVerticalMode = windowWidth < 768;
+
   const formatPrice = (price) => {
     return price.toLocaleString("en-IN", {
       style: "currency",
@@ -30,7 +44,7 @@ const CardSlider = ({ cars }) => {
   return (
     <>
       <Splide
-        className="m-5 p-5 d-flex justify-content-center bg-light"
+        className="d-flex p-5 m-5 justify-content-center "
         options={{
           type: "loop",
           perPage: 4,
@@ -44,18 +58,20 @@ const CardSlider = ({ cars }) => {
           drag: "free",
           easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
           keyboard: true,
+          direction: isVerticalMode ? "ttb" : "ltr", // "ttb" for top-to-bottom
+          height: isVerticalMode ? 1000 : undefined,
         }}
       >
         {cars.map((car) => (
-          <SplideSlide key={car.newCarId}>
+          <SplideSlide className="p-5  d-flex justify-content-center" key={car.newCarId}>
             <Link
               as={Link}
               state={{ value: car.newCarId }}
               to={"/carpreview"}
-              className="text-decoration-none text-secondary"
+              className="text-decoration-none text-secondary "
             >
               <Card
-                className="hover-element m-4 overflow-hidden"
+                className="hover-element  overflow-hidden "
                 style={{ width: "18rem" }}
               >
                 <Card.Img
@@ -74,78 +90,6 @@ const CardSlider = ({ cars }) => {
         ))}
       </Splide>
       {showAlert && <AlertPopup message="Car Added to your collection!" />}
-      {/* <SplideSlide>
-            <Card
-              className="hover-element m-4 overflow-hidden"
-              style={{ width: "18rem" }}
-            >
-              <Card.Img variant="top" src={Card6} />
-              <Card.Body style={{ width: "18rem" }} className="textContent">
-                <Card.Title>Toyota Fortuner</Card.Title>
-                <Card.Text className="fs-5">
-                  &#x20B9; 32.99 - 50.74 Lakh*
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </SplideSlide>
-          <SplideSlide>
-            {" "}
-            <Card
-              className="hover-element m-4 overflow-hidden"
-              style={{ width: "18rem" }}
-            >
-              <Card.Img variant="top" src={Card5} />
-              <Card.Body style={{ width: "18rem" }} className="textContent">
-                <Card.Title>Hyundai Creta</Card.Title>
-                <Card.Text className="fs-5">
-                  &#x20B9; 10.87 - 19.20 Lakh*
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </SplideSlide>
-          <SplideSlide>
-            {" "}
-            <Card
-              className="hover-element m-4 overflow-hidden"
-              style={{ width: "18rem" }}
-            >
-              <Card.Img variant="top" src={Card4} />
-              <Card.Body style={{ width: "18rem" }} className="textContent">
-                <Card.Title>Tata Nexon</Card.Title>
-                <Card.Text className="fs-5">&#x20B9; 8 - 14.60 Lakh*</Card.Text>
-              </Card.Body>
-            </Card>
-          </SplideSlide>
-          <SplideSlide>
-            <Card
-              className="hover-element m-4 overflow-hidden"
-              style={{ width: "18rem" }}
-            >
-              <Card.Img variant="top" src={Card3} />
-              <Card.Body style={{ width: "18rem" }} className="textContent">
-                <Card.Title>Tata Punch</Card.Title>
-                <Card.Text className="fs-5">&#x20B9; 6 - 10.10 Lakh*</Card.Text>
-              </Card.Body>
-            </Card>
-          </SplideSlide>
-          <SplideSlide>
-            {" "}
-            <Card
-              className="hover-element m-4 overflow-hidden"
-              style={{ width: "18rem" }}
-            >
-              <Card.Img variant="top" src={Card2} />
-              <Card.Body style={{ width: "18rem" }} className="textContent">
-                <Card.Title>Mahindra Thar</Card.Title>
-                <Card.Text className="fs-5">
-                  &#x20B9; 10.54 - 16.78 Lakh*
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </SplideSlide> */}
-      {/* <SplideSlide></SplideSlide>
-        <SplideSlide></SplideSlide>
-        <SplideSlide></SplideSlide> */}
     </>
   );
 };
