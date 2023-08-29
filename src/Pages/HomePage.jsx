@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 
@@ -136,27 +136,23 @@ function HomePage() {
         <div className="row ">
           <div className="col-sm-12 col-md-12 img-container">
             <img
-              style={{ position: "relative" }}
+              style={{ position: "" }}
               src={Homeimage}
               className="img-fluid rounded-start w-100"
               alt="..."
             />
           </div>
 
-          <div
-            className="col-sm-12 col-md-5 position-absolute "
-          >
+          <div className="col-sm-12 col-md-5 position-absolute ">
             <div className="card-body">
               <div className="row justify-content-center align-items-center vh-100 ">
                 <div
                   className="col-sm-6 col-md-7 bg-light shadow "
                   style={{ borderRadius: "10px" }}
                 >
-                  <h4 className="mt-5 mb-5 text-center">
-                    Find your right car
-                  </h4>
+                  <h4 className="mt-5 mb-5 text-center">Find your right car</h4>
                   <form ref={formRef} className="needs-validation">
-                    <select
+                    <Form.Select
                       className="form-control mb-2"
                       name="budget"
                       newCarId="budget"
@@ -170,8 +166,8 @@ function HomePage() {
                       <option value="10 - 15 Lakh">10 - 15 Lakh</option>
                       <option value="15 - 20 Lakh">15 - 20 Lakh</option>
                       <option value="20 - 35 Lakh">20 - 35 Lakh</option>
-                    </select>
-                    <select
+                    </Form.Select>
+                    <Form.Select
                       className="form-control"
                       name="modeType"
                       newCarId="modeType"
@@ -189,16 +185,18 @@ function HomePage() {
                       <option value="Electric">Electric</option>
                       <option value="Minivan">Minivan</option>
                       <option value="Wagon">Wagon</option>
-                    </select>
+                    </Form.Select>
                   </form>
-                  <Button
-                    type="submit"
-                    className="btn btn-block shadow-sm mt-3 mb-4"
-                    variant={buttonValidation}
-                    onClick={searchCarByBudgetAndType}
-                  >
-                    {searchButton}
-                  </Button>
+                  <div className="d-grid ">
+                    <Button
+                      type="submit"
+                      className=" shadow-sm mt-3 mb-4 "
+                      variant={buttonValidation}
+                      onClick={searchCarByBudgetAndType}
+                    >
+                      {searchButton}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

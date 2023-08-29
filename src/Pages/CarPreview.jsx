@@ -54,6 +54,24 @@ function CarPreview() {
   const [firstModelPrice, setFirstModelPrice] = useState(null);
   const [lastModelPrice, setLastModelPrice] = useState(null);
 
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isVerticalMode = windowWidth < 768;
+
   useEffect(() => {
     fetchCarData(receivedValue);
   }, [receivedValue]);
@@ -375,12 +393,9 @@ function CarPreview() {
                         <td>{newCar.carModel}</td>
                         <td>{formatPrice(newCar.carPrice) + " Lakh*"}</td>
                         <td>
-                          <Button
-                            className="btn btn-block btn-warning text-light"
-                            variant="outline-warning"
-                          >
-                            <strong>check offer</strong>
-                          </Button>
+                          <div className="d-grid ">
+                            <Button variant="warning">Check Offer</Button>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -432,7 +447,7 @@ function CarPreview() {
                   </h5>
                   {images.length !== 0 ? (
                     <Splide
-                      className="p-5"
+                      className="d-flex p-5 justify-content-center "
                       options={{
                         type: "loop",
                         perPage: 2,
@@ -446,12 +461,14 @@ function CarPreview() {
                         drag: "free",
                         easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
                         keyboard: true,
+                        direction: isVerticalMode ? "ttb" : "ltr", // "ttb" for top-to-bottom
+                        height: isVerticalMode ? 500 : undefined,
                       }}
                     >
                       {images.map((image) => (
-                        <SplideSlide>
+                        <SplideSlide className="p-4  d-flex justify-content-center align-items-center">
                           <Card
-                            className="hover-element m-4 overflow-hidden"
+                            className="hover-element  overflow-hidden "
                             style={{ width: "18rem" }}
                           >
                             <Card.Img
@@ -532,14 +549,10 @@ function CarPreview() {
                           >
                             <small>
                               {car.fuelType + " "}
-                              <FaCircle
-                                style={{ fontSize: "5px" }}
-                              />
-                              {" " + car.transmission+" "}
-                              <FaCircle
-                                style={{ fontSize: "5px" }}
-                              />
-                              {" "+car.araimileage}
+                              <FaCircle style={{ fontSize: "5px" }} />
+                              {" " + car.transmission + " "}
+                              <FaCircle style={{ fontSize: "5px" }} />
+                              {" " + car.araimileage}
                             </small>
                           </p>
                         </div>
@@ -579,7 +592,7 @@ function CarPreview() {
                   </h5>
                   {similarCarTypes.length !== 0 ? (
                     <Splide
-                      className="p-5"
+                      className="d-flex p-5 justify-content-center "
                       options={{
                         type: "loop",
                         perPage: 2,
@@ -593,10 +606,12 @@ function CarPreview() {
                         drag: "free",
                         easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
                         keyboard: true,
+                        direction: isVerticalMode ? "ttb" : "ltr", // "ttb" for top-to-bottom
+                        height: isVerticalMode ? 500 : undefined,
                       }}
                     >
                       {similarCarTypes.map((similarCar) => (
-                        <SplideSlide>
+                        <SplideSlide className="p-4  d-flex justify-content-center align-items-center">
                           <Link
                             className="text-decoration-none text-secondary"
                             as={Link}

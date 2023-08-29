@@ -11,6 +11,7 @@ import {
   Nav,
   NavDropdown,
   Navbar,
+  Offcanvas,
 } from "react-bootstrap";
 import {
   FaCheck,
@@ -31,8 +32,12 @@ import axios from "axios";
 function Navigationbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   useEffect(() => {
-   const fetchUser = async () => {
+    const fetchUser = async () => {
       try {
         const email = Cookies.get("email");
         const response = await axios.get(
@@ -41,7 +46,7 @@ function Navigationbar() {
         setUser(response.data.firstName);
         console.log(response.data.firstName);
       } catch (error) {
-        consol.log(error);
+        console.log(error);
       }
     };
     fetchUser();
@@ -49,7 +54,8 @@ function Navigationbar() {
 
   const logOutHandler = () => {
     Cookies.remove("email");
-    navigate("/");
+    localStorage.removeItem("login");
+    navigate("/",{replace:true});
   };
   return (
     <>
@@ -68,11 +74,16 @@ function Navigationbar() {
             alt=""
           />
         </Navbar.Brand>
-        <DropdownButton variant="light" className="m-4" id="dropdown-basic-button" title={"Hello "+user+"!"}>
+        <DropdownButton
+          variant="light"
+          className="me-4"
+          id="dropdown-basic-button"
+          title={"Hello " + user + "!"}
+        >
           <Dropdown.Item href="/userprofile">
             <FaUserCircle style={{ fontSize: "35px" }} />
           </Dropdown.Item>
-          <Dropdown.Item href="/wishlist">Favorite</Dropdown.Item>
+          <Dropdown.Item href="/userprofile">Favorite</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
           <Dropdown.Item onClick={logOutHandler}>Log Out</Dropdown.Item>
         </DropdownButton>
@@ -121,9 +132,20 @@ function Navigationbar() {
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Tata Cars</NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link onClick={handleShow}>Ask Bot?</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 }

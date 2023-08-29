@@ -236,7 +236,7 @@ function CarPreviewPrice() {
                   {car.carName} are available for sale. Don't miss out on the
                   opportunity to explore the diverse lineup of {car.carBrand}{" "}
                   {car.carName} in {user.city}. Visit our showroom today to
-                  experience these incredible vehicles firsthand."
+                  experience these incredible vehicles firsthand.
                 </p>
               </div>
             </div>
@@ -248,7 +248,7 @@ function CarPreviewPrice() {
           >
             <div className="row shadow-sm">
               <div className="col-sm-12 col-md-3 p-3 ">
-                <Card style={{ width: "16rem" }}>
+                <Card style={{ width: "18rem" }}>
                   <Card.Img
                     variant="top"
                     src={`data:image/jpeg;base64,${car.carImage}`}
@@ -266,9 +266,9 @@ function CarPreviewPrice() {
                     <h5 className="mb-3">
                       {formatPrice(car.carPrice) + " Lakh*"}
                     </h5>
-                    <Button className="btn btn-block" variant="warning">
-                      Go somewhere
-                    </Button>
+                    <div className="d-grid ">
+                      <Button variant="warning">Go Somewhere</Button>
+                    </div>
                   </Card.Body>
                 </Card>
               </div>
@@ -282,7 +282,6 @@ function CarPreviewPrice() {
                 <Nav justify variant="tabs" defaultActiveKey="#" className="">
                   <Nav.Item>
                     <Nav.Link
-
                       onClick={() => handleAllVarient("#")}
                       href="#"
                       active={activeTab === "#"}
@@ -290,8 +289,6 @@ function CarPreviewPrice() {
                         color: activeTab === "#" ? "white" : "black",
                         backgroundColor:
                           activeTab === "#" ? "#555555" : "transparent",
-                          
-                          
                       }}
                     >
                       All
@@ -306,8 +303,6 @@ function CarPreviewPrice() {
                         color: activeTab === "link-1" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-1" ? "#555555" : "transparent",
-                          
-                          
                       }}
                     >
                       Diesel
@@ -322,8 +317,6 @@ function CarPreviewPrice() {
                         color: activeTab === "link-2" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-2" ? "#555555" : "transparent",
-                          
-                          
                       }}
                     >
                       Petrol
@@ -338,8 +331,6 @@ function CarPreviewPrice() {
                         color: activeTab === "link-3" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-3" ? "#555555" : "transparent",
-                          
-                          
                       }}
                     >
                       CNG
@@ -354,8 +345,6 @@ function CarPreviewPrice() {
                         color: activeTab === "link-4" ? "white" : "black",
                         backgroundColor:
                           activeTab === "link-4" ? "#555555" : "transparent",
-                          
-                          
                       }}
                     >
                       Automatic
@@ -387,7 +376,6 @@ function CarPreviewPrice() {
                               onClick={() => setOpen(!open)}
                               className="text-secondary"
                             >
-                              {open ? <FaChevronUp /> : <FaChevronDown />}{" "}
                               {car.carModel}
                             </Link>
                           </Accordion.Header>
@@ -397,7 +385,6 @@ function CarPreviewPrice() {
                               .map((price) => (
                                 <Table
                                   striped
-                                  bordered
                                   hover
                                   key={price.id}
                                   borderless="true"
@@ -436,7 +423,10 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                      style={{ backgroundColor: "#2176ae",color:'white' }}
+                                      style={{
+                                        backgroundColor: "#2176ae",
+                                        color: "white",
+                                      }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -479,7 +469,6 @@ function CarPreviewPrice() {
                               onClick={() => setOpen(!open)}
                               className="text-secondary"
                             >
-                              {open ? <FaChevronUp /> : <FaChevronDown />}{" "}
                               {car.carModel}
                             </Link>
                           </Accordion.Header>
@@ -528,7 +517,10 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                       style={{ backgroundColor: "#2176ae",color:'white' }}
+                                      style={{
+                                        backgroundColor: "#2176ae",
+                                        color: "white",
+                                      }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -571,7 +563,6 @@ function CarPreviewPrice() {
                               onClick={() => setOpen(!open)}
                               className="text-secondary"
                             >
-                              {open ? <FaChevronUp /> : <FaChevronDown />}{" "}
                               {car.carModel}
                             </Link>
                           </Accordion.Header>
@@ -620,7 +611,10 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                       style={{ backgroundColor: "#2176ae",color:'white' }}
+                                      style={{
+                                        backgroundColor: "#2176ae",
+                                        color: "white",
+                                      }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -663,7 +657,6 @@ function CarPreviewPrice() {
                               onClick={() => setOpen(!open)}
                               className="text-secondary"
                             >
-                              {open ? <FaChevronUp /> : <FaChevronDown />}{" "}
                               {car.carModel}
                             </Link>
                           </Accordion.Header>
@@ -712,7 +705,10 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                       style={{ backgroundColor: "#2176ae",color:'white' }}
+                                      style={{
+                                        backgroundColor: "#2176ae",
+                                        color: "white",
+                                      }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>
@@ -755,7 +751,6 @@ function CarPreviewPrice() {
                               onClick={() => setOpen(!open)}
                               className="text-secondary"
                             >
-                              {open ? <FaChevronUp /> : <FaChevronDown />}{" "}
                               {car.carModel}
                             </Link>
                           </Accordion.Header>
@@ -804,7 +799,10 @@ function CarPreviewPrice() {
                                       </td>
                                     </tr>
                                     <tr
-                                       style={{ backgroundColor: "#2176ae",color:'white' }}
+                                      style={{
+                                        backgroundColor: "#2176ae",
+                                        color: "white",
+                                      }}
                                     >
                                       <td colSpan={2}>On-Road Price</td>
                                       <td>{formatPrice(price.onRoadPrice)}</td>

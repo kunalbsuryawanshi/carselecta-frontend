@@ -23,12 +23,16 @@ const UserLogin = () => {
   const [buttonValidationForLogin, setButtonValidationForLogin] =
     useState("outline-primary");
   const [buttonTextForLogin, setButtonTextForLogin] = useState("Log In");
-  const [buttonValidationForForgotPassowrd, setButtonValidationForForgotPassowrd] =
-    useState("outline-primary");
-  const [buttonTextForForgotPassowrd, setButtonTextForForgotPassowrd] = useState("Change Password");
+  const [
+    buttonValidationForForgotPassowrd,
+    setButtonValidationForForgotPassowrd,
+  ] = useState("outline-primary");
+  const [buttonTextForForgotPassowrd, setButtonTextForForgotPassowrd] =
+    useState("Change Password");
   const [userIcon, setUserIcon] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
-  const [showAlertForPasswordChange, setShowAlertForPasswordChange] = useState(false);
+  const [showAlertForPasswordChange, setShowAlertForPasswordChange] =
+    useState(false);
   const [forgotPassword, setForgotPassword] = useState(true);
   const formRef = useRef();
   const formRefForForgotPassword = useRef();
@@ -42,7 +46,7 @@ const UserLogin = () => {
     password: "",
   });
 
-  const userForgotPasswordAction = async()=>{
+  const userForgotPasswordAction = async () => {
     formRefForForgotPassword.current.classList.add("was-validated");
     let formStatus = formRefForForgotPassword.current.checkValidity();
     if (!formStatus) {
@@ -52,8 +56,11 @@ const UserLogin = () => {
       return;
     }
 
-    try{
-      const response = await axios.post("http://localhost:8181/user-forgot-password",userForgotPassword)
+    try {
+      const response = await axios.post(
+        "http://localhost:8181/user-forgot-password",
+        userForgotPassword
+      );
       if (response.data === 200) {
         setShowAlertForPasswordChange(true);
         setTimeout(() => {
@@ -65,17 +72,16 @@ const UserLogin = () => {
         setButtonTextForForgotPassowrd("Change Password");
         setButtonValidationForForgotPassowrd("outline-primary");
         formRefForForgotPassword.current.classList.remove("was-validated");
-      }else {
+      } else {
         setUserIcon(false);
         setButtonTextForForgotPassowrd("Invalid email!");
         setButtonValidationForForgotPassowrd("outline-danger");
         formRefForForgotPassword.current.classList.add("was-validated");
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-
-  }
+  };
   const userLoginAction = async () => {
     formRef.current.classList.add("was-validated");
     let formStatus = formRef.current.checkValidity();
@@ -86,7 +92,6 @@ const UserLogin = () => {
       return;
     }
 
-
     try {
       const response = await axios.post(
         "http://localhost:8181/user-login",
@@ -95,10 +100,12 @@ const UserLogin = () => {
       console.log(response);
       if (response.data === 200) {
         setShowAlert(true);
+        localStorage.setItem("login", "true");
         setTimeout(() => {
+          navigate("/home", { replace: true });
           setShowAlert(false);
-          navigate("/home");
         }, 3000);
+
         Cookies.set("email", `${user.email}`, { expires: 7 });
         setUserIcon(true);
         setButtonTextForLogin("Log In");
@@ -175,7 +182,7 @@ const UserLogin = () => {
                 }
                 required
               />
-              <div className="text-right text-secondary">
+              <div className="text-end text-secondary">
                 <Link
                   className="text-secondary text-decoration-none"
                   style={{ fontSize: "12px" }}
@@ -185,14 +192,16 @@ const UserLogin = () => {
                 </Link>
               </div>
             </form>
-            <Button
-              type="submit"
-              className="btn btn-block mt-3"
-              variant={buttonValidationForLogin}
-              onClick={userLoginAction}
-            >
-              {buttonTextForLogin}
-            </Button>
+            <div className="d-grid ">
+              <Button
+                type="submit"
+                className="btn btn-block mt-3"
+                variant={buttonValidationForLogin}
+                onClick={userLoginAction}
+              >
+                {buttonTextForLogin}
+              </Button>
+            </div>
             <div
               style={{ fontSize: "15px" }}
               className="text-center mt-3 mb-2 text-secondary"
@@ -277,28 +286,30 @@ const UserLogin = () => {
                 required
               />
               <Form.Control.Feedback type="invalid">
-              <small>
-                <li className="text-danger list-unstyled">
-                  Password should contain atleast
-                </li>
-                <li className="text-danger list-unstyled">
-                  <FaCircle style={{ fontSize: "5px" }} /> Atleast 1 Uppercase,
-                  1 Lowercase and 1 Special character
-                </li>
-                <li className="text-danger list-unstyled">
-                  <FaCircle style={{ fontSize: "5px" }} /> Minimum 8 charcater
-                </li>
-              </small>
-            </Form.Control.Feedback>
+                <small>
+                  <li className="text-danger list-unstyled">
+                    Password should contain atleast
+                  </li>
+                  <li className="text-danger list-unstyled">
+                    <FaCircle style={{ fontSize: "5px" }} /> Atleast 1
+                    Uppercase, 1 Lowercase and 1 Special character
+                  </li>
+                  <li className="text-danger list-unstyled">
+                    <FaCircle style={{ fontSize: "5px" }} /> Minimum 8 charcater
+                  </li>
+                </small>
+              </Form.Control.Feedback>
             </form>
-            <Button
-              type="submit"
-              className="btn btn-block mt-3"
-              variant={buttonValidationForForgotPassowrd}
-              onClick={userForgotPasswordAction}
-            >
-              {buttonTextForForgotPassowrd}
-            </Button>
+            <div className="d-grid ">
+              <Button
+                type="submit"
+                className=" mt-3"
+                variant={buttonValidationForForgotPassowrd}
+                onClick={userForgotPasswordAction}
+              >
+                {buttonTextForForgotPassowrd}
+              </Button>
+            </div>
             <div
               style={{ fontSize: "15px" }}
               className="text-center mt-3 mb-2 text-secondary"
@@ -313,7 +324,9 @@ const UserLogin = () => {
                 Signup
               </Link>
             </div>
-            {showAlertForPasswordChange && <AlertPopup message="Password changed successfully" />}
+            {showAlertForPasswordChange && (
+              <AlertPopup message="Password changed successfully" />
+            )}
           </div>
         </div>
       )}

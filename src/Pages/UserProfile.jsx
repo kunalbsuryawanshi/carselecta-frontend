@@ -64,7 +64,6 @@ function UserProfile() {
       setShowFav(true);
       console.log(favoriteCars);
     } catch (error) {
-
       console.log(error);
     }
   };
@@ -84,21 +83,21 @@ function UserProfile() {
   return (
     <>
       <Navigationbar />
-      <div className="m-5 p-5">
+      <div className="m-5 p-5" style={{backgroundColor:'#FFFFF'}}>
         <div className="row m-5">
           <div className="col-sm-12 col-md-4">
             <Card
               className="shadow"
               style={{ width: "22rem", borderRadius: "10px" }}
             >
-              <div className="text-center circle-icon-container bg-light p-3">
+              <div className="text-center circle-icon-container p-3" style={{backgroundColor:'#e0e4e78a'}}>
                 <FaCircle
                   className="text-secondary  mt-5 circle-icon"
                   style={{ fontSize: "80px" }}
                 />
                 <span className="k-letter">{fisrtLetter}</span>
                 <Card.Text className="text-center mt-2 mb-0">
-                  <strong>{user.firstName+" "+user.lastName}</strong>
+                  <strong>{user.firstName + " " + user.lastName}</strong>
                 </Card.Text>
                 <Card.Text className="text-center mt-0 pt-0 mb-0">
                   {user.phoneNumber}
@@ -200,7 +199,7 @@ function UserProfile() {
                   className=" text-decoration-none"
                   style={{ display: "block" }}
                 >
-                  <div className=" p-2 m-4 d-flex justify-content-center">
+                  <div className="d-grid p-2 m-4 ">
                     <Button
                       onClick={logoutAction}
                       className="btn btn-block"

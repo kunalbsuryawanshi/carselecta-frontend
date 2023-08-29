@@ -51,7 +51,19 @@ function WriteReview() {
   };
 
   useEffect(() => {
-    setUser(Cookies.get("email"));
+    const fetchUser = async () => {
+      try {
+        const email = Cookies.get("email");
+        const response = await axios.get(
+          `http://localhost:8181/get-user-details?email=${email}`
+        );
+        setUser(response.data.firstName);
+        console.log(response.data.firstName);
+      } catch (error) {
+        consol.log(error);
+      }
+    };
+    fetchUser();
   });
 
   const logOutHandler = () => {
@@ -101,6 +113,8 @@ function WriteReview() {
       setSelectedImageKey6(key);
     }
   };
+
+  
   useEffect(() => {
     if (
       selectedImageKey1 !== 0 &&
@@ -189,7 +203,11 @@ function WriteReview() {
           />
         </Navbar.Brand>
 
-        <DropdownButton variant="light" id="dropdown-basic-button" title={user}>
+        <DropdownButton
+          variant="light"
+          id="dropdown-basic-button"
+          title={"Hello " + user + "!"}
+        >
           <Dropdown.Item href="/userprofile">
             <FaUserCircle style={{ fontSize: "35px" }} />
           </Dropdown.Item>
@@ -441,6 +459,7 @@ function WriteReview() {
                     alt=""
                   />
                 </div>
+
                 <div className="col-sm-12 col-md-1 ">
                   <img
                     src={smily4}
@@ -470,223 +489,232 @@ function WriteReview() {
                   />
                 </div>
               </div>
-              <div className="row p-2 mt-2 text-secondary">
-                <div className="col-sm-12 col-md-3 ">Features and Styling</div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily1}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey4 === 1
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily4(1)}
-                    alt=""
-                  />
+
+
+
+
+
+              <div>
+                <div className="row p-2 mt-2 text-secondary">
+                  <div className="col-sm-12 col-md-3 ">
+                    Features and Styling
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily1}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey4 === 1
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily4(1)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily2}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey4 === 2
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily4(2)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily3}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey4 === 3
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily4(3)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily4}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey4 === 4
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily4(4)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily5}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey4 === 5
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily4(5)}
+                      alt=""
+                    />
+                  </div>
                 </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily2}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey4 === 2
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily4(2)}
-                    alt=""
-                  />
+                <div className="row p-2 mt-2 text-secondary">
+                  <div className="col-sm-12 col-md-3 ">Comfort</div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily1}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey5 === 1
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily5(1)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily2}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey5 === 2
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily5(2)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily3}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey5 === 3
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily5(3)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily4}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey5 === 4
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily5(4)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily5}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey5 === 5
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily5(5)}
+                      alt=""
+                    />
+                  </div>
                 </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily3}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey4 === 3
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily4(3)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily4}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey4 === 4
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily4(4)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily5}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey4 === 5
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily4(5)}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="row p-2 mt-2 text-secondary">
-                <div className="col-sm-12 col-md-3 ">Comfort</div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily1}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey5 === 1
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily5(1)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily2}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey5 === 2
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily5(2)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily3}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey5 === 3
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily5(3)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily4}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey5 === 4
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily5(4)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily5}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey5 === 5
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily5(5)}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="row p-2 mt-2 text-secondary">
-                <div className="col-sm-12 col-md-3 ">Performance</div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily1}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey6 === 1
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily6(1)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily2}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey6 === 2
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily6(2)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily3}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey6 === 3
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily6(3)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily4}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey6 === 4
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily6(4)}
-                    alt=""
-                  />
-                </div>
-                <div className="col-sm-12 col-md-1 ">
-                  <img
-                    src={smily5}
-                    style={{
-                      cursor: "pointer",
-                      filter:
-                        selectedImageKey6 === 5
-                          ? "saturate(2)"
-                          : "saturate(0.1)",
-                    }}
-                    onClick={() => handleSmily6(5)}
-                    alt=""
-                  />
+                <div className="row p-2 mt-2 text-secondary">
+                  <div className="col-sm-12 col-md-3 ">Performance</div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily1}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey6 === 1
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily6(1)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily2}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey6 === 2
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily6(2)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily3}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey6 === 3
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily6(3)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily4}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey6 === 4
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily6(4)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-1 ">
+                    <img
+                      src={smily5}
+                      style={{
+                        cursor: "pointer",
+                        filter:
+                          selectedImageKey6 === 5
+                            ? "saturate(2)"
+                            : "saturate(0.1)",
+                      }}
+                      onClick={() => handleSmily6(5)}
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -732,7 +760,7 @@ function WriteReview() {
                         placeholder="share the details of your experience..."
                       ></textarea>
                       <p
-                        className="text-right"
+                        className="text-end"
                         style={{ fontSize: "12px", color: "red" }}
                       >
                         Minimum 80 characters
@@ -752,7 +780,7 @@ function WriteReview() {
                         required
                       ></input>
                       <p
-                        className="text-right"
+                        className="text-end"
                         style={{ fontSize: "12px", color: "red" }}
                       >
                         Minimum 10 characters
@@ -764,9 +792,9 @@ function WriteReview() {
                   <div className="col-sm-12 col-md-12 d-flex justify-content-center">
                     <Link
                       className="text-decoration-none"
-                      as={Link}
-                      to={"/thanksforreview"}
-                      state={{ value: carIdAndTotalRating }}
+                      // as={Link}
+                      // to={"/thanksforreview"}
+                      // state={{ value: carIdAndTotalRating }}
                     >
                       <Button
                         variant={buttonValidation}

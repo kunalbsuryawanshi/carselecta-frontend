@@ -143,9 +143,12 @@ function AddCarByAdmin() {
     <>
       <Navigationbar />
       <div className="bg-light m-5 shadow-sm">
-      <h3 style={{backgroundColor:'#104b8be3'}} className="text-light p-4 text-center">
-        Enter Car Details
-      </h3>
+        <h3
+          style={{ backgroundColor: "#104b8be3" }}
+          className="text-light p-4 text-center"
+        >
+          Enter Car Details
+        </h3>
         <form ref={formRef} className="needs-validation">
           {/* ----------------------------------------------------ROW::1--------------------------------- */}
           <div className="row m-5 ">
@@ -552,14 +555,16 @@ function AddCarByAdmin() {
 
         <div className="row  justify-content-center p-5">
           <div className="col-sm-6 col-md-2">
-            <Button
-              type="submit"
-              className="btn btn-block shadow "
-              variant={buttonValidation}
-              onClick={addCarAction}
-            >
-              Add Car
-            </Button>
+            <div className="d-grid ">
+              <Button
+                type="submit"
+                className="btn btn-block shadow "
+                variant={buttonValidation}
+                onClick={addCarAction}
+              >
+                Add Car
+              </Button>
+            </div>
             {showAlert && (
               <AlertPopup message="Car details inserted successfully!" />
             )}

@@ -165,8 +165,10 @@ function UserReviews() {
                     {!isNaN(rating) ? rating : 0}
                   </h2>
                 </div>
-                <div className="col-sm-12 col-md-2">
-                  <small>Based on {totalRatings} reviews</small>
+                <div className="col-sm-12 col-md-3">
+                  <small className="text-secondary">
+                    Based on {totalRatings} reviews
+                  </small>
                 </div>
                 <div className="col-sm-12 col-md-5">
                   <Link
@@ -175,9 +177,11 @@ function UserReviews() {
                     state={{ value: newCar.newCarId }}
                     className="text-decoration-none"
                   >
-                    <Button className="btn btn-block" variant="warning">
-                      Write Review
-                    </Button>
+                    <div className="d-grid ">
+                      <Button variant="warning">
+                        Write Review
+                      </Button>
+                    </div>
                   </Link>
                 </div>
               </div>
@@ -223,7 +227,7 @@ function UserReviews() {
                       >
                         Read more...
                       </Link>
-                        <div>&nbsp;</div>
+                      <div>&nbsp;</div>
                       <p className="p-0 m-0">
                         <small
                           style={{

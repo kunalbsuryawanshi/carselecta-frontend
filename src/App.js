@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import Navigationbar from "./Pages/Navigationbar";
 import HomePage from "./Pages/HomePage";
 import AboutUs from "./Pages/Aboutus";
@@ -20,6 +20,8 @@ import CarPreviewPrice from "./Pages/CarPreviewPrice";
 import UserReviews from "./Pages/UserReviews";
 import WriteReview from "./Pages/WriteReview";
 import ThanksForReview from "./Pages/ThanksForReview";
+import Bot from "./Pages/Bot";
+import { SessionProvider } from "./AuthContext/AuthContext";
 function App() {
   return (
     <>
@@ -44,6 +46,7 @@ function App() {
           <Route path="/userreviews" element={<UserReviews />} />
           <Route path="/writereview" element={<WriteReview />} />
           <Route path="/thanksforreview" element={<ThanksForReview />} />
+          <Route path="/thanksforreview" element={<Bot />} />
         </Routes>
       </BrowserRouter>
     </>

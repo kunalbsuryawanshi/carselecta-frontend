@@ -63,7 +63,7 @@ const CardSlider = ({ cars }) => {
         }}
       >
         {cars.map((car) => (
-          <SplideSlide className="p-5  d-flex justify-content-center" key={car.newCarId}>
+          <SplideSlide className="p-4  d-flex justify-content-center align-items-center" key={car.newCarId}>
             <Link
               as={Link}
               state={{ value: car.newCarId }}

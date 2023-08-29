@@ -22,11 +22,11 @@ function UserSignup() {
     state: "",
     password: "",
   });
-
+  const validator = require("validator");
   const userSignupAction = async () => {
     formRef.current.classList.add("was-validated");
     let formStatus = formRef.current.checkValidity();
-    if (!formStatus) {
+    if (!formStatus && !validator.isEmail(user.email)) {
       setButtonTextForSignup("Invalid Details!");
       setButtonValidationForSignup("outline-danger");
       return;
@@ -63,7 +63,7 @@ function UserSignup() {
       </div>
       <div
         style={{ height: "90vh" }}
-        className="row justify-content-center align-items-center mt-5 login-container"
+        className="row justify-content-center align-items-center mt-4 login-container"
       >
         <div className="col-sm-8 col-md-4  p-4 bg-light">
           <h2 className="text-center mt-3 mb-4">
@@ -101,7 +101,7 @@ function UserSignup() {
               name="email"
               id="email"
               placeholder="Enter email..."
-              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.[a-zA-Z]{2,}$"
+              pattern="^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9.-]+\.(com|in)$"
               value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
               required
@@ -125,7 +125,7 @@ function UserSignup() {
                 required
               />
             </div>
-            <select
+            <Form.Select
               className="form-control input shadow-sm"
               aria-label="Default select example"
               value={user.state}
@@ -163,7 +163,7 @@ function UserSignup() {
               <option value="Uttar Pradesh">Uttar Pradesh</option>
               <option value="Uttarakhand">Uttarakhand</option>
               <option value="West Bengal">West Bengal</option>
-            </select>
+            </Form.Select>
             <input
               className="form-control input mt-2"
               type="text"
@@ -206,17 +206,24 @@ function UserSignup() {
               </small>
             </Form.Control.Feedback>
           </form>
-          <Button
-            type="submit"
-            className="btn btn-block mt-3"
-            variant={buttonValidationForSignup}
-            onClick={userSignupAction}
-          >
-            {buttonTextForSignup}
-          </Button>
+          <div className="d-grid ">
+            <Button
+              type="submit"
+              className="btn btn-block mt-3"
+              variant={buttonValidationForSignup}
+              onClick={userSignupAction}
+            >
+              {buttonTextForSignup}
+            </Button>
+          </div>
           <div className="text-center mt-3 mb-2 text-secondary">
             Already have an account?
-            <Link className="text-decoration-none" as={Link} to={"/userlogin"}>
+            <Link
+              style={{ color: "#1b5a9d" }}
+              className="text-decoration-none"
+              as={Link}
+              to={"/"}
+            >
               {" "}
               Login
             </Link>

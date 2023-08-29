@@ -169,40 +169,6 @@ function UpdateCarByAdmin() {
     setCarImage(null);
     formRef.current.classList.remove("was-validated");
 
-    //Testing ::...
-
-    // console.log(carName);
-    // console.log(carBrand);
-    // console.log(carType);
-    // console.log(carPrice);
-    // console.log(ARAIMileage);
-    // console.log(fuelType);
-    // console.log(transmission);
-    // console.log(modelYear);
-    // console.log(description);
-    // console.log(carImage);
-
-    // BACKEND :: ...
-
-    // let url = "http://localhost:8181/admin-login";
-    // axios.post(url).then((response) => {
-    //   if (response.data == 500) {
-    //     console.log(response.data);
-    //     setButtonValidation("outline-danger");
-    //     setIsError(true);
-    //     setTimeout(() => {
-    //       setIsError(false);
-    //     }, 2000);
-    //   } else {
-    //     localStorage.setItem("adminLogin", "true");
-    //     setButtonValidation("outline-success");
-    //     setIsSuccess(true);
-    //     setTimeout(() => {
-    //       setIsSuccess(false);
-    //       navigate("/admindashboard", { replace: true });
-    //     }, 2000);
-    //   }
-    // });
   };
 
   return (
