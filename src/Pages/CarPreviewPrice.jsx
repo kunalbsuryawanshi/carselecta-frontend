@@ -191,10 +191,7 @@ function CarPreviewPrice() {
               className="container-fluid mb-1 shadow-sm"
             >
               <Navbar style={{ backgroundColor: "#FFFFFF" }}>
-                <Nav
-                  variant="underline"
-                  className="d-flex justify-content-center w-100 "
-                >
+                <Nav className="d-flex justify-content-center w-100 ">
                   <Nav.Link
                     state={{ value: car.newCarId }}
                     as={Link}
@@ -247,7 +244,7 @@ function CarPreviewPrice() {
             className="container mt-2 vh-100"
           >
             <div className="row shadow-sm">
-              <div className="col-sm-12 col-md-3 p-3 ">
+              <div className="col-sm-12 col-md-3 p-3 d-flex justify-content-center">
                 <Card style={{ width: "18rem" }}>
                   <Card.Img
                     variant="top"
@@ -422,14 +419,24 @@ function CarPreviewPrice() {
                                         {formatPrice(price.optionalCharges)}
                                       </td>
                                     </tr>
-                                    <tr
-                                      style={{
-                                        backgroundColor: "#2176ae",
-                                        color: "white",
-                                      }}
-                                    >
-                                      <td colSpan={2}>On-Road Price</td>
-                                      <td>{formatPrice(price.onRoadPrice)}</td>
+                                    <tr>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                        colSpan={2}
+                                      >
+                                        On-Road Price
+                                      </td>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {formatPrice(price.onRoadPrice)}
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td colSpan={2}>EMI</td>
@@ -478,7 +485,6 @@ function CarPreviewPrice() {
                               .map((price) => (
                                 <Table
                                   striped
-                                  bordered
                                   hover
                                   key={price.id}
                                   borderless="true"
@@ -516,14 +522,24 @@ function CarPreviewPrice() {
                                         {formatPrice(price.optionalCharges)}
                                       </td>
                                     </tr>
-                                    <tr
-                                      style={{
-                                        backgroundColor: "#2176ae",
-                                        color: "white",
-                                      }}
-                                    >
-                                      <td colSpan={2}>On-Road Price</td>
-                                      <td>{formatPrice(price.onRoadPrice)}</td>
+                                    <tr>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                        colSpan={2}
+                                      >
+                                        On-Road Price
+                                      </td>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {formatPrice(price.onRoadPrice)}
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td colSpan={2}>EMI</td>
@@ -572,7 +588,6 @@ function CarPreviewPrice() {
                               .map((price) => (
                                 <Table
                                   striped
-                                  bordered
                                   hover
                                   key={price.id}
                                   borderless="true"
@@ -610,14 +625,24 @@ function CarPreviewPrice() {
                                         {formatPrice(price.optionalCharges)}
                                       </td>
                                     </tr>
-                                    <tr
-                                      style={{
-                                        backgroundColor: "#2176ae",
-                                        color: "white",
-                                      }}
-                                    >
-                                      <td colSpan={2}>On-Road Price</td>
-                                      <td>{formatPrice(price.onRoadPrice)}</td>
+                                    <tr>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                        colSpan={2}
+                                      >
+                                        On-Road Price
+                                      </td>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {formatPrice(price.onRoadPrice)}
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td colSpan={2}>EMI</td>
@@ -666,7 +691,6 @@ function CarPreviewPrice() {
                               .map((price) => (
                                 <Table
                                   striped
-                                  bordered
                                   hover
                                   key={price.id}
                                   borderless="true"
@@ -704,14 +728,24 @@ function CarPreviewPrice() {
                                         {formatPrice(price.optionalCharges)}
                                       </td>
                                     </tr>
-                                    <tr
-                                      style={{
-                                        backgroundColor: "#2176ae",
-                                        color: "white",
-                                      }}
-                                    >
-                                      <td colSpan={2}>On-Road Price</td>
-                                      <td>{formatPrice(price.onRoadPrice)}</td>
+                                    <tr>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                        colSpan={2}
+                                      >
+                                        On-Road Price
+                                      </td>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {formatPrice(price.onRoadPrice)}
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td colSpan={2}>EMI</td>
@@ -760,7 +794,6 @@ function CarPreviewPrice() {
                               .map((price) => (
                                 <Table
                                   striped
-                                  bordered
                                   hover
                                   key={price.id}
                                   borderless="true"
@@ -798,14 +831,24 @@ function CarPreviewPrice() {
                                         {formatPrice(price.optionalCharges)}
                                       </td>
                                     </tr>
-                                    <tr
-                                      style={{
-                                        backgroundColor: "#2176ae",
-                                        color: "white",
-                                      }}
-                                    >
-                                      <td colSpan={2}>On-Road Price</td>
-                                      <td>{formatPrice(price.onRoadPrice)}</td>
+                                    <tr>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                        colSpan={2}
+                                      >
+                                        On-Road Price
+                                      </td>
+                                      <td
+                                        style={{
+                                          backgroundColor: "#2176ae",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {formatPrice(price.onRoadPrice)}
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td colSpan={2}>EMI</td>

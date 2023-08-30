@@ -60,7 +60,7 @@ function WriteReview() {
         setUser(response.data.firstName);
         console.log(response.data.firstName);
       } catch (error) {
-        consol.log(error);
+        console.log(error);
       }
     };
     fetchUser();
@@ -114,7 +114,6 @@ function WriteReview() {
     }
   };
 
-  
   useEffect(() => {
     if (
       selectedImageKey1 !== 0 &&
@@ -270,8 +269,10 @@ function WriteReview() {
                 style={{ backgroundColor: "#FFFFF" }}
                 className="row p-2 mt-2 text-secondary"
               >
-                <div className="col-sm-12 col-md-3 ">Mileage</div>
-                <div className="col-sm-12 col-md-1 ">
+                <div className="col-sm-12 col-md-3 ">
+                  Mileage
+                </div>
+                <div className="col-sm-12 col-md-1 d-flex">
                   <img
                     src={smily1}
                     style={{
@@ -489,10 +490,6 @@ function WriteReview() {
                   />
                 </div>
               </div>
-
-
-
-
 
               <div>
                 <div className="row p-2 mt-2 text-secondary">

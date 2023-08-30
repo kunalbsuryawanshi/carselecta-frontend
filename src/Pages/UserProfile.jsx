@@ -77,20 +77,25 @@ function UserProfile() {
 
   const logoutAction = () => {
     Cookies.remove("email");
-    navigate("/", { replace: true });
+    localStorage.removeItem("loginStatus");
+    window.location.replace('/');
   };
 
   return (
     <>
       <Navigationbar />
-      <div className="m-5 p-5" style={{backgroundColor:'#FFFFF'}}>
-        <div className="row m-5">
-          <div className="col-sm-12 col-md-4">
+      <div className="mt-5">&nbsp;</div>
+      <div className="mt-5" style={{ backgroundColor: "#FFFFF" }}>
+        <div className="row m-5 justify-content-center">
+          <div className="col-sm-12 col-md-4 d-flex justify-content-center">
             <Card
               className="shadow"
               style={{ width: "22rem", borderRadius: "10px" }}
             >
-              <div className="text-center circle-icon-container p-3" style={{backgroundColor:'#e0e4e78a'}}>
+              <div
+                className="text-center circle-icon-container p-3"
+                style={{ backgroundColor: "#e0e4e78a" }}
+              >
                 <FaCircle
                   className="text-secondary  mt-5 circle-icon"
                   style={{ fontSize: "80px" }}
@@ -201,7 +206,7 @@ function UserProfile() {
                 >
                   <div className="d-grid p-2 m-4 ">
                     <Button
-                      onClick={logoutAction}
+                      onClick={() => logoutAction()}
                       className="btn btn-block"
                       variant="outline-danger"
                     >
@@ -216,11 +221,11 @@ function UserProfile() {
           {show ? (
             <>
               {showFav ? (
-                <div className="col-sm-12 col-md-6">
+                <div className="col-sm-12 col-md-6 mt-2">
                   <WishList Cars={favoriteCars} />
                 </div>
               ) : (
-                <div className="col-sm-12 col-md-6 ">
+                <div className="col-sm-12 col-md-6 mt-2 ">
                   <ProfileSetting userRef={user} />
                 </div>
               )}

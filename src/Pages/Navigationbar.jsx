@@ -54,7 +54,7 @@ function Navigationbar() {
 
   const logOutHandler = () => {
     Cookies.remove("email");
-    localStorage.removeItem("login");
+    localStorage.removeItem("loginStatus");
     navigate("/",{replace:true});
   };
   return (
@@ -72,14 +72,14 @@ function Navigationbar() {
             }}
             src={logo}
             alt=""
-          />
+            />
         </Navbar.Brand>
         <DropdownButton
           variant="light"
           className="me-4"
           id="dropdown-basic-button"
           title={"Hello " + user + "!"}
-        >
+          >
           <Dropdown.Item href="/userprofile">
             <FaUserCircle style={{ fontSize: "35px" }} />
           </Dropdown.Item>
@@ -89,21 +89,21 @@ function Navigationbar() {
         </DropdownButton>
         {/* <Dropdown size>
           <Dropdown.Toggle variant="light" id="user-dropdown">
-            <small>{user}</small>
+          <small>{user}</small>
           </Dropdown.Toggle>
-
+          
           <Dropdown.Menu style={{minWidth:'200px'}}>
-            <Dropdown.Item href="#profile">Profile</Dropdown.Item>
-            <Dropdown.Item href="#settings">Settings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#logout">Logout</Dropdown.Item>
+          <Dropdown.Item href="#profile">Profile</Dropdown.Item>
+          <Dropdown.Item href="#settings">Settings</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item href="#logout">Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown> */}
         {/* <Button
             style={{ top: "10px", right: "5px", position: "absolute" }}
             variant="primary"
             className="ml"
-          >
+            >
             Top Right Button
           </Button> */}
       </Navbar>
@@ -113,10 +113,11 @@ function Navigationbar() {
         className="shadow"
         bg="light"
         expand="lg"
-      >
+        >
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav  className="mr-auto">
             <Nav.Link href="/aboutus">New Launches</Nav.Link>
             <Nav.Link href="#home">Electric cars</Nav.Link>
             <NavDropdown title="Popular Brands" id="basic-nav-dropdown">

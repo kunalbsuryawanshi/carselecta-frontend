@@ -142,7 +142,7 @@ function ProfileSetting({ userRef }) {
 
   return (
     <>
-      <div className="card shadow-sm " style={{ maxWidth: "540px" }}>
+      <div className="card shadow-sm mt-2" style={{ width: "540px" }}>
         <div className="row ">
           <div className="col-md-3">
             <img src={userIcon} className="img-fluid rounded-start" alt="..." />
@@ -183,7 +183,7 @@ function ProfileSetting({ userRef }) {
           </div>
         </div>
       </div>
-      <div className="card shadow-sm mt-3" style={{ maxWidth: "540px" }}>
+      <div className="card shadow-sm mt-3" style={{ width: "540px" }}>
         <div className="row ">
           <div className="col-md-7">
             <div className="card-body m-0">
@@ -203,7 +203,7 @@ function ProfileSetting({ userRef }) {
           >
             <Link
               onClick={handleAddress}
-              className="text-decoration-none"
+              className="text-decoration-none text-end"
               style={{ fontSize: "12px" }}
             >
               Add Address

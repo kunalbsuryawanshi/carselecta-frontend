@@ -232,7 +232,7 @@ function CarPreview() {
           className="container-fluid mb-1"
         >
           <Navbar className="shadow-sm" style={{ backgroundColor: "#FFFFFF" }}>
-            <Nav className="d-flex justify-content-center w-100">
+            <Nav variant="" className="d-flex justify-content-center w-100">
               <Nav.Link href="#">{newCar.carName}</Nav.Link>
               <Nav.Link
                 as={Link}
@@ -257,14 +257,14 @@ function CarPreview() {
           className="container-fluid  shadow-sm "
         >
           <div className="row m-4  p-5">
-            <div className="col-sm-12 col-md-5 ">
+            <div className="col-sm-12 col-md-5 d-flex">
               <img
-                style={{ width: "30rem" }}
+                style={{ width: "30rem",objectFit: "cover", overflow: "hidden" }}
                 src={`data:image/jpeg;base64,${newCar.carImage}`}
                 alt=""
               />
             </div>
-            <div className="col-sm-12 col-md-6">
+            <div className="col-sm-12 col-md-6 mt-2">
               <div
                 style={{ justifyContent: "space-between" }}
                 className="d-flex  "

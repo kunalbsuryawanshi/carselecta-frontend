@@ -100,13 +100,13 @@ const UserLogin = () => {
       console.log(response);
       if (response.data === 200) {
         setShowAlert(true);
-        localStorage.setItem("login", "true");
+        localStorage.setItem("loginStatus", "true");
         setTimeout(() => {
           navigate("/home", { replace: true });
           setShowAlert(false);
-        }, 3000);
+        }, 2000);
 
-        Cookies.set("email", `${user.email}`, { expires: 7 });
+        Cookies.set("email", `${user.email}`,true, { expires: 1 });
         setUserIcon(true);
         setButtonTextForLogin("Log In");
         setButtonValidationForLogin("outline-primary");

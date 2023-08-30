@@ -85,7 +85,6 @@ function UserReviews() {
           >
             <Navbar style={{ backgroundColor: "#FFFFFF" }}>
               <Nav
-                variant="underline"
                 className="d-flex justify-content-center w-100 "
               >
                 <Nav.Link
@@ -197,15 +196,14 @@ function UserReviews() {
                   <h5 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
                     {newCar.carBrand + " " + newCar.carName} User Reviews
                   </h5>
-                  <hr className="text-dark mt-5 mb-5" />
+                  <hr className="text-dark mt-5 mb-4" />
                   {individualRating.map((rating, index) => (
                     <div key={index}>
                       <p>
                         <RatingStars rating={rating.score} />
                       </p>
-                      <p>
+                      <p className="m-0 p-0">
                         <strong
-                          style={{ fontFamily: "roboto,Sans-Serif,Arial" }}
                         >
                           {individualReview[index].heading}
                         </strong>
@@ -213,14 +211,15 @@ function UserReviews() {
                       <Collapse in={openStates[index]}>
                         <div
                           style={{ fontFamily: "roboto,Sans-Serif,Arial" }}
-                          className="mb-3 text-secondary"
+                          className="mb-1 text-secondary"
                           id="example-collapse-text"
                         >
                           {individualReview[index].comment}
                         </div>
                       </Collapse>
                       <Link
-                        className="text-decoration-none"
+                        className="text-decoration-none m-0 p-0"
+                        style={{ color: "#1b5a9d", fontSize:'14px' }}
                         onClick={() => handleCollapseToggle(index)}
                         aria-controls={`example-collapse-text-${index}`}
                         aria-expanded={openStates[index]}

@@ -1,7 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
-import Navigationbar from "./Pages/Navigationbar";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import AboutUs from "./Pages/Aboutus";
 import Admin from "./Pages/Admin";
@@ -21,36 +20,166 @@ import UserReviews from "./Pages/UserReviews";
 import WriteReview from "./Pages/WriteReview";
 import ThanksForReview from "./Pages/ThanksForReview";
 import Bot from "./Pages/Bot";
-import { SessionProvider } from "./AuthContext/AuthContext";
+import Cookies from "js-cookie";
+import CarPreviewAsCompany from "./Pages/CarPreviewAsCompany";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<UserLogin />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/addcarbyadmin" element={<AddCarByAdmin />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/adminupdatecar" element={<AdminUpdateCar />} />
-          <Route path="/updatecarbyadmin" element={<UpdateCarByAdmin />} />
-          <Route path="/removecarbyadmin" element={<RemoveCarByAdmin />} />
           <Route path="/usersignup" element={<UserSignup />} />
           <Route path="/userlogin" element={<UserLogin />} />
-          <Route path="/wishlist" element={<WishList />} />
-          <Route path="/userprofile" element={<UserProfile />} />
-          <Route path="/findcarunderbudget" element={<FindCarUnderBudget />} />
-          <Route path="/carpreview" element={<CarPreview />} />
-          <Route path="/carpreviewprice" element={<CarPreviewPrice />} />
-          <Route path="/userreviews" element={<UserReviews />} />
-          <Route path="/writereview" element={<WriteReview />} />
-          <Route path="/thanksforreview" element={<ThanksForReview />} />
-          <Route path="/thanksforreview" element={<Bot />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/aboutus"
+            element={
+              <ProtectedRoute>
+                <AboutUs />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/addcarbyadmin"
+            element={
+              <ProtectedRoute>
+                <AddCarByAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admindashboard"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/adminupdatecar"
+            element={
+              <ProtectedRoute>
+                <AdminUpdateCar />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/updatecarbyadmin"
+            element={
+              <ProtectedRoute>
+                <UpdateCarByAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/removecarbyadmin"
+            element={
+              <ProtectedRoute>
+                <RemoveCarByAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <WishList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/userprofile"
+            element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/findcarunderbudget"
+            element={
+              <ProtectedRoute>
+                <FindCarUnderBudget />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/carpreview"
+            element={
+              <ProtectedRoute>
+                <CarPreview />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/carpreviewprice"
+            element={
+              <ProtectedRoute>
+                <CarPreviewPrice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/userreviews"
+            element={
+              <ProtectedRoute>
+                <UserReviews />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/writereview"
+            element={
+              <ProtectedRoute>
+                <WriteReview />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/thanksforreview"
+            element={
+              <ProtectedRoute>
+                <ThanksForReview />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/thanksforreview"
+            element={
+              <ProtectedRoute>
+                <Bot />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/carpreviewascompany"
+            element={
+              <ProtectedRoute>
+                <CarPreviewAsCompany />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
   );
 }
 
+function ProtectedRoute({ children }) {
+  let loginStatus = localStorage.getItem("loginStatus") === "true";
+  let cookie = Cookies.get("email") === "true";
+  if (!loginStatus && !cookie) {
+    return <Navigate to={"/"} replace={true} />;
+  }
+
+  return children;
+}
 export default App;

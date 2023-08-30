@@ -143,60 +143,58 @@ function HomePage() {
             />
           </div>
 
-          <div className="col-sm-12 col-md-5 position-absolute ">
-            <div className="card-body">
-              <div className="row justify-content-center align-items-center vh-100 ">
-                <div
-                  className="col-sm-6 col-md-7 bg-light shadow "
-                  style={{ borderRadius: "10px" }}
-                >
-                  <h4 className="mt-5 mb-5 text-center">Find your right car</h4>
-                  <form ref={formRef} className="needs-validation">
-                    <Form.Select
-                      className="form-control mb-2"
-                      name="budget"
-                      newCarId="budget"
-                      value={budget}
-                      onChange={(e) => setBudget(e.target.value)}
-                      required
-                    >
-                      <option value="">Select Budget</option>
-                      <option value="1 - 5 Lakh">1 - 5 Lakh</option>
-                      <option value="5 - 10 Lakh">5 - 10 Lakh</option>
-                      <option value="10 - 15 Lakh">10 - 15 Lakh</option>
-                      <option value="15 - 20 Lakh">15 - 20 Lakh</option>
-                      <option value="20 - 35 Lakh">20 - 35 Lakh</option>
-                    </Form.Select>
-                    <Form.Select
-                      className="form-control"
-                      name="modeType"
-                      newCarId="modeType"
-                      value={modelType}
-                      onChange={(e) => setModelType(e.target.value)}
-                      required
-                    >
-                      <option value="">Select Model Type...</option>
-                      <option value="Hatchback">Hatchback</option>
-                      <option value="Sedan">Sedan</option>
-                      <option value="SUV">SUV</option>
-                      <option value="MUV">MUV</option>
-                      <option value="Luxury">Luxury</option>
-                      <option value="Hybrid">Hybrid</option>
-                      <option value="Electric">Electric</option>
-                      <option value="Minivan">Minivan</option>
-                      <option value="Wagon">Wagon</option>
-                    </Form.Select>
-                  </form>
-                  <div className="d-grid ">
-                    <Button
-                      type="submit"
-                      className=" shadow-sm mt-3 mb-4 "
-                      variant={buttonValidation}
-                      onClick={searchCarByBudgetAndType}
-                    >
-                      {searchButton}
-                    </Button>
-                  </div>
+          <div className="col-sm-12 col-md-4 position-absolute ">
+            <div className="row justify-content-center align-items-center vh-100 ">
+              <div
+                className="col-sm-6 col-md-7 bg-light shadow "
+                style={{ borderRadius: "10px" }}
+              >
+                <h4 className="mt-5 mb-5 text-center">Find your right car</h4>
+                <form ref={formRef} className="needs-validation">
+                  <Form.Select
+                    className="form-control mb-2"
+                    name="budget"
+                    newCarId="budget"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Budget</option>
+                    <option value="1 - 5 Lakh">1 - 5 Lakh</option>
+                    <option value="5 - 10 Lakh">5 - 10 Lakh</option>
+                    <option value="10 - 15 Lakh">10 - 15 Lakh</option>
+                    <option value="15 - 20 Lakh">15 - 20 Lakh</option>
+                    <option value="20 - 35 Lakh">20 - 35 Lakh</option>
+                  </Form.Select>
+                  <Form.Select
+                    className="form-control"
+                    name="modeType"
+                    newCarId="modeType"
+                    value={modelType}
+                    onChange={(e) => setModelType(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Model Type...</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="MUV">MUV</option>
+                    <option value="Luxury">Luxury</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Minivan">Minivan</option>
+                    <option value="Wagon">Wagon</option>
+                  </Form.Select>
+                </form>
+                <div className="d-grid ">
+                  <Button
+                    type="submit"
+                    className=" shadow-sm mt-3 mb-4 "
+                    variant={buttonValidation}
+                    onClick={searchCarByBudgetAndType}
+                  >
+                    {searchButton}
+                  </Button>
                 </div>
               </div>
             </div>
