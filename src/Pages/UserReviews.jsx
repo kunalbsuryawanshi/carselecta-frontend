@@ -50,6 +50,7 @@ function UserReviews() {
       );
       console.log(ratingAndReviews.data.ratings);
       console.log(ratingAndReviews.data.reviews);
+      
       console.log(ratingAndReviews.data.user);
       setIndividualRating(ratingAndReviews.data.ratings);
       setIndividualReview(ratingAndReviews.data.reviews);
@@ -236,7 +237,7 @@ function UserReviews() {
                           }}
                         >
                           By{" "}
-                          {user[index].firstName + " " + user[index].lastName}
+                          {user.length !== 0 ?( user[index].firstName + " " + user[index].lastName):(<></>)}
                         </small>
                       </p>
                       <p className="p-0 m-0">

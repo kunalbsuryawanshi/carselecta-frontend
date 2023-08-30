@@ -217,14 +217,7 @@ function ProfileSetting({ userRef }) {
             autoFocus={true}
             animation={true}
           >
-            <Modal.Header>
-              <Modal.Title>
-                <FaUserLock
-                  style={{ fontSize: "80px", mixBlendMode: "difference" }}
-                  className="text-secondary text-center shadow"
-                />
-              </Modal.Title>
-              <FaTimes style={{ cursor: "pointer" }} onClick={handleClose} />
+            <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body>
               <form className="p-4" ref={formRef}>
@@ -375,7 +368,7 @@ function ProfileSetting({ userRef }) {
             autoFocus={true}
             animation={true}
           >
-            <Modal.Header>
+            <Modal.Header >
               <Modal.Title>
                 <FaUserLock
                   style={{ fontSize: "80px", mixBlendMode: "difference" }}

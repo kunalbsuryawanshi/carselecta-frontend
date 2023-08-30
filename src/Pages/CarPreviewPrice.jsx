@@ -83,6 +83,14 @@ function CarPreviewPrice() {
       });
     }
   };
+  const formatPriceForCard = (price) => {
+      return price.toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 0,
+        //   maximumFractionDigits: 2,
+      });
+  };
 
   const handleAllVarient = async (eventKey) => {
     setActiveTab(eventKey);
@@ -261,7 +269,7 @@ function CarPreviewPrice() {
                       </p>
                     </p>
                     <h5 className="mb-3">
-                      {formatPrice(car.carPrice) + " Lakh*"}
+                      {formatPriceForCard(car.carPrice) + " Lakh*"}
                     </h5>
                     <div className="d-grid ">
                       <Button variant="warning">Go Somewhere</Button>

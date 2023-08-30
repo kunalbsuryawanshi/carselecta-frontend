@@ -26,8 +26,20 @@ function ThanksForReview() {
   };
 
   useEffect(() => {
-    setUser(Cookies.get("email"));
-  });
+    const fetchUser = async () => {
+      try {
+        const email = Cookies.get("email");
+        const response = await axios.get(
+          `http://localhost:8181/get-user-details?email=${email}`
+        );
+        setUser(response.data.firstName);
+        console.log(response.data.firstName);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  },[]);
 
   const logOutHandler = () => {
     Cookies.remove("email");
@@ -51,7 +63,7 @@ function ThanksForReview() {
           />
         </Navbar.Brand>
 
-        <DropdownButton variant="light" id="dropdown-basic-button" title={user}>
+        <DropdownButton className="me-3" variant="light" id="dropdown-basic-button" title={"Hello "+user+"!"}>
           <Dropdown.Item href="/userprofile">
             <FaUserCircle style={{ fontSize: "35px" }} />
           </Dropdown.Item>
@@ -63,9 +75,9 @@ function ThanksForReview() {
       <div className="mt-5 mb-4">&nbsp;</div>
       <div className="container ">
         <div className="row justify-content-center">
-          <div className="col-sm-12 col-md-6 p-5">
-            <h4>Thanks for your Review</h4>
-            <p className="text-secondary">
+          <div className="col-sm-12 col-md-5 p-5">
+            <p className="text-secondary p-">
+            <h4 className="text-dark">Thanks for your Review</h4>
               Your review for {newCar.carBrand+" "+newCar.carName} is under moderation, it will be posted
               very soon.
             </p>

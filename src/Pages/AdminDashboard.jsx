@@ -10,7 +10,7 @@ function AdminDashboard() {
     <>
       <AdminNavBar />
 
-      <div className="row m-5 p-5 justify-content-center bg-light  shadow">
+      <div className="row m-5 p-5 justify-content-center ">
         <div className="col-sm-12 col-md-3 d-flex justify-content-center mt-2">
           <Link as={Link} to={"/addcarbyadmin"}>
             <Card

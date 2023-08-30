@@ -73,7 +73,7 @@ function CarPreviewAsCompany() {
         className="container-fluid vh-100"
       >
         <div className="container mt-5">
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="col-sm-12 col-md-8">
               <div className="row m-2 ">
                 <div className="col-sm-6 col-md-9 ">
@@ -97,7 +97,7 @@ function CarPreviewAsCompany() {
                       to={"/carpreview"}
                       state={{ value: car.newCarId }}
                     >
-                      <div class="card mb-3" style={{ maxWidth: "840px" }}>
+                      <div class="card mb-3 border-0 shadow-sm" style={{ maxWidth: "840px" }}>
                         <div class="row g-0">
                           <div class="col-md-4">
                             <img

@@ -321,11 +321,15 @@ tr:hover {
 }
 
 
-.floating-chatbot {
+/* .floating-chatbot {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 300px;
   height: 500px;
   z-index: 9999;
-}
+} */
+/* .floating-chatbot.closed {
+  pointer-events: none; 
+  display: none;
+} */

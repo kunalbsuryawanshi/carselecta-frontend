@@ -354,10 +354,10 @@ function CarPreview() {
                 state={{ value: newCar.newCarId }}
               >
                 <Button
-                  style={{ width: "300px",backgroundColor:'rgb(184, 25, 184)' }}
-                  className=" text-light"
+                  style={{ width: "300px" }}
+                  variant="outline-warning "
                 >
-                  <strong>Check On-Road Price</strong>
+                  Check On-Road Price
                 </Button>
               </Link>
               <p className="mt-2">

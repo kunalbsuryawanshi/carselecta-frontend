@@ -21,6 +21,7 @@ import axios from "axios";
 function WriteReview() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [selectedImageKey1, setSelectedImageKey1] = useState(0);
   const [selectedImageKey2, setSelectedImageKey2] = useState(0);
   const [selectedImageKey3, setSelectedImageKey3] = useState(0);
@@ -55,6 +56,7 @@ function WriteReview() {
     const fetchUser = async () => {
       try {
         const email = Cookies.get("email");
+        setUserEmail(email);
         const response = await axios.get(
           `http://localhost:8181/get-user-details?email=${email}`
         );
@@ -158,14 +160,13 @@ function WriteReview() {
   });
 
   const formData = new FormData();
-  
-  formData.append("email", user);
+  formData.append("email", userEmail);
   formData.append("rating", totalRating);
   formData.append("newCarId", newCar.newCarId);
   formData.append("reviewTitle", reviewTitle);
   formData.append("reviewDescription", reviewDescription);
   console.log(formData);
-  console.log(user);
+  console.log(userEmail);
 
   console.log(totalRating);
   console.log(newCar.newCarId);
@@ -185,6 +186,9 @@ function WriteReview() {
         "http://localhost:8181/set-user-rating-review",
         formData
       );
+      setButtonValidation("outline-success");
+      setButtonText("Submit Review");
+
     } catch (error) {
       console.log(error);
     }
@@ -805,9 +809,9 @@ function WriteReview() {
                   <div className="col-sm-12 col-md-12 d-flex justify-content-center">
                     <Link
                       className="text-decoration-none"
-                      // as={Link}
-                      // to={"/thanksforreview"}
-                      // state={{ value: carIdAndTotalRating }}
+                      as={Link}
+                      to={"/thanksforreview"}
+                      state={{ value: carIdAndTotalRating }}
                     >
                       <Button
                         variant={buttonValidation}
