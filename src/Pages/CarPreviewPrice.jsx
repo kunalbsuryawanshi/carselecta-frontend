@@ -241,11 +241,11 @@ function CarPreviewPrice() {
 
           <div
             style={{ backgroundColor: "#FFFFFF" }}
-            className="container mt-2 vh-100"
+            className="container mt-2 vh-100 "
           >
             <div className="row shadow-sm">
               <div className="col-sm-12 col-md-3 p-3 d-flex justify-content-center">
-                <Card style={{ width: "18rem" }}>
+                <Card style={{ width: "18rem", height:'24rem' }}>
                   <Card.Img
                     variant="top"
                     src={`data:image/jpeg;base64,${car.carImage}`}

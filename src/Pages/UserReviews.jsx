@@ -17,6 +17,7 @@ function UserReviews() {
   const [individualRating, setIndividualRating] = useState([]);
   const [individualReview, setIndividualReview] = useState([]);
   const [user, setUser] = useState([]);
+  
   const [openStates, setOpenStates] = useState(
     new Array(individualRating.length).fill(false)
   );
@@ -111,9 +112,9 @@ function UserReviews() {
         <div className="container vh-100">
           <div className="row mt-2">
             <div className="col-sm-12 col-md-12">
-              <h3 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
+              <h4 style={{ fontFamily: "roboto,Sans-Serif,Arial" }}>
                 {newCar.carBrand + " " + newCar.carName} User Reviews
-              </h3>
+              </h4>
             </div>
           </div>
           <div className="row mt-2">

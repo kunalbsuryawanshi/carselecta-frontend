@@ -50,7 +50,7 @@ import Skoda from "../Images/skoda.webp";
 import Jeep from "../Images/jeep.webp";
 import Renault from "../Images/renault.webp";
 import Nissan from "../Images/nissan.webp";
-
+import CarSelectaChatbot from "./chatbot";
 import {
   FaArrowAltCircleRight,
   FaArrowAltCircleLeft,
@@ -1229,6 +1229,7 @@ function HomePage() {
               <h4 className="text-center">Popular Brands</h4>
             </Carousel.Item>
           </Carousel>
+          <CarSelectaChatbot />
         </div>
       </div>
     </>

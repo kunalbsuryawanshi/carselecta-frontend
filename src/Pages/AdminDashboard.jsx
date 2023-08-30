@@ -1,14 +1,14 @@
 import { Card } from "react-bootstrap";
-import Navigationbar from "./Navigationbar";
 import card1 from "../Images/admindashboardcard1.jpg";
 import card2 from "../Images/admindashboardcard2.jpg";
 import card3 from "../Images/admindashboardcard3.jpg";
 import { Link } from "react-router-dom";
+import AdminNavBar from "./AdminNavBar";
 
 function AdminDashboard() {
   return (
     <>
-      <Navigationbar />
+      <AdminNavBar />
 
       <div className="row m-5 p-5 justify-content-center bg-light  shadow">
         <div className="col-sm-12 col-md-3 d-flex justify-content-center mt-2">

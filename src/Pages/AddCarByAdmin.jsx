@@ -18,6 +18,7 @@ import {
 } from "react-notifications";
 import AlertPopup from "./AlertPopup";
 import Cookies from "js-cookie";
+import AdminNavBar from "./AdminNavBar";
 function AddCarByAdmin() {
   let formRef = useRef();
   const navigate = useNavigate();
@@ -141,7 +142,7 @@ function AddCarByAdmin() {
 
   return (
     <>
-      <Navigationbar />
+      <AdminNavBar/>
       <div className="bg-light m-5 shadow-sm">
         <h3
           style={{ backgroundColor: "#104b8be3" }}

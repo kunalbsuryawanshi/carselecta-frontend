@@ -50,41 +50,41 @@ function App() {
           <Route
             path="/addcarbyadmin"
             element={
-              <ProtectedRoute>
+              <ProtectedRouteForAdmin>
                 <AddCarByAdmin />
-              </ProtectedRoute>
+              </ProtectedRouteForAdmin>
             }
           />
           <Route
             path="/admindashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedRouteForAdmin>
                 <AdminDashboard />
-              </ProtectedRoute>
+              </ProtectedRouteForAdmin>
             }
           />
           <Route
             path="/adminupdatecar"
             element={
-              <ProtectedRoute>
+              <ProtectedRouteForAdmin>
                 <AdminUpdateCar />
-              </ProtectedRoute>
+              </ProtectedRouteForAdmin>
             }
           />
           <Route
             path="/updatecarbyadmin"
             element={
-              <ProtectedRoute>
+              <ProtectedRouteForAdmin>
                 <UpdateCarByAdmin />
-              </ProtectedRoute>
+              </ProtectedRouteForAdmin>
             }
           />
           <Route
             path="/removecarbyadmin"
             element={
-              <ProtectedRoute>
+              <ProtectedRouteForAdmin>
                 <RemoveCarByAdmin />
-              </ProtectedRoute>
+              </ProtectedRouteForAdmin>
             }
           />
           <Route
@@ -177,6 +177,16 @@ function ProtectedRoute({ children }) {
   let loginStatus = localStorage.getItem("loginStatus") === "true";
   let cookie = Cookies.get("email") === "true";
   if (!loginStatus && !cookie) {
+    return <Navigate to={"/"} replace={true} />;
+  }
+
+  return children;
+}
+
+function ProtectedRouteForAdmin({ children }) {
+  let cookie = Cookies.get("admin");
+  console.log(cookie);
+  if (!cookie) {
     return <Navigate to={"/"} replace={true} />;
   }
 

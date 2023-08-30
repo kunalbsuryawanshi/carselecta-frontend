@@ -3,6 +3,7 @@ import Navigationbar from "./Navigationbar";
 import { Button, Card } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import AdminNavBar from "./AdminNavBar";
 
 function AdminUpdateCar() {
   let formRef = useRef();
@@ -78,7 +79,7 @@ function AdminUpdateCar() {
 
   return (
     <>
-      <Navigationbar />
+      <AdminNavBar/>
       <div className="row justify-content-center p-5 m-5">
         <div className="col-sm-12 col-md-4 bg-light p-4 shadow">
           <form ref={formRef} className="needs-validation">

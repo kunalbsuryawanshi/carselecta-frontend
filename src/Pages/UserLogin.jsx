@@ -158,6 +158,7 @@ const UserLogin = () => {
                 name="email"
                 id="email"
                 placeholder="Enter email..."
+                pattern="^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9.-]+\.(com|in)$"
                 required
                 value={user.email}
                 onChange={(e) =>
@@ -173,6 +174,7 @@ const UserLogin = () => {
                 name="password"
                 id="password"
                 placeholder="Enter password..."
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$"
                 value={user.password}
                 onChange={(e) =>
                   setUser({
@@ -182,6 +184,20 @@ const UserLogin = () => {
                 }
                 required
               />
+              <Form.Control.Feedback type="invalid">
+              <small>
+                <li className="text-danger list-unstyled">
+                  Password should contain atleast
+                </li>
+                <li className="text-danger list-unstyled">
+                  <FaCircle style={{ fontSize: "5px" }} /> Atleast 1 Uppercase,
+                  1 Lowercase and 1 Special character
+                </li>
+                <li className="text-danger list-unstyled">
+                  <FaCircle style={{ fontSize: "5px" }} /> Minimum 8 charcater
+                </li>
+              </small>
+            </Form.Control.Feedback>
               <div className="text-end text-secondary">
                 <Link
                   className="text-secondary text-decoration-none"

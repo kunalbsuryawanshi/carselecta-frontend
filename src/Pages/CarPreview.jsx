@@ -348,13 +348,14 @@ function CarPreview() {
                 </small>
               </p>
               <Link
+              className="text-decoration-none "
                 as={Link}
                 to={"/carpreviewprice"}
                 state={{ value: newCar.newCarId }}
               >
                 <Button
-                  style={{ width: "300px" }}
-                  className="btn btn-warning text-light"
+                  style={{ width: "300px",backgroundColor:'rgb(184, 25, 184)' }}
+                  className=" text-light"
                 >
                   <strong>Check On-Road Price</strong>
                 </Button>

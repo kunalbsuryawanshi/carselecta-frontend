@@ -49,7 +49,7 @@ function Admin() {
           setIsError(false);
         }, 2000);
       } else {
-        Cookies.set("admin",admin.username);
+        Cookies.set("admin", admin.username , true);
         setButtonValidation("outline-success");
         setShowAlert(true);
         setTimeout(() => {
@@ -67,7 +67,9 @@ function Admin() {
           <div className="row justify-content-center align-items-center vh-100 ">
             <div className="col-sm-12 col-md-3 bg-light p-4 shadow-lg">
               <form ref={formRef} className="needs-validation">
-                <h3 className="text-center mt-4 mb-4">Admin Login</h3>
+                <h3 className="text-center text-secondary mt-4 mb-4">
+                  Admin Login
+                </h3>
                 <input
                   className="form-control"
                   type="password"
@@ -89,14 +91,16 @@ function Admin() {
                   required
                 />
               </form>
-              <Button
-                type="submit"
-                className="form-control mt-3"
-                variant={buttonValidation}
-                onClick={adminLoginAction}
-              >
-                Login
-              </Button>
+              <div className="d-grid">
+                <Button
+                  type="submit"
+                  className=" mt-3"
+                  variant={buttonValidation}
+                  onClick={adminLoginAction}
+                >
+                  Login
+                </Button>
+              </div>
               {isError && (
                 <div className="text-danger text-center mt-2">
                   Invalid username or password
@@ -105,7 +109,7 @@ function Admin() {
               )}
               <Link
                 className="d-flex justify-content-center mt-3"
-                style={{ textDecoration: "none", color:'#1b5a9d' }}
+                style={{ textDecoration: "none", color: "#1b5a9d" }}
                 as={Link}
                 to={"#"}
               >

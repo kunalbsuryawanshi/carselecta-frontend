@@ -37,6 +37,7 @@ function WriteReview() {
   const location = useLocation();
   const receivedValue = location.state?.value || "No value received";
   const [newCar, setNewCar] = useState([]);
+  const [showSmily, setShowSmily] = useState(false);
   useEffect(() => {
     fetchCar(receivedValue);
   }, [receivedValue]);
@@ -66,6 +67,15 @@ function WriteReview() {
     fetchUser();
   });
 
+  useEffect(() => {
+    if (
+      selectedImageKey1 !== 0 &&
+      selectedImageKey2 !== 0 &&
+      selectedImageKey3 !== 0
+    ) {
+      setShowSmily(true);
+    }
+  });
   const logOutHandler = () => {
     Cookies.remove("email");
     navigate("/");
@@ -148,12 +158,13 @@ function WriteReview() {
   });
 
   const formData = new FormData();
+  
   formData.append("email", user);
   formData.append("rating", totalRating);
   formData.append("newCarId", newCar.newCarId);
   formData.append("reviewTitle", reviewTitle);
   formData.append("reviewDescription", reviewDescription);
-
+  console.log(formData);
   console.log(user);
 
   console.log(totalRating);
@@ -169,6 +180,7 @@ function WriteReview() {
       return;
     }
     try {
+      console.log(formData);
       await axios.post(
         "http://localhost:8181/set-user-rating-review",
         formData
@@ -269,9 +281,7 @@ function WriteReview() {
                 style={{ backgroundColor: "#FFFFF" }}
                 className="row p-2 mt-2 text-secondary"
               >
-                <div className="col-sm-12 col-md-3 ">
-                  Mileage
-                </div>
+                <div className="col-sm-12 col-md-3 ">Mileage</div>
                 <div className="col-sm-12 col-md-1 d-flex">
                   <img
                     src={smily1}
@@ -490,7 +500,9 @@ function WriteReview() {
                   />
                 </div>
               </div>
+                {showSmily?(
 
+                
               <div>
                 <div className="row p-2 mt-2 text-secondary">
                   <div className="col-sm-12 col-md-3 ">
@@ -714,6 +726,10 @@ function WriteReview() {
                   </div>
                 </div>
               </div>
+              ):(
+                <>
+                </>
+              )}
             </div>
           ) : (
             <>

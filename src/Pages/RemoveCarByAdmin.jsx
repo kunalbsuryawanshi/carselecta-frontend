@@ -7,6 +7,7 @@ import "./Cards.css";
 import AlertPopup from "./AlertPopup";
 import { car } from "fontawesome";
 import { FaTimes } from "react-icons/fa";
+import AdminNavBar from "./AdminNavBar";
 
 function RemoveCarByAdmin() {
   let [inputPlaceholder, setInputPlaceholder] = useState("");
@@ -124,7 +125,7 @@ function RemoveCarByAdmin() {
   };
   return (
     <>
-      <Navigationbar />
+      <AdminNavBar/>
       {/* fetching car by search */}
 
       <div className="row justify-content-center p-5 m-5">

@@ -24,7 +24,7 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 import logo from "../Images/Purple Badge Car Wash Logo1.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import userlogin from "../Images/userlogin.jpg";
 import { useEffect, useState } from "react";
@@ -55,7 +55,7 @@ function Navigationbar() {
   const logOutHandler = () => {
     Cookies.remove("email");
     localStorage.removeItem("loginStatus");
-    navigate("/",{replace:true});
+    navigate("/", { replace: true });
   };
   return (
     <>
@@ -72,19 +72,18 @@ function Navigationbar() {
             }}
             src={logo}
             alt=""
-            />
+          />
         </Navbar.Brand>
         <DropdownButton
           variant="light"
           className="me-4"
           id="dropdown-basic-button"
           title={"Hello " + user + "!"}
-          >
+        >
           <Dropdown.Item href="/userprofile">
             <FaUserCircle style={{ fontSize: "35px" }} />
           </Dropdown.Item>
           <Dropdown.Item href="/userprofile">Favorite</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
           <Dropdown.Item onClick={logOutHandler}>Log Out</Dropdown.Item>
         </DropdownButton>
         {/* <Dropdown size>
@@ -113,40 +112,52 @@ function Navigationbar() {
         className="shadow"
         bg="light"
         expand="lg"
-        >
-
+      >
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav  className="mr-auto">
+          <Nav className="mr-auto">
             <Nav.Link href="/aboutus">New Launches</Nav.Link>
             <Nav.Link href="#home">Electric cars</Nav.Link>
             <NavDropdown title="Popular Brands" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item
+                as={Link}
+                to={"/carpreviewascompany"}
+                state={{ value: "Maruti Suzuki" }}
+              >
                 Maruti Suzuki Cars
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Hundai Cars
+              <NavDropdown.Item
+                as={Link}
+                to={"/carpreviewascompany"}
+                state={{ value: "Hyundai" }}
+              >
+                Hyundai Cars
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Kia Cars</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item
+                as={Link}
+                to={"/carpreviewascompany"}
+                state={{ value: "Kia" }}
+              >
+                Kia Cars
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to={"/carpreviewascompany"}
+                state={{ value: "Mahindra" }}
+              >
                 Mahindra Cars
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Tata Cars</NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to={"/carpreviewascompany"}
+                state={{ value: "Tata" }}
+              >
+                Tata Cars
+              </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={handleShow}>Ask Bot?</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
-      </Offcanvas>
     </>
   );
 }

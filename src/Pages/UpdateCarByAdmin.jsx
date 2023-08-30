@@ -11,6 +11,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import AlertPopup from "./AlertPopup";
 import Cookies from "js-cookie";
+import AdminNavBar from "./AdminNavBar";
 
 function UpdateCarByAdmin() {
   //fetching data from ::AdminUpdateCar component which is passed by
@@ -173,7 +174,7 @@ function UpdateCarByAdmin() {
 
   return (
     <>
-      <Navigationbar />
+      <AdminNavBar/>
       <h2 className="text-secondary text-center mt-5">
         Add car into collection
       </h2>
