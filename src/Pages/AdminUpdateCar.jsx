@@ -77,6 +77,14 @@ function AdminUpdateCar() {
     formRef.current.classList.remove("was-validated");
   };
 
+  const formatPrice = (price) => {
+      return price.toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 0,
+        //   maximumFractionDigits: 2,
+      });
+  };
   return (
     <>
       <AdminNavBar/>
@@ -122,7 +130,7 @@ function AdminUpdateCar() {
           </Button>
         </div>
       </div>
-      <div className="row bg-light justify-content-center m-5 p-5">
+      <div className="row  justify-content-center m-5 p-5">
         {items.map((item) => (
           <div className="col-sm-12 col-md-3 d-flex justify-content-center mt-5">
             <Link
@@ -149,7 +157,7 @@ function AdminUpdateCar() {
                     {item.carBrand + " " + item.carName}
                   </Card.Title>
                   <Card.Text className="mb-0">
-                    <small>{"Price: " + item.carPrice + "*"}</small>
+                    <small>{formatPrice(item.carPrice)+" Lakh*"}</small>
                   </Card.Text>
                   <Card.Text className="mb-0 mt-0">
                     <small>{"Mileage: " + item.araimileage}</small>{" "}

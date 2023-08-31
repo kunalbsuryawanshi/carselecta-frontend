@@ -175,7 +175,7 @@ function UserProfile() {
                     </Link>
                   </div>
                 </Link>
-                <Link
+                {/* <Link
                   onClick={handleFavRef}
                   className=" text-decoration-none"
                   style={{ display: "block" }}
@@ -199,7 +199,7 @@ function UserProfile() {
                       />
                     </Link>
                   </div>
-                </Link>
+                </Link> */}
                 <Link
                   className=" text-decoration-none"
                   style={{ display: "block" }}

@@ -285,59 +285,80 @@ function HomePage() {
               <div className="row bg-light m-5  mt-5 justify-content-center ">
                 {/* card => 1 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center ">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 18 }}
                   >
-                    <Card.Img variant="top" src={Card1} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Hyundai Exter</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 6 - 10.10 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Card1} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Hyundai Exter</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 6 - 10.10 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
 
                 {/* card => 2 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 5 }}
                   >
-                    <Card.Img variant="top" src={Card2} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Mahindra Thar</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 10.54 - 16.78 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Card2} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Mahindra Thar</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 10.54 - 16.78 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
 
                 {/* card => 3 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center ">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 161 }}
                   >
-                    <Card.Img variant="top" src={Card3} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Tata Punch</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 6 - 10.10 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Card3} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Tata Punch</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 6 - 10.10 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
               </div>
               <h4 className="text-center">The most searched SUV's</h4>
@@ -346,59 +367,80 @@ function HomePage() {
               <div className="row bg-light m-5  mt-5 justify-content-center">
                 {/* card => 4 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 107 }}
                   >
-                    <Card.Img variant="top" src={Card4} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Tata Nexon</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 8 - 14.60 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Card4} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Tata Nexon</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 8 - 14.60 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
 
                 {/* card => 5 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 147 }}
                   >
-                    <Card.Img variant="top" src={Card5} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Hyundai Creta</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 10.87 - 19.20 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Card5} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Hyundai Creta</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 10.87 - 19.20 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
 
                 {/* card => 6 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 78 }}
                   >
-                    <Card.Img variant="top" src={Card6} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Toyota Fortuner</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 32.99 - 50.74 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Card6} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Toyota Fortuner</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 32.99 - 50.74 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
               </div>
               <h4 className="text-center">The most searched SUV's</h4>
@@ -1232,7 +1274,7 @@ function HomePage() {
           </Carousel>
           <CarSelectaChatbot />
         </div>
-      <Footer/>
+        <Footer />
       </div>
     </>
   );

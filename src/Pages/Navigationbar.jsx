@@ -117,7 +117,7 @@ function Navigationbar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/aboutus">About CarSelecta</Nav.Link>
-            <Nav.Link href="#home">Electric cars</Nav.Link>
+            {/* <Nav.Link href="#home">Electric cars</Nav.Link> */}
             <NavDropdown title="Popular Brands" id="basic-nav-dropdown">
               <NavDropdown.Item
                 as={Link}
