@@ -22,11 +22,11 @@ function UserSignup() {
     state: "",
     password: "",
   });
-  const validator = require("validator");
+
   const userSignupAction = async () => {
     formRef.current.classList.add("was-validated");
     let formStatus = formRef.current.checkValidity();
-    if (!formStatus && !validator.isEmail(user.email)) {
+    if (!formStatus) {
       setButtonTextForSignup("Invalid Details!");
       setButtonValidationForSignup("outline-danger");
       return;

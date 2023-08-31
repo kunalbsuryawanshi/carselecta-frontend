@@ -77,7 +77,7 @@ const steps = [
     id: "specialOffers",
     component: (
       <div>
-        Check out our amazing diwali offers by visiting your favourite cars to
+        Check out our amazing offers by visiting your favourite cars to
         make your driving dreams come true! 🚗💨
         <img
           src={offer} // Add the URL of your special offer image here
