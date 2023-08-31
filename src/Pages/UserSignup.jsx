@@ -7,8 +7,9 @@ import LoginFormVideo from "../Videos/loginform.mp4";
 import axios from "axios";
 
 function UserSignup() {
-  const [buttonValidationForSignup, setButtonValidationForSignup] =
-    useState("outline-success");
+  const [buttonValidationForSignup, setButtonValidationForSignup] = useState(
+    "outline-success"
+  );
   const [buttonTextForSignup, setButtonTextForSignup] = useState("Sign Up");
   const [showAlert, setShowAlert] = useState(false);
   const formRef = useRef();
@@ -22,11 +23,10 @@ function UserSignup() {
     state: "",
     password: "",
   });
-  const validator = require("validator");
   const userSignupAction = async () => {
     formRef.current.classList.add("was-validated");
     let formStatus = formRef.current.checkValidity();
-    if (!formStatus && !validator.isEmail(user.email)) {
+    if (!formStatus) {
       setButtonTextForSignup("Invalid Details!");
       setButtonValidationForSignup("outline-danger");
       return;

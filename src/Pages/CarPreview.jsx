@@ -28,7 +28,6 @@ import Cookies from "js-cookie";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import AlertPopup from "./AlertPopup";
 import RatingStars from "./RatingStars";
-
 function CarPreview() {
   const location = useLocation();
   const receivedValue = location.state?.value || "No value received";
@@ -42,12 +41,15 @@ function CarPreview() {
   const [rating, setRating] = useState(null);
   const [similarCarTypes, setSimilarCarTypes] = useState([]);
   const [user, setUser] = useState([]);
-
+  const [sameBrandCars, setSameBrandCars] = useState([]);
   const [totalRatings, setTotalRatings] = useState(null);
-  const [showAlertForAddToFavorite, setShowAlertForAddToFavorite] =
-    useState(false);
-  const [showAlertForRemoveFromFavorite, setShowAlertForRemoveFromFavorite] =
-    useState(false);
+  const [showAlertForAddToFavorite, setShowAlertForAddToFavorite] = useState(
+    false
+  );
+  const [
+    showAlertForRemoveFromFavorite,
+    setShowAlertForRemoveFromFavorite,
+  ] = useState(false);
 
   const [newCarForAllVarient, setNewCarForAllVarient] = useState([]);
   const [carPricingForAllVarient, setCarPricingForAllVarient] = useState([]);
@@ -120,11 +122,21 @@ function CarPreview() {
           allVarientresponse.data.newCar.length - 1
         ].carPrice
       );
+
+      const sameBrandCarsResponse = await axios.get(
+        `http://localhost:8181/get-car-by-brand?carBrand=${response.data.newCar.carBrand}`
+      );
+      setSameBrandCars(sameBrandCarsResponse.data);
+      console.log(sameBrandCarsResponse.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+  const uniqueCars = Array.from(
+    new Set(sameBrandCars.map((car) => car.carName))
+  ).map((carName) => {
+    return sameBrandCars.find((car) => car.carName === carName);
+  });
   //   For images
   useEffect(() => {
     fetchCarImages(carNameForImages);
@@ -259,7 +271,11 @@ function CarPreview() {
           <div className="row m-4  p-5">
             <div className="col-sm-12 col-md-5 d-flex">
               <img
-                style={{ width: "30rem",objectFit: "cover", overflow: "hidden" }}
+                style={{
+                  width: "30rem",
+                  objectFit: "cover",
+                  overflow: "hidden",
+                }}
                 src={`data:image/jpeg;base64,${newCar.carImage}`}
                 alt=""
               />
@@ -348,15 +364,12 @@ function CarPreview() {
                 </small>
               </p>
               <Link
-              className="text-decoration-none "
+                className="text-decoration-none "
                 as={Link}
                 to={"/carpreviewprice"}
                 state={{ value: newCar.newCarId }}
               >
-                <Button
-                  style={{ width: "300px" }}
-                  variant="outline-warning "
-                >
+                <Button style={{ width: "300px" }} variant="warning ">
                   Check On-Road Price
                 </Button>
               </Link>
@@ -591,7 +604,7 @@ function CarPreview() {
                   <h5>
                     <strong>Get Similar {newCar.carType + "'s"}</strong>
                   </h5>
-                  {similarCarTypes.length !== 0 ? (
+                  {uniqueCars.length !== 0 ? (
                     <Splide
                       className="d-flex p-5 justify-content-center "
                       options={{
@@ -656,7 +669,52 @@ function CarPreview() {
                 </div>
               </div>
             </div>
-            {/* <div className="col-sm-12 col-md-4">Popular cars</div> */}
+            <div
+              style={{ backgroundColor: "#FFFFFF" }}
+              className="col-sm-12 col-md-3 p-3"
+            >
+              <strong className="mb-3">Tranding {newCar.carBrand} cars</strong>
+              {uniqueCars.map((car) => (
+                <div className="row">
+                  <div className="col-sm-12 col-md-12">
+                    <Link
+                      className="text-decoration-none "
+                      as={Link}
+                      to={"/carpreview"}
+                      onClick={() =>
+                        (window.location.href = window.location.href)
+                      }
+                      state={{ value: car.newCarId }}
+                    >
+                      <div
+                        class="card mb-3 border-0 shadow-sm hover-element"
+                        style={{ maxWidth: "540px" }}
+                      >
+                        <div class="row g-0">
+                          <div class="col-md-6">
+                            <img
+                              src={`data:image/jpeg;base64,${car.carImage}`}
+                              class="img-fluid rounded-start"
+                              alt="..."
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <div class="card-body">
+                              <small class="card-title m-0 p-0">
+                                {car.carBrand + " " + car.carName}
+                              </small>
+                              <p class="card-text m-0 p-0">
+                                {formatPrice(car.carPrice)}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

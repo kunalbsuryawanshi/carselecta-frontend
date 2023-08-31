@@ -64,6 +64,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import AlertPopup from "./AlertPopup";
 import CardSlider from "./CardSlider";
+import Footer from "./Footer";
 
 function HomePage() {
   const [budget, setBudget] = useState("");
@@ -1231,6 +1232,7 @@ function HomePage() {
           </Carousel>
           <CarSelectaChatbot />
         </div>
+      <Footer/>
       </div>
     </>
   );

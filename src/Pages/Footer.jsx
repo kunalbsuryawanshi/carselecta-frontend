@@ -1,28 +1,11 @@
 import React from "react";
 import "./Footer.css";
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 const Footer = () => {
   return (
-    <>
-      <div>
-        <div className="row row2">
-          <div className="col-sm-3">
-            <h4>India’s #1</h4>
-            <p>Largest Auto portal</p>
-          </div>
-          <div className="col-md-3">
-            <h4>Car Sold</h4>
-            <p>Every 4 minute</p>
-          </div>
-          <div className="col-md-3">
-            <h4>Offers</h4>
-            <p>Stay updated pay less</p>
-          </div>
-          <div className="col-md-3">
-            <h4>Compare</h4>
-            <p>Decode the right car</p>
-          </div>
-        </div>
-        <div className="row">
+    <footer>
+      <div className="container-fluid">
+        <div className="row justify-content-center">
           <hr />
           {/* Main footer content code */}
           <div className="col-md-4">
@@ -54,7 +37,6 @@ const Footer = () => {
               <li>Personal loan</li>
               <li>TyreDekho</li>
               <li>BatteryDekho</li>
-              <li>Girnar Vision Fund</li>
             </ul>
           </div>
         </div>
@@ -62,34 +44,33 @@ const Footer = () => {
         <hr />
         <div className="row">
           <div className="col-md-6">
-            <footer>
-              <p>© 2023 Girnar Software Pvt. Ltd.</p>
-            </footer>
+            <p>© 2023 carselecta-frontend</p>
           </div>
+
           <div className="col-md-6">
-            <strong> Connect: </strong>
             <span className="icon">
+              <span className="connect"> Connect: </span>
               &nbsp;
               <a href="#" className="me-4">
-                <i className="bi bi-facebook"></i>
+                <FaFacebook/>
               </a>
               <a href="#" className="me-4">
-                <i className="bi bi-twitter"></i>
+                <FaTwitter/>
               </a>
               <a href="#" className="me-4">
-                <i className="bi bi-youtube"></i>
+                <FaYoutube/>
               </a>
               <a href="#" className="me-4">
-                <i className="bi bi-instagram"></i>
+                <FaInstagram/>
               </a>
               <a href="#" className="me-4">
-                <i className="bi bi-linkedin"></i>
+                <FaLinkedinIn/>
               </a>
             </span>
           </div>
         </div>
       </div>
-    </>
+    </footer>
   );
 };
 export default Footer;

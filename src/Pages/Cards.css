@@ -333,3 +333,46 @@ tr:hover {
   pointer-events: none; 
   display: none;
 } */
+
+li,
+footer {
+    font-size: 13px;
+    color: rgb(92, 92, 92);
+    line-height: 30px;
+}
+
+.lightb {
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.icon {
+    word-spacing: 10px;
+    float: right;
+}
+
+.iconb {
+    color: black;
+}
+
+
+/* India's 1 row css */
+.row2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+footer {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    /* background-color: rgb(247, 244, 244); */
+}
+
+.connect {
+    color: black;
+    font-weight: bold;
+}
