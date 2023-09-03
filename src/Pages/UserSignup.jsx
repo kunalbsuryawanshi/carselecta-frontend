@@ -23,6 +23,7 @@ function UserSignup() {
     state: "",
     password: "",
   });
+  const validator = require("validator");
   const userSignupAction = async () => {
     formRef.current.classList.add("was-validated");
     let formStatus = formRef.current.checkValidity();
