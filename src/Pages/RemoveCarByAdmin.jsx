@@ -23,8 +23,6 @@ function RemoveCarByAdmin() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [carIdForDelete, setCarIdForDelete] = useState("");
 
-  
-
   const formatPrice = (price) => {
     if (cars.length !== 0) {
       return price.toLocaleString("en-IN", {
@@ -111,21 +109,25 @@ function RemoveCarByAdmin() {
 
   const handleDeleteCar = async () => {
     try {
+      console.log(carIdForDelete);
       await axios.get(
+       
         `http://localhost:8181/delete-car-by-id?newCarId=${carIdForDelete}`
       );
+      // const updatedCarList = carList.filter((car) => car.newCarId !== newCarId);
+      // setCars(updatedCarList);
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
         window.location.reload();
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <>
-      <AdminNavBar/>
+      <AdminNavBar />
       {/* fetching car by search */}
 
       <div className="row justify-content-center p-5 m-5">
