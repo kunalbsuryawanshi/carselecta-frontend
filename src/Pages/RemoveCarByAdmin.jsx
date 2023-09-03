@@ -171,7 +171,7 @@ function RemoveCarByAdmin() {
         </div>
       </div>
 
-      <div className={`row m-5 p-5 justify-content-center bg-light `}>
+      <div className={`row m-5 p-5 justify-content-center  `}>
         {cars.map((car) => (
           <div className="col-sm-12 col-md-3 mt-5">
             <Link

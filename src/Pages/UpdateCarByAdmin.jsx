@@ -137,7 +137,7 @@ function UpdateCarByAdmin() {
     //for storing the updated data
     try {
       const response = await axios.post(
-        "http://localhost:8181/add-new-car",
+        "http://localhost:8181/update-new-car",
         formData,
         {
           headers: {

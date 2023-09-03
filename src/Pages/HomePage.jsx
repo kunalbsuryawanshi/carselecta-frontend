@@ -476,40 +476,54 @@ function HomePage() {
               <div className="row bg-light m-5  mt-5 justify-content-center ">
                 {/* card => 1 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 35 }}
                   >
-                    <Card.Img variant="top" src={Hatchback1} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Maruti Swift</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 5.99 - 9.33 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Hatchback1} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Maruti Swift</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 5.99 - 9.33 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
 
                 {/* card => 2 */}
                 <div className="col-sm-12 col-md-3 mt-5 d-flex justify-content-center">
-                  <Card
-                    className="hover-element overflow-hidden"
-                    style={{ width: "18rem" }}
+                  <Link
+                    className="text-decoration-none "
+                    as={Link}
+                    to={"/carpreview"}
+                    state={{ value: 45 }}
                   >
-                    <Card.Img variant="top" src={Hatchback2} />
-                    <Card.Body
+                    <Card
+                      className="hover-element overflow-hidden"
                       style={{ width: "18rem" }}
-                      className="textContent"
                     >
-                      <Card.Title>Maruti Baleno</Card.Title>
-                      <Card.Text className="fs-5">
-                        &#x20B9; 6.61 - 9.88 Lakh*
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                      <Card.Img variant="top" src={Hatchback2} />
+                      <Card.Body
+                        style={{ width: "18rem" }}
+                        className="textContent"
+                      >
+                        <Card.Title>Maruti Baleno</Card.Title>
+                        <Card.Text className="fs-5">
+                          &#x20B9; 6.61 - 9.88 Lakh*
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
 
                 {/* card => 3 */}
